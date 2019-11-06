@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 int main()
 {
     const char *end_word = "Dragon flew away!";
@@ -11,21 +10,20 @@ int main()
     char **text = NULL;
     int text_len = 0, text_buffer = 0;
     
-    char *next_sentence = NULL, *end_pointer = NULL;
+    char *next_sentence = NULL, *end_pointer = NULL, *curse_pointer = NULL;
     int sentence_len = 0, sentence_buffer = 0;
     char next_char;
-        
+    
     int number_sentences_before = 0, number_sentences_after = 0;
     
     while(1)
     {
-        if (text_len+1 >= text_buffer)
+        if (text_len+2 >= text_buffer)
         {
             text_buffer += 100;
             text = realloc(text, (text_buffer) * sizeof(char*));
         }
         
-        /* reading sentence to address next_sentence */
         while(1)
         {
             /* read char w/o begin spaces */
@@ -49,13 +47,59 @@ int main()
                 if (strlen(next_sentence) >= strlen(end_word))
                     end_pointer = strstr(next_sentence, end_word);
                 if (end_pointer)
+                {
                     *(end_pointer + sizeof(char) * strlen(end_word)) = '\0';
-                
-                if (!end_pointer)
+                }
+                else
+                {
                     number_sentences_before++;
+                }
+            /**/
+            /**/
+                if (sentence_len-1 == strlen(curse_word))
+                    curse_pointer = strstr(next_sentence, curse_word);
+                if (sentence_len > strlen(curse_word))
+                {
+                    curse_pointer = strstr(next_sentence, "555 ");
+                    if (curse_pointer != next_sentence)
+                    {
+                        curse_pointer = strstr(next_sentence, "555,");
+                        if (curse_pointer != next_sentence)
+                        {
+                            curse_pointer = strstr(next_sentence, "555;");
+                            if (curse_pointer != next_sentence)
+                            {
+                                curse_pointer = strstr(next_sentence, "555?");
+                                if (curse_pointer != next_sentence)
+                                {
+                                    curse_pointer = strstr(next_sentence, "555.");
+                                    if (curse_pointer != next_sentence)
+                                    {
+                                        curse_pointer = strstr(next_sentence, " 555 ");
+                                        if (!curse_pointer)
+                                        {
+                                            curse_pointer = strstr(next_sentence, " 555;");
+                                            if (!curse_pointer)
+                                            {
+                                                curse_pointer = strstr(next_sentence, " 555?");
+                                                if (!curse_pointer)
+                                                {
+                                                    curse_pointer = strstr(next_sentence, " 555.");
+                                                    if (!curse_pointer)
+                                                    {
+                                                        curse_pointer = strstr(next_sentence, " 555,");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 
-                /* if 555 is not in next_sentence */
-                if (sentence_len < strlen(curse_word) || !strstr(next_sentence, curse_word))
+                if (sentence_len < strlen(curse_word) || !curse_pointer)
                 {
                     text[text_len] = calloc(strlen(next_sentence), sizeof(char));
                     strcpy(text[text_len], next_sentence);
@@ -71,6 +115,8 @@ int main()
                 break;
             }
         }
+        
+        /* exit condition */
         if(end_pointer)
             break;
     };
@@ -79,6 +125,8 @@ int main()
     for(int i = 0; i < text_len; i++)
     {
         printf("%s\n", text[i]);
+        free(text[i]);
+        text[i] = NULL;
     }
     free(text);
     printf("Количество предложений до %d и количество предложений после %d\n", number_sentences_before, number_sentences_after);
