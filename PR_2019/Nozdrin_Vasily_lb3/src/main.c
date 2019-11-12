@@ -60,43 +60,7 @@ int main()
                     curse_pointer = strstr(next_sentence, curse_word);
                 if (sentence_len > strlen(curse_word))
                 {
-                    curse_pointer = strstr(next_sentence, "555 ");
-                    if (curse_pointer != next_sentence)
-                    {
-                        curse_pointer = strstr(next_sentence, "555,");
-                        if (curse_pointer != next_sentence)
-                        {
-                            curse_pointer = strstr(next_sentence, "555;");
-                            if (curse_pointer != next_sentence)
-                            {
-                                curse_pointer = strstr(next_sentence, "555?");
-                                if (curse_pointer != next_sentence)
-                                {
-                                    curse_pointer = strstr(next_sentence, "555.");
-                                    if (curse_pointer != next_sentence)
-                                    {
-                                        curse_pointer = strstr(next_sentence, " 555 ");
-                                        if (!curse_pointer)
-                                        {
-                                            curse_pointer = strstr(next_sentence, " 555;");
-                                            if (!curse_pointer)
-                                            {
-                                                curse_pointer = strstr(next_sentence, " 555?");
-                                                if (!curse_pointer)
-                                                {
-                                                    curse_pointer = strstr(next_sentence, " 555.");
-                                                    if (!curse_pointer)
-                                                    {
-                                                        curse_pointer = strstr(next_sentence, " 555,");
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    //strtok()
                 }
                 
                 if (sentence_len < strlen(curse_word) || !curse_pointer)
