@@ -1,28 +1,39 @@
-#include <string.h>
-#include <stdlib.h>
-#include <wchar.h>
-#include <locale.h>
-
-
 #ifndef TEXT_H
 #define TEXT_H
 
+
+/* includes */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <wchar.h>
+#include <wctype.h>
+#include <locale.h>
+
+
+/* define structures */
 typedef struct
 {
-	wchar_t *str;
-	int len, size;
-} Sentence;
+    wchar_t *str;
+    int len, size;
+} Sentence_t;
 
 typedef struct
 {
-	Sentence **sentences;
-	int len, size;
-} Text;
+    Sentence_t **sentences;
+    int len, size;
+} Text_t;
 
-Sentence *read_sentence ();
-Text *read_text ();
-int cmp_text (Text *text1, Text *text2);
-int delete_duplicates (Text *text);
+
+/* read functions */
+Sentence_t *read_sentence ();
+Text_t *read_text ();
+
+/* print functions */
+void print_sentence(Sentence_t snt);
+void print_text(Text_t text);
+
+/* comparator functions */
+int snt_str_cmp(void* snt1, void* snt2);
 
 #endif
-

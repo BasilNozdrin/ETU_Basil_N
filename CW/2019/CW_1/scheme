@@ -1,11 +1,8 @@
 
 
-
-
-
-main.c   <-      text_module.c
+main.c   <-      text_func.c
                   ||
-                  |∟--------- text_module.h
+                  |∟--------- text_func.h
                   |                                                                                      
                   |                                                                                      
                   |                                                                                      
@@ -15,11 +12,6 @@ main.c   <-      text_module.c
                                 |                                                                        
                                 |                                                                        
                                 ∟-------text.h                                                           
-                                                                                                         
-                                                                                                         
-                                                                                                         
-                                                                                                         
-                                                                                                         
                                                                                                          
                                                                                                          
                                                                                                          

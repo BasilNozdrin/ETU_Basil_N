@@ -3,20 +3,20 @@ CFLAGS=-c -Wall
 
 all: main
 
-main: main.o text.o textio.h
-	$(CC) main.o text.o textio.o -o main
+main: main.o text.o text_func.o
+	$(CC) main.o text.o text_func.o -o main.out
 
-main.o: main.c text.o textio.o
+main.o: main.c text.o text_func.o
 	$(CC) $(CFLAGS) main.c
 
 text.o: text.c
 	$(CC) $(CFLAGS) text.c
 
-textio.o: textio.c text.o
-	$(CC) $(CFLAGS) textio.c
+text_func.o: text_func.c text.o
+	$(CC) $(CFLAGS) text_func.c
 
 clean:
 	rm -rf *.o
 
 test:
-	./main < inp > outp
+	./main.out < inp > outp
