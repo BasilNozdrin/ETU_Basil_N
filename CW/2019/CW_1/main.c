@@ -11,6 +11,7 @@ int main ()
 {
     setlocale (LC_ALL, "");
     fputws(L"Hi there!\nReading text from stdin...\n", stdout);
+    
     Text_t *text = read_text ();
     
     delete_duplicates (text);
@@ -31,6 +32,7 @@ int main ()
                 fputws(L"Bye!\n", stdout);
                 break;
             case '1':
+                print_anagrams(text);
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '2':
