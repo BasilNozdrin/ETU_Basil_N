@@ -65,19 +65,17 @@ int main ()
                 break;
             case '2':
                 cap_sort(text);
-                /*TODO*/
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '3':
-                /*TODO*/
+                /*TODO: add call vowels shift */
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '4':
-                /*TODO*/
+                /*TODO: add call find'n'replace */
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '5':
-                /*TODO*/
                 print_text(*text);
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;

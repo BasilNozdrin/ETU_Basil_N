@@ -77,13 +77,13 @@ void *cap_sort(Text_t *text)
 
 Text_t *vowels_shift(Text_t *text)
 {
-    /*TODO*/
+    /*TODO: vowels shift */
     return text;
 }
 
 Text_t *find_and_replace(Text_t *text, wchar_t *wstr)
 {
-    /*TODO*/
+    /*TODO find'n'replace */
     return text;
 }
 
