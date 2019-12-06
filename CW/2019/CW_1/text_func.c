@@ -52,17 +52,16 @@ void print_anagrams(const Text_t *text)
 //     for (int i = 0; i < text->len; i++)
 //         wprintf(L"%d ", mask[i]);
     for (int i = 0; i < text->len-1; i++)
-        if(mask[i] == 0)
+        if (mask[i] == 0)
         {
-            for (int j = i+1; j < text->len; j++)
-                if(check_anagram(text->sentences[i]->str, text->sentences[j]->str))
+            for (int j = i + 1; j < text->len; j++)
+                if (check_anagram(text->sentences[i]->str, text->sentences[j]->str))
                 {
                     mask[i] = 1;
                     mask[j] = 1;
                 }
             for (int j = 0; j < text->len; j++)
-                if (mask[j] == 1)
-                {
+                if (mask[j] == 1) {
                     wprintf(L"[%d|%d]:", i, j);
                     print_sentence(*(text->sentences[j]));
                     wprintf(L"\n");
@@ -71,18 +70,20 @@ void print_anagrams(const Text_t *text)
         }
 }
 
-Text_t *cap_sort(Text_t *text)
+void *cap_sort(Text_t *text)
 {
-    return text;
+    qsort(text->sentences, text->len, sizeof(Sentence_t*), cap_cmp);
 }
 
 Text_t *vowels_shift(Text_t *text)
 {
+    /*TODO*/
     return text;
 }
 
 Text_t *find_and_replace(Text_t *text, wchar_t *wstr)
 {
+    /*TODO*/
     return text;
 }
 
@@ -120,5 +121,12 @@ int check_anagram(wchar_t *a, wchar_t *b)
         return 0;
     }
     return 1;
+}
+
+int cap_cmp(const void* s1, const void* s2)
+{
+    Sentence_t** snt1 = (Sentence_t**) s1;
+    Sentence_t** snt2 = (Sentence_t**) s2;
+    return ((*snt1)->cap_c < (*snt2)->cap_c);
 }
 

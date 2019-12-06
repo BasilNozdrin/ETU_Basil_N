@@ -16,6 +16,7 @@ typedef struct
 {
     wchar_t *str;
     int len, size;
+    int cap_c;
 } Sentence_t;
 
 typedef struct

@@ -13,6 +13,7 @@ int main ()
     Text_t *text;
     setlocale (LC_ALL, "");
 
+    /* READ TEXT BEGIN */
     fputws(L"Hi there!\nEnter filename with your text (not longer than 100):\n", stdout);
     wchar_t wfile_path[100];
     char file_path[100];
@@ -39,6 +40,7 @@ int main ()
         }
         fputws(L"Something went wrong... Try again!\n", stdout);
     }
+    /* READ TEXT END */
 
     delete_duplicates (text);
 
@@ -62,15 +64,20 @@ int main ()
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '2':
+                cap_sort(text);
+                /*TODO*/
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '3':
+                /*TODO*/
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '4':
+                /*TODO*/
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '5':
+                /*TODO*/
                 print_text(*text);
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;

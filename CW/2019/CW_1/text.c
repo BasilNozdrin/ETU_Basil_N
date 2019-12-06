@@ -7,6 +7,7 @@ Sentence_t *read_sentence (FILE * stream)
     sent->str = NULL; // wchar_t
     sent->len = 0; // int
     sent->size = 0; // int
+    sent->cap_c = 0; // int
     wchar_t wc;
     do
     {
@@ -30,7 +31,11 @@ Sentence_t *read_sentence (FILE * stream)
             sent->str = tmp;
         }
         if (wc)
+        {
+            if (iswupper(wc))
+                sent->cap_c++;
             sent->str[sent->len++] = wc;
+        }
     } while (wc != L'.' && wc != L'\n' && wc != WEOF);
     sent->str[sent->len] = L'\0';
     return sent;
@@ -61,7 +66,7 @@ Text_t *read_text (FILE * stream)
 
 void print_sentence(Sentence_t snt)
 {
-    wprintf (L"%ls", snt);
+    wprintf (L"%ls", snt.str);
 }
 
 void print_text(Text_t text)
