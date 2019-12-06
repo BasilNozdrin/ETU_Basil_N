@@ -1,7 +1,7 @@
 #include "text.h"
 
 
-Sentence_t *read_sentence ()
+Sentence_t *read_sentence (FILE * stream)
 {
     Sentence_t *sent = realloc(NULL, sizeof(Sentence_t));
     sent->str = NULL; // wchar_t
@@ -10,7 +10,7 @@ Sentence_t *read_sentence ()
     wchar_t wc;
     do
     {
-        wc = getwc(stdin);
+        wc = getwc(stream);
         if ((wc == WEOF || wc == L'\n') && sent-> len == 0)
             return NULL;
         if (sent->len + 4 >= sent->size)
@@ -37,14 +37,14 @@ Sentence_t *read_sentence ()
 }
 
 
-Text_t *read_text ()
+Text_t *read_text (FILE * stream)
 {
     Text_t *text = realloc(NULL, sizeof(Text_t));
     text->sentences = NULL; // Sentence**
     text->len = 0; // int
     text-> size = 0; // int
     Sentence_t *snt;
-    while(snt = read_sentence ())
+    while((snt = read_sentence (stream)))
     {
         if (text->len + 4 >= text->size)
         {

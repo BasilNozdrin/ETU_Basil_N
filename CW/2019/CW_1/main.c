@@ -9,14 +9,40 @@
 
 int main ()
 {
+    FILE *pFile;
+    Text_t *text;
     setlocale (LC_ALL, "");
-    fputws(L"Hi there!\nReading text from stdin...\n", stdout);
-    
-    Text_t *text = read_text ();
-    
+
+    fputws(L"Hi there!\nEnter filename with your text (not longer than 100):\n", stdout);
+    wchar_t wfile_path[100];
+    char file_path[100];
+
+    while(1) {
+        fgetws(wfile_path, 100, stdin);
+
+        if (!wcstombs(file_path, wfile_path, sizeof(file_path)))
+        {
+            fputws(L"Something went wrong... Try again!\n", stdout);
+            continue;
+        }
+
+        for (int i = 0; file_path[i]; i++)
+        {   if (file_path[i] == '\n'){
+                file_path[i] = '\0';
+                break;
+        }}
+        pFile = fopen(file_path, "r");
+        if (pFile) {
+            text = read_text(pFile);
+            fclose(pFile);
+            break;
+        }
+        fputws(L"Something went wrong... Try again!\n", stdout);
+    }
+
     delete_duplicates (text);
 
-    wchar_t *tip = L"Type number 0-5 to choose an option!\n0 : to finish the programm\n1 : show all anagrams in the text\n2 : to sort sentences of the text by the number of capital letters on each one\n3 : to replace every vowels with the next vowel by the alphabet order\n~~~~Tip: 'Я' is replaced by 'А' and 'Z' is replaced by 'A'\n4 : \"Find & Replace All\" option\n5 : to show the text\n6 : to show this tip again\n";
+    wchar_t *tip = L"Type number 0-5 to choose an option!\n0 : to finish the program\n1 : show all anagrams in the text\n2 : to sort sentences of the text by the number of capital letters on each one\n3 : to replace every vowels with the next vowel by the alphabet order\n~~~~Tip: 'Я' is replaced by 'А' and 'Z' is replaced by 'A'\n4 : \"Find & Replace All\" option\n5 : to show the text\n6 : to show this tip again\n";
     fputws(tip, stdout);
 
     char command;
@@ -52,7 +78,7 @@ int main ()
                 fputws(tip, stdout);
                 break;
             default:
-                fputws(L"Oops, you look like you missspelled something! Try again! Type 6 to show the tip\n", stdout);
+                fputws(L"Oops, you look like you misspelled something! Try again! Type 6 to show the tip\n", stdout);
                 break;
         }
     } while (command != '0');

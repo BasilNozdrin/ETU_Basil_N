@@ -19,4 +19,4 @@ clean:
 	rm -rf *.o
 
 test:
-	./main.out < inp > outp
+	./main.out

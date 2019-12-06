@@ -9,14 +9,20 @@ void delete_duplicates (Text_t *text)
         { if (text->sentences[j])
             if (text->sentences[i]->len == text->sentences[j]->len)
             {
+                /* copy snt[i] to s1 */
                 wchar_t s1[text->sentences[i]->len+1];
                 wcscpy(s1, text->sentences[i]->str);
+                /* copy snt[j] to s2 */
                 wchar_t s2[text->sentences[j]->len+1];
                 wcscpy(s2, text->sentences[j]->str);
+
+                /* lower both snt */
                 for(int k = 0; s1[k] ; k++){
                     s1[k] = towlower(s1[k]);
                     s2[k] = towlower(s2[k]);
                 }
+
+                /* delete snt[j] if needed */
                 if(!snt_str_cmp((void*)(&s1), (void*)(&s2)))
                 {
                     free(text->sentences[j]->str);
@@ -28,25 +34,21 @@ void delete_duplicates (Text_t *text)
     }
     /* shift text to remove NULL sentences */
     for (int i = 0; i < text->len; i++)
-    {
         if (text->sentences[i])
         {
-            if(new_len != i)
-            {
+            if (new_len != i) {
                 text->sentences[new_len] = text->sentences[i];
                 text->sentences[i] = NULL;
             }
             new_len++;
         }
-    }
     text->len = new_len;
 }
 
 void print_anagrams(const Text_t *text)
 {
     int mask[text->len];
-    for (int i = 0; i < text->len; i++)
-        mask[i] = 0;
+    memset(mask, 0, text->len);
 //     for (int i = 0; i < text->len; i++)
 //         wprintf(L"%d ", mask[i]);
     for (int i = 0; i < text->len-1; i++)

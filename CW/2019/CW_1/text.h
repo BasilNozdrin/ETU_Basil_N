@@ -26,8 +26,8 @@ typedef struct
 
 
 /* read functions */
-Sentence_t *read_sentence ();
-Text_t *read_text ();
+Sentence_t *read_sentence (FILE * stream);
+Text_t *read_text (FILE * stream);
 
 /* print functions */
 void print_sentence(Sentence_t snt);
