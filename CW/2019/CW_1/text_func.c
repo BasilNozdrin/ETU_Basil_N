@@ -70,15 +70,56 @@ void print_anagrams(const Text_t *text)
         }
 }
 
-void *cap_sort(Text_t *text)
+void cap_sort(Text_t *text)
 {
     qsort(text->sentences, text->len, sizeof(Sentence_t*), cap_cmp);
 }
 
-Text_t *vowels_shift(Text_t *text)
+void vowels_shift(Text_t *text)
 {
     /*TODO: vowels shift */
-    return text;
+    for (int i = 0; i < text->len; i++)
+    {
+        snt_vowels_shift(text->sentences[i]);
+    }
+}
+
+void snt_vowels_shift (Sentence_t *snt)
+{
+    wchar_t *new_str = malloc((snt->len*2)*sizeof(wchar_t));
+    int new_len = 0;
+    for (int i = 0; snt->str[i]; i++)
+    {
+        if (wcschr(L"Yy", snt->str[i]))
+        {
+            new_str[new_len++] = (snt->str[i]+1);
+            new_str[new_len++] = (snt->str[i]-24);
+            continue;
+        }
+        if(wcschr(L"AEIOUaeiouАЕЁИОУЫЭаеёиоуыэ", snt->str[i]))
+        {
+            new_str[new_len++] = (snt->str[i]+1);
+            new_str[new_len++] = (snt->str[i]+2);
+            continue;
+        }
+        if (wcschr(L"Юю", snt->str[i]))
+        {
+            new_str[new_len++] = (snt->str[i]+1);
+            new_str[new_len++] = (snt->str[i]-30);
+            continue;
+        }
+        if (wcschr(L"Яя", snt->str[i]))
+        {
+            new_str[new_len++] = (snt->str[i]-31);
+            new_str[new_len++] = (snt->str[i]-30);
+            continue;
+        }
+        new_str[new_len++] = snt->str[i];
+    }
+    new_str[new_len] = L'\0';
+    free(snt->str);
+    snt->str = new_str;
+    snt->len = new_len;
 }
 
 Text_t *find_and_replace(Text_t *text, wchar_t *wstr)

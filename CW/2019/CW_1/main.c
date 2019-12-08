@@ -44,13 +44,12 @@ int main ()
 
     delete_duplicates (text);
 
-    wchar_t *tip = L"Type number 0-5 to choose an option!\n0 : to finish the program\n1 : show all anagrams in the text\n2 : to sort sentences of the text by the number of capital letters on each one\n3 : to replace every vowels with the next vowel by the alphabet order\n~~~~Tip: 'Я' is replaced by 'А' and 'Z' is replaced by 'A'\n4 : \"Find & Replace All\" option\n5 : to show the text\n6 : to show this tip again\n";
+    wchar_t *tip = L"Type number 0-5 to choose an option!\n0 : to finish the program\n1 : show all anagrams in the text\n2 : to sort sentences of the text by the number of capital letters on each one\n3 : to replace every vowels with two following letters of alphabet\n4 : \"Find & Replace All\" option\n5 : to show the text\n6 : to show this tip again\n";
     fputws(tip, stdout);
 
     char command;
     do
     {
-        
         wchar_t tmp[100];
         fgetws(tmp, 100, stdin);
         command = tmp[0];
@@ -68,7 +67,7 @@ int main ()
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '3':
-                /*TODO: add call vowels shift */
+                vowels_shift(text);
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '4':
