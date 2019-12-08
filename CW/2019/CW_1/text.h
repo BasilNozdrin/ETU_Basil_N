@@ -31,10 +31,10 @@ Sentence_t *read_sentence (FILE * stream);
 Text_t *read_text (FILE * stream);
 
 /* print functions */
-void print_sentence(Sentence_t snt);
-void print_text(Text_t text);
+void print_sentence (Sentence_t snt);
+void print_text (Text_t text);
 
 /* comparator functions */
-int snt_str_cmp(void* snt1, void* snt2);
+int snt_str_cmp (void* snt1, void* snt2);
 
 #endif

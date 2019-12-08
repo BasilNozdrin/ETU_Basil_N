@@ -71,7 +71,26 @@ int main ()
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '4':
-                /*TODO: add call find'n'replace */
+                fputws(L"Enter word to replace:\n", stdout);
+                wchar_t old[101];
+                fgetws(old, 100, stdin);
+                for (int i = 0; old[i]; i++)
+                {   if (old[i] == '\n'){
+                        old[i] = '\0';
+                        break;
+                }}
+                fputws(L"Enter word to replace with:\n", stdout);
+                wchar_t new[101];
+                fgetws(new, 100, stdin);
+                for (int i = 0; new[i]; i++)
+                {   if (new[i] == '\n'){
+                        new[i] = '\0';
+                        break;
+                }}
+                for (int i = 0; i < text->len; i++)
+                {
+                    snt_find_and_replace(text->sentences[i], old, new);
+                }
                 fputws(L"Done! Type next command to continue. (6 to show the tip)\n", stdout);
                 break;
             case '5':

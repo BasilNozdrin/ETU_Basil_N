@@ -3,7 +3,7 @@
 
 Sentence_t *read_sentence (FILE * stream)
 {
-    Sentence_t *sent = realloc(NULL, sizeof(Sentence_t));
+    Sentence_t *sent = realloc (NULL, sizeof(Sentence_t));
     sent->str = NULL; // wchar_t
     sent->len = 0; // int
     sent->size = 0; // int
@@ -11,8 +11,8 @@ Sentence_t *read_sentence (FILE * stream)
     wchar_t wc;
     do
     {
-        wc = getwc(stream);
-        if ((wc == WEOF || wc == L'\n') && sent-> len == 0)
+        wc = getwc (stream);
+        if (sent-> len == 0 && wc == WEOF)
             return NULL;
         if (sent->len + 4 >= sent->size)
         {    
@@ -32,7 +32,7 @@ Sentence_t *read_sentence (FILE * stream)
         }
         if (wc)
         {
-            if (iswupper(wc))
+            if (iswupper (wc))
                 sent->cap_c++;
             sent->str[sent->len++] = wc;
         }
@@ -49,7 +49,7 @@ Text_t *read_text (FILE * stream)
     text->len = 0; // int
     text-> size = 0; // int
     Sentence_t *snt;
-    while((snt = read_sentence (stream)))
+    while ((snt = read_sentence (stream)))
     {
         if (text->len + 4 >= text->size)
         {
@@ -64,12 +64,12 @@ Text_t *read_text (FILE * stream)
     return text;
 }
 
-void print_sentence(Sentence_t snt)
+void print_sentence (Sentence_t snt)
 {
     wprintf (L"%ls", snt.str);
 }
 
-void print_text(Text_t text)
+void print_text (Text_t text)
 {
     wprintf(L"~~~~~~~Text~~~~~~~\n");
     for(int i = 0; i < text.len; i++)
@@ -77,7 +77,7 @@ void print_text(Text_t text)
     wprintf(L"\n~~~~~~~~~~~~~~~~~~\n");
 }
 
-int snt_str_cmp(void* snt1, void* snt2)
+int snt_str_cmp (void* snt1, void* snt2)
 {
     wchar_t *p1 = (wchar_t *)snt1;
     wchar_t *p2 = (wchar_t *)snt2;

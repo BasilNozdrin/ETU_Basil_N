@@ -45,12 +45,10 @@ void delete_duplicates (Text_t *text)
     text->len = new_len;
 }
 
-void print_anagrams(const Text_t *text)
+void print_anagrams (const Text_t *text)
 {
     int mask[text->len];
     memset(mask, 0, text->len);
-//     for (int i = 0; i < text->len; i++)
-//         wprintf(L"%d ", mask[i]);
     for (int i = 0; i < text->len-1; i++)
         if (mask[i] == 0)
         {
@@ -70,14 +68,13 @@ void print_anagrams(const Text_t *text)
         }
 }
 
-void cap_sort(Text_t *text)
+void cap_sort (Text_t *text)
 {
     qsort(text->sentences, text->len, sizeof(Sentence_t*), cap_cmp);
 }
 
-void vowels_shift(Text_t *text)
+void vowels_shift (Text_t *text)
 {
-    /*TODO: vowels shift */
     for (int i = 0; i < text->len; i++)
     {
         snt_vowels_shift(text->sentences[i]);
@@ -86,7 +83,7 @@ void vowels_shift(Text_t *text)
 
 void snt_vowels_shift (Sentence_t *snt)
 {
-    wchar_t *new_str = malloc((snt->len*2)*sizeof(wchar_t));
+    wchar_t *new_str = (wchar_t*) malloc((snt->len*2)*sizeof(wchar_t));
     int new_len = 0;
     for (int i = 0; snt->str[i]; i++)
     {
@@ -122,14 +119,42 @@ void snt_vowels_shift (Sentence_t *snt)
     snt->len = new_len;
 }
 
-Text_t *find_and_replace(Text_t *text, wchar_t *wstr)
+void snt_find_and_replace (Sentence_t *snt, wchar_t *old, wchar_t *new)
 {
-    /*TODO find'n'replace */
-    return text;
+    wchar_t *new_str;
+    int i, counter = 0;
+    int new_len = wcslen(new);
+    int old_len = wcslen(old);
+    wchar_t *s = snt->str;
+    for (i = 0; s[i]; i++)
+        if (wcsstr(s + i, old) == (s + i))
+        {
+            counter++;
+            i += old_len - 1;
+        }
+    if (old_len < new_len)
+        new_str = (wchar_t *) malloc (sizeof(wchar_t) * (i + counter * (new_len - old_len) + 2));
+    else
+        new_str = (wchar_t *) malloc (sizeof(wchar_t) * (i + counter * old_len + 2));
+    i = 0;
+    while (*s)
+    {
+        if (wcsstr (s, old) == s)
+        {
+            wcscpy (new_str + i, new);
+            i += new_len;
+            s += old_len;
+        }
+        else
+            new_str[i++] = *(s++);
+    }
+    new_str[i] = '\0';
+    free (snt->str);
+    snt->str = new_str;
 }
 
 
-int check_anagram(wchar_t *a, wchar_t *b)
+int check_anagram (wchar_t *a, wchar_t *b)
 {
     int fst[128] = {0}, snd[128] = {0};
     // Calculating frequency of characters of first string
@@ -164,7 +189,7 @@ int check_anagram(wchar_t *a, wchar_t *b)
     return 1;
 }
 
-int cap_cmp(const void* s1, const void* s2)
+int cap_cmp (const void* s1, const void* s2)
 {
     Sentence_t** snt1 = (Sentence_t**) s1;
     Sentence_t** snt2 = (Sentence_t**) s2;
