@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <regex.h>
 
 int main () {
     char **text = NULL;
@@ -40,7 +41,7 @@ int main () {
         }
         
         /* read a sentence */
-	sentence = NULL;
+        sentence = NULL;
         sentence_length = 0; sentence_buffer_size = 0;
         c = getc(stdin);
         while (c != '\n' && c != EOF) {
@@ -58,14 +59,27 @@ int main () {
         }
         
         text[text_length++] = sentence;
-        //printf("[%d]|[%p]:%s\n", text_length-1, text + text_length-1, text[text_length-1]);
     } while (strcmp ("Fin.", text[text_length-1]) != 0);
+    
     for (int i = 0; i < text_length - 1; i++)
         printf("%s\n", text[i]);
     
-    return 0;
     /* reg expr stuff shuold be placed below */
-    //for (int i = 0; i < text_length - 1; i++) // because of the last sentence is "Fin.", we can skip it
+    regex_t regex;
+    int return_value;
+    int match_result;
+    return_value = regcomp(&regex, ".* [A-Za-z0-9_]\+@", 0);
+    // ^(.*) ([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([#]) ([\w\s]+)$
+    if (return_value == 0)
+        for (int i = 0; i < text_length - 1; i++) // because of the last sentence is "Fin.", we can skip it
+        {
+            match_result = regexec(&regex, text[i], 0, NULL, 0);
+            printf("Match reult %d: %d\n", i, match_result);
+        }
+    else
+        printf("Compilation error.");
+    
+        
     /*
      * ^(.*) ([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([\$#]) ([\w\s]+)$
      * 
