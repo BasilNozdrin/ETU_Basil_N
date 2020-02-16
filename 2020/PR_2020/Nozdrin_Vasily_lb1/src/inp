@@ -1,0 +1,8 @@
+Run docker container: kot@kot-ThinkPad:~$ docker run -d --name stepik stepik/challenge-avr:latest
+You can get into running /bin/bash command in interactive mode: kot@kot-ThinkPad:~$ docker exec -it stepik "/bin/bash"
+Switch user: su <user>: root@84628200cd19: ~ # su box
+box@84628200cd19: ~ $ ^C
+Exit from box: box@5718c87efaa7: ~ $ exit
+exit from container: root@5718c87efaa7: ~ # exit
+kot@kot-ThinkPad:~$ ^C
+Fin.
