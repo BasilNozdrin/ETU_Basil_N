@@ -23,6 +23,8 @@
 #include <string.h>
 #include <regex.h>
 
+//#define DEBUG
+
 int main () {
     char **text = NULL;
     int text_length = 0, text_buffer_size = 0;
@@ -61,36 +63,81 @@ int main () {
         text[text_length++] = sentence;
     } while (strcmp ("Fin.", text[text_length-1]) != 0);
     
+#ifdef DEBUG
     for (int i = 0; i < text_length - 1; i++)
         printf("%s\n", text[i]);
+#endif
     
     /* reg expr stuff shuold be placed below */
-    regex_t regex;
-    int return_value;
-    int match_result;
-    return_value = regcomp(&regex, ".* [A-Za-z0-9_]\+@", 0);
-    // ^(.*) ([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([#]) ([\w\s]+)$
-    if (return_value == 0)
-        for (int i = 0; i < text_length - 1; i++) // because of the last sentence is "Fin.", we can skip it
-        {
-            match_result = regexec(&regex, text[i], 0, NULL, 0);
-            printf("Match reult %d: %d\n", i, match_result);
-        }
-    else
-        printf("Compilation error.");
+    char *regexString = "^(.* )?([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([#]) (.+)$";
+    // Groups :          /.1/ /......2....../ /.......3....../      /...4../ /........5......../    In total : 6
+    //                                                                \\$ could be there, but I don't whant to add 'if' for this case          
+    size_t maxGroups = 6;
     
-        
-    /*
-     * ^(.*) ([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([\$#]) ([\w\s]+)$
-     * 
-     * ^(.*) ([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([#]) ([\w\s]+)$
-     * 
-     * user_name = group[2]
-     * computer_name = group[3]
-     * command is stared as sudo if group[4] = # else group[4] = $ and we have to ignore it
-     * command = group[5]
-     */
-        // TODO
+    regex_t regexCompiled;
+    regmatch_t groupArray[maxGroups];
+    
+    // Compile regular expression
+    if (regcomp(&regexCompiled, regexString, REG_EXTENDED))
+    {
+        printf("Regex compilation error\n");
+        return 0;
+    }
+    
+    // Match 
+    int match_result;
+    for (int i = 0; i < text_length - 1; i++) // because of the last sentence is "Fin.", we can skip it
+    {
+        if (regexec(&regexCompiled, text[i], maxGroups, groupArray, 0) == 0)
+        {
+#ifndef DEBUG
+            if (groupArray[2].rm_so == -1)
+                    break;
+            if (groupArray[5].rm_so == -1)
+                    break;
+            for (int k = groupArray[2].rm_so; k < groupArray[2].rm_eo; k++)
+                printf("%c",text[i][k]);
+            printf(" - ");
+            for (int k = groupArray[5].rm_so; k < groupArray[5].rm_eo; k++)
+                printf("%c",text[i][k]);
+            printf("\n");
+#endif
+#ifdef DEBUG
+            for (int j = 1; j < maxGroups; j++)
+            {
+                if (groupArray[j].rm_so == -1)
+                {
+                    printf("No %2d group\n", j);
+                    if (j == 1)
+                        continue;
+                    break;
+                }
+                /* ^(.*) ([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([\$#]) ([\w\s]+)$
+                 * user_name = group[2]     computer_name = group[3]        sudo if group[4] == '#'     command = group[5]
+                 */
+                printf("Group %d: [%2d-%2d]: ", j, groupArray[j].rm_so, groupArray[j].rm_eo);
+                for(int k = groupArray[j].rm_so; k < groupArray[j].rm_eo; k++)
+                    printf("%c",text[i][k]);
+                printf("\n");
+            }
+            printf("-----------------------------------\n");
+#endif
+        }
+#ifdef DEBUG
+        else {
+            printf("NOТ matched!\n");
+            printf("-----------------------------------\n");
+        }
+#endif
+    }
+    
+    // Free memory
+    for (int i = 0; i < text_length; i++)
+    {
+        free (text[i]);
+    }
+    free (text);
+    regfree(&regexCompiled);
+    
     return 0;
 }
-
