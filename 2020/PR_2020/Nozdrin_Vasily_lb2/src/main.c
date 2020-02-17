@@ -1,82 +1,153 @@
-/*
- * На вход программе подается текст, представляющий собой набор предложений с новой строки.
- * Текст заканчивается предложением "Fin."
- * В тексте могут встречаться примеры запуска программ в командной строке Linux.
- * Требуется, используя регулярные выражения, найти только примеры команд в оболочке суперпользователя
- * и вывести на экран пары <имя пользователя> - <имя_команды>.
- * Если предложение содержит какой-то пример команды,
- * то гарантируется, что после нее будет символ переноса строки.
- */ /*
-     * Примеры имеют слеующий вид:
-     * Сначала идет имя пользователя, состоящее из букв, цифр и символа _
-     * Символ @
-     * Имя компьютера, состоящее из букв, цифр, символов _ и -
-     * Символ : и ~
-     * Символ $, если команда запущена в оболочке пользователя
-     * и #, если в оболочке суперпользователя. При этом между двоеточием, тильдой и $ или # могут быть пробелы.
-     * Пробел
-     * Сама команда и символ переноса строки.
-     */
-
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
-int main () {
-    char **text = NULL;
-    int text_length = 0, text_buffer_size = 0;
-    char *sentence = NULL;
-    int sentence_length = 0, sentence_buffer_size = 0;
-    char c;
-    /* read a text */
-    do {
-        /* alloc or realloc memory for the text (char* array) */
-        if (text_length + 2 >= text_buffer_size) {
-            text_buffer_size += 16;
-            char **tmp = (char**) realloc (text, sizeof(char*)*text_buffer_size);
-            if (!tmp)
-                break;
-            text = tmp;
-        }
-        
-        /* read a sentence */
-	sentence = NULL;
-        sentence_length = 0; sentence_buffer_size = 0;
-        c = getc(stdin);
-        while (c != '\n' && c != EOF) {
-            /* alloc or realloc memory for the sentence (char array) */
-            if (sentence_length + 2 >= sentence_buffer_size) {
-                sentence_buffer_size += 32;
-                char *tmp_sentence = (char*) realloc (sentence, sizeof(char)*sentence_buffer_size);
-                if (!tmp_sentence)
-                    break;
-                sentence = tmp_sentence;
-            }
-            sentence[sentence_length++] = c;
-            sentence[sentence_length] = '\0';
-            c = getc(stdin);
-        }
-        
-        text[text_length++] = sentence;
-        //printf("[%d]|[%p]:%s\n", text_length-1, text + text_length-1, text[text_length-1]);
-    } while (strcmp ("Fin.", text[text_length-1]) != 0);
-    for (int i = 0; i < text_length - 1; i++)
-        printf("%s\n", text[i]);
-    
-    return 0;
-    /* reg expr stuff shuold be placed below */
-    //for (int i = 0; i < text_length - 1; i++) // because of the last sentence is "Fin.", we can skip it
-    /*
-     * ^(.*) ([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([\$#]) ([\w\s]+)$
-     * 
-     * ^(.*) ([A-Za-z0-9_]+)@([A-Za-z0-9_-]+): ?~ ?([#]) ([\w\s]+)$
-     * 
-     * user_name = group[2]
-     * computer_name = group[3]
-     * command is stared as sudo if group[4] = # else group[4] = $ and we have to ignore it
-     * command = group[5]
+
+// Описание структуры MusicalComposition
+typedef struct {
+    /* Структура элемента списка (тип - MusicalComposition)
+     * name - строка неизвестной длины (гарантируется, что длина не может быть больше 80 символов), название композиции.
+     * author - строка неизвестной длины (гарантируется, что длина не может быть больше 80 символов), автор композиции/музыкальная группа.
+     * year - целое число, год создания.
      */
-        // TODO
+    char name[80];
+    char author[80];
+    int year;
+} MusicalComposition;
+
+// Создание структуры MusicalComposition
+
+MusicalComposition* createMusicalComposition(char* name, char* autor,int year);
+
+// Функции для работы со списком MusicalComposition
+
+MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n);
+
+void push(MusicalComposition* head, MusicalComposition* element);
+
+void removeEl(MusicalComposition* head, char* name_for_remove);
+
+int count(MusicalComposition* head);
+
+void print_names(MusicalComposition* head);
+
+// Функцию main менять не нужно.
+// Функцию main менять не нужно.
+// Функцию main менять не нужно.
+int main(){ // Функцию main менять не нужно.
+    int length;
+    scanf("%d\n", &length);  
+
+    char** names = (char**)malloc(sizeof(char*)*length);
+    char** authors = (char**)malloc(sizeof(char*)*length);
+    int* years = (int*)malloc(sizeof(int)*length);
+
+    for (int i=0;i<length;i++)
+    {
+        char name[80];
+        char author[80];
+
+        fgets(name, 80, stdin);
+        fgets(author, 80, stdin);
+        fscanf(stdin, "%d\n", &years[i]);
+
+        (*strstr(name,"\n"))=0;
+        (*strstr(author,"\n"))=0;
+
+        names[i] = (char*)malloc(sizeof(char*) * (strlen(name)+1));
+        authors[i] = (char*)malloc(sizeof(char*) * (strlen(author)+1));
+
+        strcpy(names[i], name);
+        strcpy(authors[i], author);
+
+    }
+    MusicalComposition* head = createMusicalCompositionList(names, authors, years, length);
+    char name_for_push[80];
+    char author_for_push[80];
+    int year_for_push;
+
+    char name_for_remove[80];
+
+    fgets(name_for_push, 80, stdin);
+    fgets(author_for_push, 80, stdin);
+    fscanf(stdin, "%d\n", &year_for_push);
+    (*strstr(name_for_push,"\n"))=0;
+    (*strstr(author_for_push,"\n"))=0;
+
+    MusicalComposition* element_for_push = createMusicalComposition(name_for_push, author_for_push, year_for_push);
+
+    fgets(name_for_remove, 80, stdin);
+    (*strstr(name_for_remove,"\n"))=0;
+
+    printf("%s %s %d\n", head->name, head->author, head->year);
+    int k = count(head);
+
+    printf("%d\n", k);
+    push(head, element_for_push);
+
+    k = count(head);
+    printf("%d\n", k);
+
+    removeEl(head, name_for_remove); 
+    print_names(head);
+
+    k = count(head);
+    printf("%d\n", k);
+
+    for (int i=0;i<length;i++){
+        free(names[i]);
+        free(authors[i]);
+    }
+    free(names);
+    free(authors);
+    free(years);
+
     return 0;
+} // Функцию main менять не нужно.
+// Функцию main менять не нужно.
+// Функцию main менять не нужно.
+
+MusicalComposition* createMusicalComposition(char* name, char* autor,int year)
+{
+    MusicalComposition *track = malloc(sizeof(MusicalComposition));
+    track->name = name;
+    track->autor = autor;
+    track->year = year;
+    return track;
 }
 
+MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n);
+/* MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n);
+ * создает список музыкальных композиций MusicalCompositionList, в котором:
+ * n - длина массивов array_names, array_authors, array_years.
+ * поле name первого элемента списка соответствует первому элементу списка array_names (array_names[0]).
+ * поле author первого элемента списка соответствует первому элементу списка array_authors (array_authors[0]).
+ * поле year первого элемента списка соответствует первому элементу списка array_authors (array_years[0]).
+ *     ! Аналогично для второго, третьего, ... n-1-го элемента массива.
+ *     ! длина массивов array_names, array_authors, array_years одинаковая и равна n, это проверять не требуется.
+ *     ! Функция возвращает указатель на первый элемент списка.
+ */
+
+void push(MusicalComposition* head, MusicalComposition* element);
+/*
+ * void push(MusicalComposition*  head, MusicalComposition* element);
+ * добавляет element  в конец списка musical_composition_list
+ */
+
+void removeEl(MusicalComposition* head, char* name_for_remove);
+/*
+ * void removeEl (MusicalComposition*  head, char* name_for_remove);
+ * удаляет элемент element списка, у которого значение name равно значению  name_for_remove
+ */
+
+int count(MusicalComposition* head);
+/*
+ * int count(MusicalComposition*  head);
+ * возвращает количество элементов списка
+ */
+
+void print_names(MusicalComposition* head);
+/*
+ * void print_names(MusicalComposition*  head); 
+ * Выводит названия композиций
+ */

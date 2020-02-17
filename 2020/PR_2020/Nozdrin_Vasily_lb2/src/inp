@@ -1,8 +1,26 @@
-Run docker container: kot@kot-ThinkPad:~$ docker run -d --name stepik stepik/challenge-avr:latest
-You can get into running /bin/bash command in interactive mode: kot@kot-ThinkPad:~$ docker exec -it stepik "/bin/bash"
-Switch user: su <user>: root@84628200cd19: ~ # su box
-box@84628200cd19: ~ $ ^C
-Exit from box: box@5718c87efaa7: ~ $ exit
-exit from container: root@5718c87efaa7: ~ # exit
-kot@kot-ThinkPad:~$ ^C
-Fin.
+7
+Fields of Gold
+Sting
+1993
+In the Army Now
+Status Quo
+1986
+Mixed Emotions
+The Rolling Stones
+1989
+Billie Jean
+Michael Jackson
+1983
+Seek and Destroy
+Metallica
+1982
+Wicked Game
+Chris Isaak
+1989
+Points of Authority
+Linkin Park
+2000
+Sonne
+Rammstein
+2001
+Points of Authority
