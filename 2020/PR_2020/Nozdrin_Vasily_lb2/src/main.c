@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-
 // Описание структуры MusicalComposition
-typedef struct {
+typedef struct track {
     /* Структура элемента списка (тип - MusicalComposition)
      * name - строка неизвестной длины (гарантируется, что длина не может быть больше 80 символов), название композиции.
      * author - строка неизвестной длины (гарантируется, что длина не может быть больше 80 символов), автор композиции/музыкальная группа.
@@ -13,11 +12,15 @@ typedef struct {
     char name[80];
     char author[80];
     int year;
+    
+    struct track *next;
+    struct track *prev;
+    
 } MusicalComposition;
 
 // Создание структуры MusicalComposition
 
-MusicalComposition* createMusicalComposition(char* name, char* autor,int year);
+MusicalComposition* createMusicalComposition(char* name, char* author,int year);
 
 // Функции для работы со списком MusicalComposition
 
@@ -31,10 +34,8 @@ int count(MusicalComposition* head);
 
 void print_names(MusicalComposition* head);
 
-// Функцию main менять не нужно.
-// Функцию main менять не нужно.
-// Функцию main менять не нужно.
-int main(){ // Функцию main менять не нужно.
+
+int main(){
     int length;
     scanf("%d\n", &length);  
 
@@ -103,51 +104,136 @@ int main(){ // Функцию main менять не нужно.
     free(years);
 
     return 0;
-} // Функцию main менять не нужно.
-// Функцию main менять не нужно.
-// Функцию main менять не нужно.
 
-MusicalComposition* createMusicalComposition(char* name, char* autor,int year)
+}
+
+
+MusicalComposition* createMusicalComposition(char* name, char* author,int year)
 {
     MusicalComposition *track = malloc(sizeof(MusicalComposition));
-    track->name = name;
-    track->autor = autor;
+    strcpy(track->name, name);
+    strcpy(track->author, author);
     track->year = year;
+    
+    track->next = NULL;
+    track->prev = NULL;
+    
     return track;
 }
 
-MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n);
-/* MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n);
- * создает список музыкальных композиций MusicalCompositionList, в котором:
- * n - длина массивов array_names, array_authors, array_years.
- * поле name первого элемента списка соответствует первому элементу списка array_names (array_names[0]).
- * поле author первого элемента списка соответствует первому элементу списка array_authors (array_authors[0]).
- * поле year первого элемента списка соответствует первому элементу списка array_authors (array_years[0]).
- *     ! Аналогично для второго, третьего, ... n-1-го элемента массива.
- *     ! длина массивов array_names, array_authors, array_years одинаковая и равна n, это проверять не требуется.
- *     ! Функция возвращает указатель на первый элемент списка.
- */
 
-void push(MusicalComposition* head, MusicalComposition* element);
-/*
- * void push(MusicalComposition*  head, MusicalComposition* element);
- * добавляет element  в конец списка musical_composition_list
- */
+MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n)
+{
+    /* MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n);
+     * создает список музыкальных композиций MusicalCompositionList, в котором:
+     * n - длина массивов array_names, array_authors, array_years.
+     * поле name первого элемента списка соответствует первому элементу списка array_names (array_names[0]).
+     * поле author первого элемента списка соответствует первому элементу списка array_authors (array_authors[0]).
+     * поле year первого элемента списка соответствует первому элементу списка array_authors (array_years[0]).
+     *     ! Аналогично для второго, третьего, ... n-1-го элемента массива.
+     *     ! длина массивов array_names, array_authors, array_years одинаковая и равна n, это проверять не требуется.
+     *     ! Функция возвращает указатель на первый элемент списка.
+     */
+    MusicalComposition *head = createMusicalComposition(array_names[0], array_authors[0], array_years[0]);
+    
+    MusicalComposition *prev = head;
+    for (int i = 1; i < n; i++)
+    {
+        MusicalComposition *next = createMusicalComposition(array_names[i], array_authors[i], array_years[i]);
+        prev->next = next;
+        next->prev = prev;
+        prev = next;
+    }
+    return head;
+}
 
-void removeEl(MusicalComposition* head, char* name_for_remove);
-/*
- * void removeEl (MusicalComposition*  head, char* name_for_remove);
- * удаляет элемент element списка, у которого значение name равно значению  name_for_remove
- */
+void push(MusicalComposition* head, MusicalComposition* element)
+{
+    /*
+     * void push(MusicalComposition*  head, MusicalComposition* element);
+     * добавляет element  в конец списка musical_composition_list
+     */
+    MusicalComposition *tmp = head;
+    while (tmp->next)
+        tmp = tmp->next;
+    tmp->next = element;
+    element->prev = tmp;
+    element->next = NULL; // ?? без него тоже работает, но пусть будет так
+}
 
-int count(MusicalComposition* head);
-/*
- * int count(MusicalComposition*  head);
- * возвращает количество элементов списка
- */
+void removeEl(MusicalComposition* head, char* name_for_remove)
+{
+    /*
+     * void removeEl (MusicalComposition*  head, char* name_for_remove);
+     * удаляет элемент element списка, у которого значение name равно значению  name_for_remove
+     */
+    MusicalComposition *tmp = head;
+    while (tmp)
+    {
+        if (!strcmp (tmp->name, name_for_remove))
+        {
+            if (tmp->prev)
+            {
+                if (tmp->next)
+                {
+                    tmp->prev->next = tmp->next;
+                    tmp->next->prev = tmp->prev;
+                    free(tmp);
+                }
+                else
+                {
+                    tmp->prev->next = NULL;
+                    free(tmp);
+                }
+            } else {
+                if (tmp->next)
+                {
+                    tmp->next->prev = NULL;
+                    // MusicalComposition *new_head = tmp->next;
+                    free(tmp);
+                    // return new_head;
+                }
+                /*
+                else
+                {
+                    free(tmp);
+                    return NULL;
+                }
+                */
+            }
+            break;
+        }
+        tmp = tmp->next;
+    }
+}
 
-void print_names(MusicalComposition* head);
-/*
- * void print_names(MusicalComposition*  head); 
- * Выводит названия композиций
- */
+int count(MusicalComposition* head)
+{
+    /*
+     * int count(MusicalComposition*  head);
+     * возвращает количество элементов списка
+     */
+    int counter = 0;
+    MusicalComposition *tmp = head;
+    while (tmp)
+    {
+        counter++;
+        tmp = tmp->next;
+    }
+    return counter;
+}
+
+void print_names(MusicalComposition* head)
+{
+    MusicalComposition *tmp = head;
+    while (tmp)
+    {
+        printf("%s\n", tmp->name);
+        tmp = tmp->next;
+    }
+    /*
+     * void print_names(MusicalComposition*  head); 
+     * Выводит названия композиций
+     */
+    
+}
