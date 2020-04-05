@@ -1,4 +1,4 @@
-# Install script for directory: /home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src
+# Install script for directory: /home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

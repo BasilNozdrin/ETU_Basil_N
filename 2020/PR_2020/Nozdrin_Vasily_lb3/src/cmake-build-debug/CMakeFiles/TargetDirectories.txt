@@ -1,2 +1,2 @@
-/home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles/edit_cache.dir

@@ -48,10 +48,10 @@ RM = /home/ice_jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.6911.21/b
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src
+CMAKE_SOURCE_DIR = /home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug
+CMAKE_BINARY_DIR = /home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles /home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles /home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

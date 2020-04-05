@@ -1,4 +1,4 @@
-/home/ice_jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.6911.21/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src
+/home/ice_jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.6911.21/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src
 CMake Warning (dev) in CMakeLists.txt:
   No project() command is present.  The top-level CMakeLists.txt file must
   contain a literal, direct call to the project() command.  Add a line of
@@ -12,8 +12,8 @@ CMake Warning (dev) in CMakeLists.txt:
   line.
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
--- The C compiler identification is GNU 9.2.1
--- The CXX compiler identification is GNU 9.2.1
+-- The C compiler identification is GNU 9.3.0
+-- The CXX compiler identification is GNU 9.3.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -28,4 +28,4 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/ice_jack/Projects/Etu/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug
+-- Build files have been written to: /home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug

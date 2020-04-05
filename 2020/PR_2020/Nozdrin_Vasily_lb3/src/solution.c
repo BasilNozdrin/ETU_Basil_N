@@ -1,100 +1,99 @@
 #include <stdio.h>
-
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-
-#include <sys/types.h>
+#include <regex.h>
 #include <dirent.h>
+#include <sys/types.h>
 
-/* struct dirent {
- *      ino_t          d_ino;       // inode number
- *      off_t          d_off;       // offset to the next dirent
- *      unsigned short d_reclen;    // length of this record
- *      unsigned char  d_type;      // type of file; not supported by all file system types
- *      char           d_name[256]; // filename
- * };
- */
+typedef struct {
+    char *letters;
+    int len;
+    char **routes;
+} myDict;
 
+int isValid(char *filename);
+void save (const char *route, myDict *dict);
+void listDir (char *startDir, myDict *dict);
 
-#define WORK_DIR "./tmp/"
-
-void count(char *dir, int levels, int *filecount, int *dircount) {
-    struct dirent *dp;
-    DIR *fd;
-
-    if ((fd=opendir(dir))==NULL) {
-        fprintf(stderr, "count: can't open %s\ncount stopped.", dir);
-        exit(0);
-    }
-
-    while((dp = readdir(fd))!=NULL){
-        if(!strcmp(dp->d_name, ".")||!strcmp(dp->d_name, ".."))
-            continue;
-        if(dp->d_type==DT_REG){ /* Regular file */
-            (*filecount)++;
-        }
-        if(dp->d_type==DT_DIR){ /* Directory */
-            (*dircount)++;
-            if(levels>0){
-                count(dp->d_name,levels-1,filecount,dircount);
-            }
-        }
-    }
-    closedir(fd);
-}
-
-void listDir(char* path){
-    DIR* dir;
-    struct dirent *ent;
-    if((dir=opendir(path)) != NULL){
-        while (( ent = readdir(dir)) != NULL){
-            if(ent->d_type == DT_DIR && strcmp(ent->d_name, ".") != 0  && strcmp(ent->d_name, "..") != 0){
-                printf("%s\n", ent->d_name);
-                /**/
-                listDir(/*path + / + */ent->d_name);
-            }
-        }
-        closedir(dir);
-    }
-}
-
-int main ()
+int main (int argc, char **argv, char **env)
 {
-    //printf("DT_DIR:%d\n", DT_DIR);
-    //return 0;
+    if (argc != 2) { printf ("use ./prog <path>\n"); return 0; }
 
-    DIR *dir = opendir(WORK_DIR);
+    char *letters = (char*) malloc (NAME_MAX * sizeof(char));
+    scanf("%s", letters);
+    char **routes = (char**) calloc (strlen(letters), sizeof(char*));
+    myDict dict = {letters, strlen(letters), routes};
+
+    listDir (argv[1], &dict);
+
+    int len = strlen(dict.letters);
+    for (int i = 0; i < len; i++)
+    {
+        printf("%s\n", routes[i]? routes[i]: "NULL");
+    }
+
+    return 0;
+}
+
+void save (const char *route, myDict *dict)
+{
+    char c = route[strlen(route)-5];
+    //printf("[%c]%s\n", c, route);
+    for (int i = 0; i < dict->len; i++)
+        if (dict->letters[i] == c)
+        {
+            dict->routes[i] = malloc ((strlen(route)+1) * sizeof(char));
+            strcpy(dict->routes[i], route);
+            return;
+        }
+}
+
+void listDir (char *startDir, myDict *dict)
+{
+    char *regexp = "^[[:alpha:]]\\.txt$";
+    regex_t regexComp;
+    if (regcomp (&regexComp, regexp, REG_EXTENDED)) { perror("regexCompile"); return exit(1); }
+
+    char nextDir[NAME_MAX]={0};
+    strcpy(nextDir, startDir);
+    DIR *dir = opendir(startDir);
     struct dirent *entry;
 
-    if (!dir) {
-        perror("diropen");
-        exit(1);
-    };
-
-    while ((entry = readdir(dir)) != NULL) {
-        if(!strcmp(entry->d_name, ".")||!strcmp(entry->d_name, ".."))
+    if (!dir) { perror("diropen"); exit(1); }
+    while ((entry = readdir (dir)))
+    {
+        if (!strcmp(entry->d_name, ".")||!strcmp(entry->d_name, ".."))
             continue;
-//        if(entry->d_type == DT_REG){ (*filecount)++;}
-//        if(entry->d_type == DT_DIR){ (*dircount)++; if(levels>0) { count(entry->d_name,levels-1,filecount,dircount); }}
-        
-        printf("%lu - %s [%d] %d\n",
-                entry->d_ino, entry->d_name, entry->d_type, entry->d_reclen);
-    };
 
+        if (entry->d_type == DT_DIR)
+        {
+            int len = strlen (nextDir);
+            strcat (nextDir, "/");
+            strcat (nextDir, entry->d_name);
+            listDir (nextDir, dict);
+            nextDir[len] = '\0';
+        }
+
+        if (entry->d_type == DT_REG && (regexec(&regexComp, entry->d_name, 0, NULL, 0) == 0)) // TODO
+        {
+            int len = strlen (nextDir);
+            strcat (nextDir, "/");
+            strcat (nextDir, entry->d_name);
+            save (nextDir, dict);
+            nextDir[len] = '\0';
+        }
+    }
     closedir(dir);
-    return 0;
-};
 
-
+    regfree(&regexComp);
+}
 
 /*
  * Дана некоторая корневая директория,
- * в которой может находиться некоторое количество папок,
- * в том числе вложенных.
+ * в которой может находиться некоторое количество папок, в том числе вложенных.
  * 
- * В этих папках хранятся некоторые текстовые файлы,
- * имеющие имя вида <filename>.txt.
+ * В этих папках хранятся некоторые текстовые файлы, имеющие имя вида <filename>.txt.
  * В качестве имени файла используется символ латинского алфавита.
  * На вход программе подается строка.
  * Требуется найти и вывести последовательность полных путей файлов, имена которых образуют эту строку.
@@ -112,8 +111,7 @@ int main ()
  * ! Могут встречаться файлы, в имени которых есть несколько букв и эти файлы использовать нельзя.
  * ! Одна буква может встречаться один раз.
  * 
- * Ваше решение должно находиться в директории /home/box,
- * файл с решением должен называться solution.c.
+ * Ваше решение должно находиться в директории /home/box, файл с решением должен называться solution.c.
  * 
  * Результат работы программы должен быть записан в файл result.txt.
  * Ваша программа должна обрабатывать директорию, которая называется tmp.

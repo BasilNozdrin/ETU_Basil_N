@@ -13,4 +13,4 @@ clean:
 	rm -rf *.o
 
 run:
-	./run.out > result.txt
+	./run.out "./tmp/"
