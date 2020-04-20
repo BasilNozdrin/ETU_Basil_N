@@ -1,3 +1,4 @@
-ToolSet: 1.0 (local)Options: 
+ToolSet: w64 5.0 (local)@D:\00 Install\Coding\Haskell Platform\8.2.1\mingw
+Options: 
 
 Options:

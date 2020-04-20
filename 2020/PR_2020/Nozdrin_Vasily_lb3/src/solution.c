@@ -18,21 +18,24 @@ void listDir (char *startDir, myDict *dict);
 
 int main (int argc, char **argv, char **env)
 {
-    if (argc != 2) { printf ("use ./prog <path>\n"); return 0; }
+
+    //if (argc != 2) { printf ("use ./prog <path>\n"); return 0; }
+    FILE *result = fopen ("result.txt", "w")
 
     char *letters = (char*) malloc (NAME_MAX * sizeof(char));
     scanf("%s", letters);
     char **routes = (char**) calloc (strlen(letters), sizeof(char*));
     myDict dict = {letters, strlen(letters), routes};
 
-    listDir (argv[1], &dict);
+    listDir ("tmp"/*argv[1]*/, &dict);
 
     int len = strlen(dict.letters);
     for (int i = 0; i < len; i++)
     {
-        printf("%s\n", routes[i]? routes[i]: "NULL");
+        fprintf(result, "%s\n", routes[i]? routes[i]: "NULL");
     }
 
+    fclose(result);
     return 0;
 }
 
