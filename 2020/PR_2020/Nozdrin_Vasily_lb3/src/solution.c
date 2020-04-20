@@ -20,7 +20,7 @@ int main (int argc, char **argv, char **env)
 {
 
     //if (argc != 2) { printf ("use ./prog <path>\n"); return 0; }
-    FILE *result = fopen ("result.txt", "w")
+    FILE *result = fopen ("result.txt", "w");
 
     char *letters = (char*) malloc (NAME_MAX * sizeof(char));
     scanf("%s", letters);

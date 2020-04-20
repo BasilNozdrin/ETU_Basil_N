@@ -8,37 +8,37 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug"/>
+				<Option working_dir="/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug"/>
+				<Option working_dir="/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug"/>
+				<Option working_dir="/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/ice_jack/Projects/ETU/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/CMakeLists.txt">
+		<Unit filename="/home/ie-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_lb3/src/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
