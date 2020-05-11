@@ -1,9 +1,10 @@
 #include "mypng.h"
 
+
 #define DEBUG 01
 
 MyPNG::MyPNG (const char *filename) :
-    fileName(new char[strlen(filename)+1]), isOpened(true), image(new struct Png), 
+    fileName(new char[strlen(filename)+1]), isOpened(true), image(new struct Png)
 {
     this->openImage(filename);
     strcpy(this->fileName, filename);
@@ -26,6 +27,8 @@ MyPNG::MyPNG () :
 
 MyPNG::~MyPNG ()
 {
+    if (!(this->isOpened))
+        return;
 #if DEBUG
     std::cout << "MyPNG obj is being deleted" << std::endl;
 #endif
@@ -91,6 +94,11 @@ int MyPNG::openImage (const char *filenameToOpen)
     png_read_image(image->png_ptr, image->row_pointers);
 
     fclose(fp);
+
+    if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_RGB)
+    { this->bitsInPixel = 3; }
+    if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_RGB_ALPHA)
+    { this->bitsInPixel = 4; }
 
     return 0;
 }
@@ -249,7 +257,20 @@ void MyPNG::drawSquareWithDiagonals(int x1, int y1,
 
 void MyPNG::info() const
 {
-        std::cout << "Image size is " << this->image->width << "x" << this->image->height << std::endl;
+    std::cout << "Image info:" << std::endl;
+    std::cout << "Size: " << this->image->width << "x" << this->image->height << std::endl;
+    std::cout << "Color type: ";
+    if (this->bitsInPixel == 3)
+        std::cout << "RGB";
+    else if (this->bitsInPixel == 4)
+        std::cout << "RGBA";
+    else std::cout << "unsupported";
+    std::cout << std::endl;
+}
+
+bool MyPNG::opened() const
+{
+    return this->isOpened;
 }
 
 bool MyPNG::isOutOfBounds(const int x, const int y) const

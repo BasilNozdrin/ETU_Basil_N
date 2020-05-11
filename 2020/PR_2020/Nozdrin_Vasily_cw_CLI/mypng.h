@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <cstdio>
+#include <cstring>
 #include <stdarg.h>
 #include <math.h>
 
@@ -38,7 +39,7 @@ public:
     void drawCircle (int leftUpperX, int leftUpperY, // int centerX, centerY
                      int rightBottomX, int rightBottomY, // int radius
                      int thickness,
-                     png_color lineColor={0,0,0}, bool isFilled=0,
+                     png_color lineColor, bool isFilled,
                      int lineColorAlpha=255,
                      png_color mainColor={255,255,255}, int mainColorAlpha=0);
 
@@ -55,6 +56,7 @@ public:
                                   png_color mainColor={255,255,255}, int mainColorAlpha=0);
     
     void info () const;
+    bool opened() const;
 
 protected:
     char *fileName;
