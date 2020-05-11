@@ -21,7 +21,7 @@ void errorMsg()
 int main(int argc, char *argv[])
 {
     MyPNG *image = new MyPNG();
-
+/*
     if (argc >= 2)
     {
         if(strstr(argv[argc-1], ".png"))
@@ -42,31 +42,32 @@ int main(int argc, char *argv[])
      * В случае, если программой будут поддерживаться не все версии bmp-файлов, программа должна выводить об этом внятное сообщение, а не крашиться.
      * Для каждого инструмента должен быть соответствующий ключ и ключи для его конфигурирования. Например, рисование прямоугольника может выглядеть как-то так:
      * ice-jack@ice-pc ~> ./Nozdrin_Vasily_cw --rectangle --start 0 0 --end 100 50 --color red picture.bmp
-     */
-    static const std::string    optionString    = "hicfsqX:Y:T:C:";
+     *//*
+    static const std::string    optionString    = "hicfsqC:T:X:Y:io";
     static const char           *optString      = optionString.c_str();
-    static const std::string    optsString    = "x:y:z:a:prh?tls:e:c:w:i:o:d";
-    static const char           *opts      = optsString.c_str();
 //#define no_argument            0
 //#define required_argument      1
 //#define optional_argument      2
     static const struct option longOpts[] =
     {
-        {"process",     no_argument,        NULL, 'p'},
+        //{char *name,    int has_arg,   int *flag, int val; };
+        // basic
+        {"help",        no_argument,        NULL,   'h' },
+        {"info",        no_argument,        NULL,   'i' },
+        // functions
+        {"circle",      no_argument,        NULL,   'c' },
+        {"filter",      no_argument,        NULL,   'f' },
+        {"split",       no_argument,        NULL,   's' },
+        {"square",      no_argument,        NULL,   'q' },
+        // parameters
+        {"color",       required_argument,  NULL,   'C' },
+        {"thickness",   required_argument,  NULL,   'T' },
+        {"start",       required_argument,  NULL,   'X' },
+        {"end",         required_argument,  NULL,   'Y' },
+        {"size",        required_argument,  NULL,   'S' },
+
         {"input",       required_argument,  NULL, 'i'},
         {"output",      required_argument,  NULL, 'o'},
-        {"start",       required_argument,  NULL, 's'},
-        {"end",         required_argument,  NULL, 'e'},
-        {"line",        no_argument,        NULL, 'l'},
-        {"application", required_argument,  NULL, 'a'},
-        //{char *name,    int has_arg,   int *flag, int val; };
-        {"help",        no_argument,        NULL, 'h' },
-        {"info",        no_argument,        NULL, 'i' },
-        {"circle",      no_argument,        NULL, 'c' },
-        {"filter",      no_argument,        NULL, 'f' },
-        {"split",       no_argument,        NULL, 's' },
-        {"square",      no_argument,        NULL, 'q' },
-        {"color",       required_argument,  NULL, 'C' },
         {NULL,          0,                  NULL,  0  }
     };
 
@@ -101,7 +102,7 @@ int main(int argc, char *argv[])
             {
             // --circle -X x1 y1 -Y x2 y2 -T thickness -C R G B A? -C R G B A?
                 // get first point X
-                option = getopt_long(argc, argv, opts, longOpts, &longIndex);
+                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
                 if (option != 'X' || (optind >= argc)
                 || (!atoi(optarg) && optarg[0] != '0')
                 || (!atoi(argv[optind]) && argv[optind][0] != '0'))
@@ -110,7 +111,7 @@ int main(int argc, char *argv[])
                 y1 = atoi(argv[optind]);
 
                 // get second point Y
-                option = getopt_long(argc, argv, opts, longOpts, &longIndex);
+                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
                 if (option != 'Y' || (optind >= argc)
                 || (!atoi(optarg) && optarg[0] != '0')
                 || (!atoi(argv[optind]) && argv[optind][0] != '0'))
@@ -119,13 +120,13 @@ int main(int argc, char *argv[])
                 y2 = atoi(argv[optind]);
 
                 // get line thickness
-                option = getopt_long(argc, argv, opts, longOpts, &longIndex);
+                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
                 if (option != 'T' || (!atoi(optarg) && optarg[0] != '0'))
                 { errorMsg(); return 0; }
                 lineThickness = atoi(optarg);
 
                 // get lineColor
-                option = getopt_long(argc, argv, opts, longOpts, &longIndex);
+                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
                 if (option != 'C' || (optind + 2 >= argc)
                 || (!atoi(optarg) && optarg[0] != '0')
                 || (!atoi(argv[optind]) && argv[optind][0] != '0')
@@ -138,7 +139,7 @@ int main(int argc, char *argv[])
                     lineColorAlpha = atoi(argv[optind + 2]);
 
                 // get mainColor
-                option = getopt_long(argc, argv, opts, longOpts, &longIndex);
+                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
                 if (option != 'C' || (optind + 2 >= argc)
                     || (!atoi(optarg) && optarg[0] != '0')
                     || (!atoi(argv[optind]) && argv[optind][0] != '0')
@@ -149,16 +150,17 @@ int main(int argc, char *argv[])
                             lineThickness, lineColor, false,
                            (lineColorAlpha >= 0)? lineColorAlpha%256: 255);
                 } else {
-                mainColor.red = atoi(optarg);
-                mainColor.green = atoi(argv[optind]);
-                mainColor.blue = atoi(argv[optind + 1]);
-                if (atoi(argv[optind + 2]) || argv[optind + 2][0] == '0')
-                    mainColorAlpha = atoi(argv[optind + 2]);
+                    mainColor.red = atoi(optarg);
+                    mainColor.green = atoi(argv[optind]);
+                    mainColor.blue = atoi(argv[optind + 1]);
+                    if (atoi(argv[optind + 2]) || argv[optind + 2][0] == '0')
+                        mainColorAlpha = atoi(argv[optind + 2]);
         // CALL DrawCircle
-                image->drawCircle (x1, y1, x2, y2,
-                       lineThickness, lineColor, true,
-                       (lineColorAlpha >= 0)? lineColorAlpha%256: 255,
-                       mainColor, (mainColorAlpha >= 0)? mainColorAlpha%256: 255);
+                    image->drawCircle (x1, y1, x2, y2,
+                           lineThickness, lineColor, true,
+                           (lineColorAlpha >= 0)? lineColorAlpha%256: 255,
+                           mainColor, (mainColorAlpha >= 0)? mainColorAlpha%256: 255);
+                    std::cout << "here\n";
                 }
                 break;
             }
@@ -172,16 +174,16 @@ int main(int argc, char *argv[])
                 break;
         }
     }
-    
-    return 0;
+*/
+//    std::string outPath = "./WorkExamples/out2.png";
+//    image->saveImage(outPath.c_str());
+//    return 0;
 
     std::string inPath = "./WorkExamples/in2.png";
     std::string outPath = "./WorkExamples/out2.png";
     MyPNG *img = new MyPNG(inPath.c_str());
     if (!img) { std::cerr << "fileOpen error" <<std::endl; return 1; }
-    img->drawCircle(10, 10, 200, 200, 5, {0,0,0}, 1, 255, {255,0,0}, 255);
-    img->rgbaFilter(2, 255);
-    img->splitImage(3, 4, 3, {150,0,0});
+    img->drawCircle(10, 10, 100, 100, 3, {200,50,50}, 1, 255, {0,0,0}, 0);
     img->saveImage(outPath.c_str());
     delete img;
     return 0;
@@ -196,13 +198,28 @@ void help(){
 
     std::cout << "\tDESCRIPTION\n"
                  "\t\tThis program is PNG editor that supports "
-                 "onlyRGB and RGBA images\n";
+                 "only RGB and RGBA images\n";
 
-    std::cout << "\tOPERATIONS\n"
-                 "\t\t-h, --help -?\n"
-                 "\t\t\tDisplay the general syntax.\n"
-                 "\t\t-i, --info\n"
-                 "\t\t\tDisplay picture information.\n";
+    std::cout << "\tOPERATIONS" << std::endl;
+    std::cout << "\t\t-h, --help -?\n"
+                 "\t\t\tDisplay the general syntax." << std::endl;
+    std::cout << "\t\t-i, --info\n"
+                 "\t\t\tDisplay picture information." << std::endl;
+    std::cout << "\t\t-c --circle\n"
+                 "\t\t\tOPTIONS:\n"
+                 "\t\t\t-X [coords1] -Y [coords2] -T [value] -C [lineColor] -C [fillColor]\n";
+
+    std::cout << "\tOPTIONS" << std::endl;
+    std::cout << "\t\t-C, --color\n"
+                 "\t\t\t 3 or 4 integers for RGB or RGBA" << std::endl;
+    std::cout << "\t\t-X, --start\n"
+                 "\t\t\tpair of integers as coordinates of first point" << std::endl;
+    std::cout << "\t\t-Y, --end\n"
+                 "\t\t\tpair of integers as coordinates of second point" << std::endl;
+    std::cout << "\t\t-T, --thickness\n"
+                 "\t\t\tan integer that corresponds with line thickness" << std::endl;
+    std::cout << "\t\t-S, --size\n"
+                 "\t\t\tan integer that corresponds with square size" << std::endl;
 
 /*
     std::cout << "1) -l -s <x1> <y1> -e <x2> <y2> -c <R> <G> <B> <A_C> -w <val> - DRAW A LINE" << std::endl;
