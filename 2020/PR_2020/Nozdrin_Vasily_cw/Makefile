@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I. -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
+CXXFLAGS      = -pipe -O2 -std=gnu++11 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
+INCPATH       = -I. -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -I. -I. -I/usr/lib/qt/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = Nozdrin_Vasily_cw1.0.0
 DISTDIR = /home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw/.tmp/Nozdrin_Vasily_cw1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) -lpng /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -52,11 +52,17 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = counter.cpp \
-		main.cpp moc_counter.cpp
-OBJECTS       = counter.o \
+SOURCES       = display.cpp \
+		main.cpp \
+		mainwindow.cpp \
+		mypng.cpp moc_display.cpp \
+		moc_mainwindow.cpp
+OBJECTS       = display.o \
 		main.o \
-		moc_counter.o
+		mainwindow.o \
+		mypng.o \
+		moc_display.o \
+		moc_mainwindow.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -259,7 +265,6 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -279,8 +284,12 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		Nozdrin_Vasily_cw.pro counter.h counter.cpp \
-		main.cpp
+		Nozdrin_Vasily_cw.pro display.h \
+		mainwindow.h \
+		mypng.h display.cpp \
+		main.cpp \
+		mainwindow.cpp \
+		mypng.cpp
 QMAKE_TARGET  = Nozdrin_Vasily_cw
 DESTDIR       = 
 TARGET        = Nozdrin_Vasily_cw
@@ -289,7 +298,7 @@ TARGET        = Nozdrin_Vasily_cw
 first: all
 ####### Build rules
 
-Nozdrin_Vasily_cw:  $(OBJECTS)  
+Nozdrin_Vasily_cw: ui_mainwindow.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: Nozdrin_Vasily_cw.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs/features/spec_pre.prf \
@@ -494,7 +503,6 @@ Makefile: Nozdrin_Vasily_cw.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/li
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -718,7 +726,6 @@ Makefile: Nozdrin_Vasily_cw.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/li
 /usr/lib/qt/mkspecs/features/qt_config.prf:
 /usr/lib/qt/mkspecs/linux-g++/qmake.conf:
 /usr/lib/qt/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/qt/mkspecs/features/exclusive_builds.prf:
 /usr/lib/qt/mkspecs/features/toolchain.prf:
 /usr/lib/qt/mkspecs/features/default_pre.prf:
@@ -754,8 +761,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents counter.h $(DISTDIR)/
-	$(COPY_FILE) --parents counter.cpp main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents display.h mainwindow.h mypng.h $(DISTDIR)/
+	$(COPY_FILE) --parents display.cpp main.cpp mainwindow.cpp mypng.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -785,46 +793,80 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
+	g++ -pipe -O2 -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_counter.cpp
+compiler_moc_header_make_all: moc_display.cpp moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_counter.cpp
-moc_counter.cpp: counter.h \
+	-$(DEL_FILE) moc_display.cpp moc_mainwindow.cpp
+moc_display.cpp: display.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw -I/home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/9.3.0 -I/usr/include/c++/9.3.0/x86_64-pc-linux-gnu -I/usr/include/c++/9.3.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed -I/usr/include counter.h -o moc_counter.cpp
+	/usr/bin/moc $(DEFINES) --include /home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/9.3.0 -I/usr/include/c++/9.3.0/x86_64-pc-linux-gnu -I/usr/include/c++/9.3.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed -I/usr/include display.h -o moc_display.cpp
+
+moc_mainwindow.cpp: mainwindow.h \
+		display.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/9.3.0 -I/usr/include/c++/9.3.0/x86_64-pc-linux-gnu -I/usr/include/c++/9.3.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all:
+compiler_uic_make_all: ui_mainwindow.h
 compiler_uic_clean:
+	-$(DEL_FILE) ui_mainwindow.h
+ui_mainwindow.h: mainwindow.ui \
+		/usr/bin/uic
+	/usr/bin/uic mainwindow.ui -o ui_mainwindow.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
-counter.o: counter.cpp counter.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o counter.o counter.cpp
+display.o: display.cpp display.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o display.o display.cpp
 
-main.o: main.cpp counter.h
+main.o: main.cpp mainwindow.h \
+		display.h \
+		mypng.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-moc_counter.o: moc_counter.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_counter.o moc_counter.cpp
+mainwindow.o: mainwindow.cpp mainwindow.h \
+		display.h \
+		ui_mainwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
+
+mypng.o: mypng.cpp mypng.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mypng.o mypng.cpp
+
+moc_display.o: moc_display.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_display.o moc_display.cpp
+
+moc_mainwindow.o: moc_mainwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
 ####### Install
 
-install:  FORCE
+install_target: first FORCE
+	@test -d $(INSTALL_ROOT)/opt/Nozdrin_Vasily_cw/bin || mkdir -p $(INSTALL_ROOT)/opt/Nozdrin_Vasily_cw/bin
+	$(QINSTALL_PROGRAM) $(QMAKE_TARGET) $(INSTALL_ROOT)/opt/Nozdrin_Vasily_cw/bin/$(QMAKE_TARGET)
+	-$(STRIP) $(INSTALL_ROOT)/opt/Nozdrin_Vasily_cw/bin/$(QMAKE_TARGET)
 
-uninstall:  FORCE
+uninstall_target: FORCE
+	-$(DEL_FILE) $(INSTALL_ROOT)/opt/Nozdrin_Vasily_cw/bin/$(QMAKE_TARGET)
+	-$(DEL_DIR) $(INSTALL_ROOT)/opt/Nozdrin_Vasily_cw/bin/ 
+
+
+install: install_target  FORCE
+
+uninstall: uninstall_target  FORCE
 
 FORCE:
 
