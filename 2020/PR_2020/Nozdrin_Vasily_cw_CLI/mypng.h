@@ -7,10 +7,10 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
-#include <stdarg.h>
-#include <math.h>
+#include <cstdarg>
+#include <cmath>
+#include <cerrno>
 
-#define PNG_DEBUG 3
 #include <png.h>
 
 struct Png
@@ -29,8 +29,8 @@ struct Png
 class MyPNG
 {
 public:
-    MyPNG (const char *filenameToOpen);
     MyPNG ();
+    explicit MyPNG (const char *filenameToOpen);
     ~MyPNG ();
 
     int openImage (const char *filenameToOpen);
@@ -51,29 +51,30 @@ public:
 
     void drawSquareWithDiagonals (int leftUpperX, int leftUpperY,
                                   int sideSize, int lineThickness,
-                                  png_color lineColor={0,0,0}, int lineColorAlpha=255,
-                                  bool isFilled=0,
+                                  png_color lineColor={0,0,0}, bool isFilled=false,
+                                  int lineColorAlpha=255,
                                   png_color mainColor={255,255,255}, int mainColorAlpha=0);
     
     void info () const;
     bool opened() const;
+    char *getFileName() const;
 
 protected:
     char *fileName;
-    unsigned short int bitsInPixel;
+    unsigned short int bitsInPixel{};
     bool isOpened;
     struct Png *image;
 
-    bool isOutOfBounds (const int x, const int y) const;
+    bool isOutOfBounds (int x, int y) const;
 
-    void setPixel (const int x, const int y,
+    void setPixel (int x, int y,
                   png_color color, int colorAlpha=255);
 
-    void setBigPixel (const int x, const int y,
+    void setBigPixel (int x, int y,
                       png_color color, bool isVertical, int thickness, int colorAlpha=255);
 
-    void drawLine (const int x1, const int y1, const int x2, const int y2,
-                   const png_color color, const int thickness, const int colorAlpha=255);
+    void drawLine (int x1, int y1, int x2, int y2,
+                   png_color color, int thickness, int colorAlpha=255);
 };
 
 #endif // MYPNG_H

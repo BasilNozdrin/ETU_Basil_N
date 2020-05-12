@@ -1,37 +1,25 @@
 #include "mypng.h"
 
-
-#define DEBUG 01
-
-MyPNG::MyPNG (const char *filename) :
-    fileName(new char[strlen(filename)+1]), isOpened(true), image(new struct Png)
-{
-    this->openImage(filename);
-    strcpy(this->fileName, filename);
-
-//    if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_GRAY)
-//    { this->bitsInPixel = 1; }
-//    if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_PALETTE)
-//    { this->bitsInPixel = 1; }
-    if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_RGB)
-    { this->bitsInPixel = 3; }
-    if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_RGB_ALPHA)
-    { this->bitsInPixel = 4; }
-//    if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_GRAY_ALPHA)
-//    { this->bitsInPixel = 2; }
-
-}
-
 MyPNG::MyPNG () :
-    fileName(NULL), isOpened(false), image(new struct Png) {}
+        fileName(nullptr), isOpened(false), bitsInPixel(0), image(new struct Png) {}
+
+MyPNG::MyPNG (const char *filename)
+{
+    this->fileName  = nullptr;
+    this->isOpened  = true;
+    this->image     = new struct Png;
+    if (!this->openImage(filename))
+    {
+        this->isOpened = false;
+        delete this->fileName;
+        delete this->image;
+    }
+}
 
 MyPNG::~MyPNG ()
 {
     if (!(this->isOpened))
         return;
-#if DEBUG
-    std::cout << "MyPNG obj is being deleted" << std::endl;
-#endif
     int /*x,*/ y;
 
     /* cleanup heap allocation */
@@ -39,37 +27,33 @@ MyPNG::~MyPNG ()
         delete image->row_pointers[y];
 
     delete image->row_pointers;
-
     delete this->image;
+    delete this->fileName;
 }
 
 int MyPNG::openImage (const char *filenameToOpen)
 {
     if (isOpened)
         return 1;
-    Png *image = this->image;
-
     int /*x,*/ y;
     unsigned char header[8];    // 8 is the maximum size that can be checked
 
     /* open file and test for it being a png */
     FILE *fp = fopen(filenameToOpen, "rb");
-    if (!fp) { return 1; } // file could not be opened
+    if (!fp) { perror("file could not be opened"); return 1; }
 
     fread(header, 1, 8, fp);
     if (png_sig_cmp(header, 0, 8))
-    {
-        return 2; // file is not recognized as a PNG
-    }
+    { perror("file is not recognized as a PNG"); return 2; }
 
-    image->png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    image->png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 
-    if (!image->png_ptr) { return 3; } // png_create_read_struct failed
+    if (!image->png_ptr) { perror("png_create_read_struct failed"); return 3; }
 
     image->info_ptr = png_create_info_struct(image->png_ptr);
-    if (!image->info_ptr) { return 4; } // png_create_info_struct failed
+    if (!image->info_ptr) { perror("png_create_info_struct failed"); return 4; }
 
-    if (setjmp(png_jmpbuf(image->png_ptr))) { return 5; } // error during init_io
+    if (setjmp(png_jmpbuf(image->png_ptr))) { perror("error during init_io"); return 5; }
 
     png_init_io(image->png_ptr, fp);
     png_set_sig_bytes(image->png_ptr, 8);
@@ -85,7 +69,7 @@ int MyPNG::openImage (const char *filenameToOpen)
     png_read_update_info(image->png_ptr, image->info_ptr);
 
     /* read file */
-    if (setjmp(png_jmpbuf(image->png_ptr))) { return 6; } // error during read_image
+    if (setjmp(png_jmpbuf(image->png_ptr))) { perror("error during read_image"); return 6; }
 
     image->row_pointers = new png_bytep[image->height];
     for (y = 0; y < image->height; y++)
@@ -96,9 +80,18 @@ int MyPNG::openImage (const char *filenameToOpen)
     fclose(fp);
 
     if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_RGB)
-    { this->bitsInPixel = 3; }
-    if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_RGB_ALPHA)
-    { this->bitsInPixel = 4; }
+    {
+        this->bitsInPixel = 3;
+    } else if (png_get_color_type(this->image->png_ptr, this->image->info_ptr) == PNG_COLOR_TYPE_RGBA)
+    {
+        this->bitsInPixel = 4;
+    } else {
+        std::cerr << "unsupported file format\n";
+        return 7;
+    }
+    this->isOpened = true;
+    this->fileName = new char[strlen(filenameToOpen)+1];
+    strcpy(this->fileName, filenameToOpen);
 
     return 0;
 }
@@ -107,15 +100,14 @@ int MyPNG::saveImage (const char *filenameToSave) const
 {
     if (!isOpened)
         return 1;
-    Png *image = this->image;
 //    int x,y;
 
     /* create file */
     FILE *fp = fopen(filenameToSave, "wb");
-    if (!fp) { return 1; } // file could not be opened
+    if (!fp) { std::cerr << "file could not be opened"; return 1; }
 
     /* initialize stuff */
-    image->png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    image->png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
     if (!image->png_ptr) { return 2; } // png_create_write_struct failed
 
     image->info_ptr = png_create_info_struct(image->png_ptr);
@@ -142,7 +134,7 @@ int MyPNG::saveImage (const char *filenameToSave) const
     /* end write */
     if (setjmp(png_jmpbuf(image->png_ptr))) { return 7; } // error during end of write
 
-    png_write_end(image->png_ptr, NULL);
+    png_write_end(image->png_ptr, nullptr);
 
     fclose(fp);
 
@@ -159,8 +151,8 @@ void MyPNG::drawCircle(int x1, int y1,
     if (!isOpened)
         return;
     if (x1==x2 && y1==y2) {
-        setBigPixel(x1, y1, lineColor, 0, lineThikness, lineColorAlpha);
-        setBigPixel(x1, y1, lineColor, 1, lineThikness, lineColorAlpha);
+        setBigPixel(x1, y1, lineColor, false, lineThikness, lineColorAlpha);
+        setBigPixel(x1, y1, lineColor, true, lineThikness, lineColorAlpha);
         return;
     }
     int centerX = x2-x1;
@@ -171,8 +163,8 @@ void MyPNG::drawCircle(int x1, int y1,
     if (isFilled)
         for (int x = 0; x < radius; x++)
         {
-            float f_x = sqrt (radius*radius - x*x);
-            for (int y = 0; y <= f_x; y++)
+            double f_x = sqrt (radius*radius - x*x);
+            for (int y = 0; y <= (int)f_x; y++)
             {
                 setPixel(centerX+x, centerY+y, mainColor, mainColorAlpha);
                 setPixel(centerX+x, centerY-y, mainColor, mainColorAlpha);
@@ -183,19 +175,19 @@ void MyPNG::drawCircle(int x1, int y1,
 
     for (int x = 0; x < radius/sqrt(2)+lineThikness; x++)
     {
-        float f_x = sqrt (radius*radius - x*x);
-        setBigPixel(centerX+x, centerY+f_x, lineColor, 1, lineThikness, lineColorAlpha);
-        setBigPixel(centerX+x, centerY-f_x, lineColor, 1, lineThikness, lineColorAlpha);
-        setBigPixel(centerX-x, centerY+f_x, lineColor, 1, lineThikness, lineColorAlpha);
-        setBigPixel(centerX-x, centerY-f_x, lineColor, 1, lineThikness, lineColorAlpha);
+        double f_x = sqrt (radius*radius - x*x);
+        setBigPixel(centerX+x, centerY+(int)f_x, lineColor, true, lineThikness, lineColorAlpha);
+        setBigPixel(centerX+x, centerY-(int)f_x, lineColor, true, lineThikness, lineColorAlpha);
+        setBigPixel(centerX-x, centerY+(int)f_x, lineColor, true, lineThikness, lineColorAlpha);
+        setBigPixel(centerX-x, centerY-(int)f_x, lineColor, true, lineThikness, lineColorAlpha);
     }
     for (int y = 0; y < radius/sqrt(2)+lineThikness; y++)
     {
-        float f_y = sqrt (radius*radius - y*y);
-        setBigPixel(centerX+f_y, centerY+y, lineColor, 0, lineThikness, lineColorAlpha);
-        setBigPixel(centerX+f_y, centerY-y, lineColor, 0, lineThikness, lineColorAlpha);
-        setBigPixel(centerX-f_y, centerY+y, lineColor, 0, lineThikness, lineColorAlpha);
-        setBigPixel(centerX-f_y, centerY-y, lineColor, 0, lineThikness, lineColorAlpha);
+        double f_y = sqrt (radius*radius - y*y);
+        setBigPixel(centerX+(int)f_y, centerY+y, lineColor, false, lineThikness, lineColorAlpha);
+        setBigPixel(centerX+(int)f_y, centerY-y, lineColor, false, lineThikness, lineColorAlpha);
+        setBigPixel(centerX-(int)f_y, centerY+y, lineColor, false, lineThikness, lineColorAlpha);
+        setBigPixel(centerX-(int)f_y, centerY-y, lineColor, false, lineThikness, lineColorAlpha);
     }
 
 }
@@ -204,7 +196,6 @@ void MyPNG::rgbaFilter(int chanelToChange, int newValue)
 {
     if (!isOpened)
         return;
-    struct Png *image = this->image;
     int x,y;
 
     chanelToChange %= this->bitsInPixel;
@@ -224,7 +215,6 @@ void MyPNG::splitImage(int n, int m,
 {
     if (!isOpened)
         return;
-    struct Png *image = this->image;
     for (int i = 1; i < n; i++)
         drawLine(0, i*image->height /n, image->width, i*image->height /n, lineColor, thikness, lineColorAlpha);
     for (int j = 1; j < m; j++)
@@ -234,8 +224,8 @@ void MyPNG::splitImage(int n, int m,
 void MyPNG::drawSquareWithDiagonals(int x1, int y1,
                                     int sideSize,
                                     int lineThikness,
-                                    png_color lineColor, int lineColorAlpha,
-                                    bool isFilled,
+                                    png_color lineColor, bool isFilled,
+                                    int lineColorAlpha,
                                     png_color mainColor, int mainColorAlpha)
 {
     if (!isOpened)
@@ -258,14 +248,11 @@ void MyPNG::drawSquareWithDiagonals(int x1, int y1,
 void MyPNG::info() const
 {
     std::cout << "Image info:" << std::endl;
-    std::cout << "Size: " << this->image->width << "x" << this->image->height << std::endl;
-    std::cout << "Color type: ";
-    if (this->bitsInPixel == 3)
-        std::cout << "RGB";
-    else if (this->bitsInPixel == 4)
-        std::cout << "RGBA";
-    else std::cout << "unsupported";
-    std::cout << std::endl;
+    std::cout << "\tSize:                              " << this->image->width << "x" << this->image->height << std::endl;
+    std::cout << "\tColor type:                        " << this->image->color_type << std::endl;
+    std::cout << "\tBit depth:                         " << this->image->bit_depth << std::endl;
+    std::cout << "\tBytes in a row:                    " << this->image->row_pointers << std::endl;
+    std::cout << "\tExpansion of the interlaced image: " << this->image->number_of_passes << std::endl;
 }
 
 bool MyPNG::opened() const
@@ -273,11 +260,15 @@ bool MyPNG::opened() const
     return this->isOpened;
 }
 
+char *MyPNG::getFileName() const
+{
+    return this->fileName;
+}
+
 bool MyPNG::isOutOfBounds(const int x, const int y) const
 {
     if (!isOpened)
         return false;
-    struct Png *image = this->image;
     return y >= image->height or x >= image->width;
 }
 
@@ -285,7 +276,6 @@ void MyPNG::setPixel(const int x, const int y, png_color color, int colorAlpha)
 {
     if (!isOpened)
         return;
-    struct Png *image = this->image;
 
     if (isOutOfBounds(x, y)) { return; }
 
@@ -312,8 +302,8 @@ void MyPNG::drawLine(const int x1, const int y1, const int x2, const int y2, con
     if (!isOpened)
         return;
     if (x1==x2 && y1==y2) {
-        setBigPixel(x1, y1, color, 0,thikness, colorAlpha);
-        setBigPixel(x1, y1, color, 1,thikness, colorAlpha);
+        setBigPixel(x1, y1, color, false,thikness, colorAlpha);
+        setBigPixel(x1, y1, color, true,thikness, colorAlpha);
         return;
     }
     bool isVertical = abs(y1-y2) > abs(x1-x2);
@@ -321,16 +311,16 @@ void MyPNG::drawLine(const int x1, const int y1, const int x2, const int y2, con
     { // y = kx+b
         int new_x1, new_x2, new_y1, new_y2;
         if (y1<y2) { new_x1 = x1; new_x2 = x2; new_y1 = y1; new_y2 = y2; }
-              else { new_x1 = x2; new_x2 = x1; new_y1 = y2; new_y2 = y1; }
-        float k = (new_x2-new_x1) / (new_y2-new_y1);
+        else { new_x1 = x2; new_x2 = x1; new_y1 = y2; new_y2 = y1; }
+        float k = (float)(new_x2-new_x1) / (float)(new_y2-new_y1);
         for(int y = 0; y <= new_y2-new_y1; y++)
-            setBigPixel(new_x1+k*y, new_y1+y, color, !isVertical, thikness, colorAlpha);
+            setBigPixel(new_x1+(int)(k*(float)y), new_y1+y, color, !isVertical, thikness, colorAlpha);
     } else {
         int new_x1, new_x2, new_y1, new_y2;
         if (x1<x2) { new_x1 = x1; new_x2 = x2; new_y1 = y1; new_y2 = y2; }
-              else { new_x1 = x2; new_x2 = x1; new_y1 = y2; new_y2 = y1; }
-        float k = (new_y2-new_y1) / (new_x2-new_x1);
+        else { new_x1 = x2; new_x2 = x1; new_y1 = y2; new_y2 = y1; }
+        float k = (float)(new_y2-new_y1) / (float)(new_x2-new_x1);
         for(int x = 0; x <= new_x2-new_x1; x++)
-            setBigPixel(new_x1+x, new_y1+k*x, color, !isVertical, thikness, colorAlpha);
+            setBigPixel(new_x1+x, new_y1+int(k*(float)x), color, !isVertical, thikness, colorAlpha);
     }
 }
