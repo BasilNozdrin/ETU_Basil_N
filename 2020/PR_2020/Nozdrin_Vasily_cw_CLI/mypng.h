@@ -36,8 +36,8 @@ public:
     int openImage (const char *filenameToOpen);
     int saveImage (const char *filenameToSave) const;
 
-    void drawCircle (int leftUpperX, int leftUpperY, // int centerX, centerY
-                     int rightBottomX, int rightBottomY, // int radius
+    void drawCircle (int x1, int y1,
+                     int x2, int y2,
                      int thickness,
                      png_color lineColor, bool isFilled,
                      int lineColorAlpha=255,
@@ -49,7 +49,7 @@ public:
                      int thickness, // or PATH to save parts
                      png_color lineColor, int lineColorAlpha=255);
 
-    void drawSquareWithDiagonals (int leftUpperX, int leftUpperY,
+    void drawSquareWithDiagonals (int x1, int x2,
                                   int sideSize, int lineThickness,
                                   png_color lineColor={0,0,0}, bool isFilled=false,
                                   int lineColorAlpha=255,

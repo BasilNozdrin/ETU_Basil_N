@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw_CLI/main.cpp
+iostream
+-
+cstdlib
+-
+cstring
+-
+getopt.h
+-
+mypng.h
+/home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw_CLI/mypng.h
+
+/home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw_CLI/mypng.h
+iostream
+-
+unistd.h
+-
+cstdlib
+-
+cstdio
+-
+cstring
+-
+cstdarg
+-
+cmath
+-
+cerrno
+-
+png.h
+-
+

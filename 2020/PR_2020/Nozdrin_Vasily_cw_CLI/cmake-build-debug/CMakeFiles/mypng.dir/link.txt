@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libmypng.so -o libmypng.so CMakeFiles/mypng.dir/mypng.cpp.o 

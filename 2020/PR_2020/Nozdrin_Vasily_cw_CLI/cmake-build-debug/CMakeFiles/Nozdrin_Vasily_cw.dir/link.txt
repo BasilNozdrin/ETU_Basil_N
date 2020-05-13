@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Nozdrin_Vasily_cw.dir/main.cpp.o  -o Nozdrin_Vasily_cw  -Wl,-rpath,/home/ice-jack/Projects/ETU_Basil_N/2020/PR_2020/Nozdrin_Vasily_cw_CLI/cmake-build-debug /usr/lib/libpng.so libmypng.so 

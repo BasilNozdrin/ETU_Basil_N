@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    static const std::string    optionString    = "hpcfsqS:D:T:io";
+    static const std::string    optionString    = "?hpcfsqS:D:T:io";
     static const char           *optString      = optionString.c_str();
 //#define no_argument            0
 //#define required_argument      1
@@ -83,11 +83,176 @@ int main(int argc, char *argv[])
             case 'c':
             {
             // --circle -D x1 y1 -D x2 y2 -S thickness -T R G B A? -T R G B A?
-                function = 1;
+                if (!function) function = 1;
+                else break;
                 // get first point X
                 {
                     option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'D' || (optind >= argc)
+                        || (!std::stoi(optarg) && optarg[0] != '0')
+                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0'))
+                    {
+                        errorMessage();
+                        return 0;
+                    }
+                    x1 = std::stoi(optarg);
+                    y1 = std::stoi(argv[optind]);
+                }
+                // get second point Y
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'D' || (optind >= argc)
+                        || (!std::stoi(optarg) && optarg[0] != '0')
+                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0'))
+                    {
+                        errorMessage();
+                        return 0;
+                    }
+                    x2 = std::stoi(optarg);
+                    y2 = std::stoi(argv[optind]);
+                }
+                // get line thickness
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'S' || (!std::stoi(optarg) && optarg[0] != '0'))
+                    {
+                        errorMessage();
+                        return 0;
+                    }
+                    lineThickness = std::stoi(optarg);
+                }
+                // get lineColor
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'T' || (optind + 1 >= argc)
+                        || (!std::stoi(optarg) && optarg[0] != '0')
+                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
+                        || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
+                    {
+                        errorMessage();
+                        return 0;
+                    }
+                    lineColor.red = std::stoi(optarg) % 256;
+                    lineColor.green = std::stoi(argv[optind]) % 256;
+                    lineColor.blue = std::stoi(argv[optind + 1]) % 256;
+                }
+                // get lineColorAlpha
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'S'
+                        || (!std::stoi(optarg) && optarg[0] != '0'))
+                    {
+                        lineColorAlpha = 255;
+                        break;
+                    } else {
+                        lineColorAlpha = std::stoi(optarg) % 256;
+                    }
+                }
+                // get mainColor
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'T' || (optind + 1 >= argc)
+                        || (!std::stoi(optarg) && optarg[0] != '0')
+                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
+                        || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
+                    {
+                        isFilled = false;
+                    } else {
+                        isFilled = true;
+                        mainColor.red = std::stoi(optarg) % 256;
+                        mainColor.green = std::stoi(argv[optind]) % 256;
+                        mainColor.blue = std::stoi(argv[optind + 1]) % 256;
+                    }
+
+                }
+                // get mainColorAlpha
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'S'
+                        || (!std::stoi(optarg) && optarg[0] != '0'))
+                    {
+                        mainColorAlpha = 255;
+                    } else {
+                        mainColorAlpha = std::stoi(optarg) % 256;
+                    }
+                }
+                break;
+            }
+            case 'f':
+            {
+                if (!function) function = 2;
+                else break;
+                // --filter -D chanel new_value
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
                     if (option != 'D' || (optind + 1 >= argc)
+                        || (!std::stoi(optarg) && optarg[0] != '0')
+                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0'))
+                    {
+                        errorMessage();
+                        return 0;
+                    }
+                    chanelToChange = (std::stoi(optarg)-1) % 4;
+                    newValue = std::stoi(argv[optind]) % 256;
+                }
+                break;
+            }
+            case 's':
+            {
+                if (!function) function = 3;
+                else break;
+                // --split -D n m -T thickness -C R G B A?
+                // get n and m
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'D' || (optind >= argc)
+                        || (!std::stoi(optarg) && optarg[0] != '0')
+                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0'))
+                    { errorMessage(); return 0; }
+                    n = std::stoi(optarg);
+                    m = std::stoi(argv[optind]);
+                }
+                // get line thickness
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'S' || (!std::stoi(optarg) && optarg[0] != '0'))
+                    { errorMessage(); return 0; }
+                    lineThickness = std::stoi(optarg);
+                }
+                // get lineColor
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'T' || (optind + 2 >= argc)
+                        || (!std::stoi(optarg) && optarg[0] != '0')
+                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
+                        || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
+                    { errorMessage(); return 0; }
+                    lineColor.red = std::stoi(optarg) % 256;
+                    lineColor.green = std::stoi(argv[optind]) % 256;
+                    lineColor.blue = std::stoi(argv[optind + 1]) % 256;
+                }
+                // get lineColorAlpha
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'S'
+                        || (!std::stoi(optarg) && optarg[0] != '0'))
+                    {
+                        lineColorAlpha = 255;
+                    } else {
+                        lineColorAlpha = std::stoi(optarg) % 256;
+                    }
+                }
+                break;
+            }
+            case 'q':
+            {
+                if (!function) function = 4;
+                else break;
+                // --square -D x1 y1 -S sideSize -S thickness -C R G B A? -C R G B A?
+                // get first point X
+                {
+                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                    if (option != 'D' || (optind >= argc)
                         || (!std::stoi(optarg) && optarg[0] != '0')
                         || (!std::stoi(argv[optind]) && argv[optind][0] != '0'))
                     {
@@ -98,18 +263,15 @@ int main(int argc, char *argv[])
                     y1 = std::stoi(argv[optind]);
                 }
 
-                // get second point Y
+                // get side size
                 {
                     option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                    if (option != 'D' || (optind + 1 >= argc)
-                        || (!std::stoi(optarg) && optarg[0] != '0')
-                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0'))
+                    if (option != 'S' || (!std::stoi(optarg) && optarg[0] != '0'))
                     {
                         errorMessage();
                         return 0;
                     }
-                    x2 = std::stoi(optarg);
-                    y2 = std::stoi(argv[optind]);
+                    sideSize = std::stoi(optarg);
                 }
 
                 // get line thickness
@@ -126,7 +288,7 @@ int main(int argc, char *argv[])
                 // get lineColor
                 {
                     option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                    if (option != 'T' || (optind + 1 >= argc)
+                    if (option != 'T' || (optind + 2 >= argc)
                         || (!std::stoi(optarg) && optarg[0] != '0')
                         || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
                         || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
@@ -134,9 +296,9 @@ int main(int argc, char *argv[])
                         errorMessage();
                         return 0;
                     }
-                    lineColor.red = std::stoi(optarg);
-                    lineColor.green = std::stoi(argv[optind]);
-                    lineColor.blue = std::stoi(argv[optind + 1]);
+                    lineColor.red = std::stoi(optarg) % 256;
+                    lineColor.green = std::stoi(argv[optind]) % 256;
+                    lineColor.blue = std::stoi(argv[optind + 1]) % 256;
                 }
 
                 // get lineColorAlpha
@@ -146,30 +308,28 @@ int main(int argc, char *argv[])
                         || (!std::stoi(optarg) && optarg[0] != '0'))
                     {
                         lineColorAlpha = 255;
+                        break;
                     } else {
                         lineColorAlpha = std::stoi(optarg) % 256;
                     }
                 }
 
                 // get mainColor
+                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
+                if (option != 'T' || (optind + 2 >= argc)
+                    || (!std::stoi(optarg) && optarg[0] != '0')
+                    || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
+                    || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
                 {
-                    option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                    if (option != 'T' || (optind + 1 >= argc)
-                        || (!std::stoi(optarg) && optarg[0] != '0')
-                        || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
-                        || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
-                    {
-                        isFilled = false;
-                    } else {
-                        isFilled = true;
-                        mainColor.red = std::stoi(optarg);
-                        mainColor.green = std::stoi(argv[optind]);
-                        mainColor.blue = std::stoi(argv[optind + 1]);
-                    }
-
+                    isFilled = false;
+                } else {
+                    mainColor.red = std::stoi(optarg) % 256;
+                    mainColor.green = std::stoi(argv[optind]) % 256;
+                    mainColor.blue = std::stoi(argv[optind + 1]) % 256;
+                    isFilled = true;
                 }
 
-                // get mainColorAlpha
+                // get lineColorAlpha
                 {
                     option = getopt_long(argc, argv, optString, longOpts, &longIndex);
                     if (option != 'S'
@@ -182,128 +342,6 @@ int main(int argc, char *argv[])
                 }
                 break;
             }
-            case 'f':
-            {
-                function = 2;
-                // --filter -S chanel -T new_value
-                // get side size
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'S' || (!std::stoi(optarg) && optarg[0] != '0'))
-                { errorMessage(); return 0; }
-                sideSize = std::stoi(optarg);
-
-                // get line thickness
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'S' || (!std::stoi(optarg) && optarg[0] != '0'))
-                { errorMessage(); return 0; }
-                lineThickness = std::stoi(optarg);
-    // CALL RGBAFilter
-                image->rgbaFilter (sideSize, lineThickness);
-                // chanel and new_value
-                break;
-            }
-            case 's':
-            {
-                function = 3;
-                // --split -X n m -T thickness -C R G B A?
-                // get n and m
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'D' || (optind >= argc)
-                    || (!std::stoi(optarg) && optarg[0] != '0')
-                    || (!std::stoi(argv[optind]) && argv[optind][0] != '0'))
-                { errorMessage(); return 0; }
-                n = std::stoi(optarg);
-                m = std::stoi(argv[optind]);
-
-                // get line thickness
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'S' || (!std::stoi(optarg) && optarg[0] != '0'))
-                { errorMessage(); return 0; }
-                lineThickness = std::stoi(optarg);
-
-                // get lineColor
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'T' || (optind + 2 >= argc)
-                    || (!std::stoi(optarg) && optarg[0] != '0')
-                    || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
-                    || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
-                { errorMessage(); return 0; }
-                lineColor.red = std::stoi(optarg);
-                lineColor.green = std::stoi(argv[optind]);
-                lineColor.blue = std::stoi(argv[optind + 1]);
-                if (std::stoi(argv[optind + 2]) || argv[optind + 2][0] == '0')
-                    lineColorAlpha = std::stoi(argv[optind + 2]);
-
-
-    // CALL SplitImage
-                image->splitImage (n, m, lineThickness,
-                        lineColor, (lineColorAlpha >= 0)? lineColorAlpha%256: 255);
-                break;
-            }
-            case 'q':
-            {
-                function = 4;
-                // --square -X x1 y1 -S sideSize -T thickness -C R G B A? -C R G B A?
-                // get first point X
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'D' || (optind >= argc)
-                    || (!std::stoi(optarg) && optarg[0] != '0')
-                    || (!std::stoi(argv[optind]) && argv[optind][0] != '0'))
-                { errorMessage(); return 0; }
-                x1 = std::stoi(optarg);
-                y1 = std::stoi(argv[optind]);
-
-                // get side size
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'S' || (!std::stoi(optarg) && optarg[0] != '0'))
-                { errorMessage(); return 0; }
-                sideSize = std::stoi(optarg);
-
-                // get line thickness
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'S' || (!std::stoi(optarg) && optarg[0] != '0'))
-                { errorMessage(); return 0; }
-                lineThickness = std::stoi(optarg);
-
-                // get lineColor
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'T' || (optind + 2 >= argc)
-                    || (!std::stoi(optarg) && optarg[0] != '0')
-                    || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
-                    || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
-                { errorMessage(); return 0; }
-                lineColor.red = std::stoi(optarg);
-                lineColor.green = std::stoi(argv[optind]);
-                lineColor.blue = std::stoi(argv[optind + 1]);
-                if (std::stoi(argv[optind + 2]) || argv[optind + 2][0] == '0')
-                    lineColorAlpha = std::stoi(argv[optind + 2]);
-
-                // get mainColor
-                option = getopt_long(argc, argv, optString, longOpts, &longIndex);
-                if (option != 'T' || (optind + 2 >= argc)
-                    || (!std::stoi(optarg) && optarg[0] != '0')
-                    || (!std::stoi(argv[optind]) && argv[optind][0] != '0')
-                    || (!std::stoi(argv[optind + 1]) && argv[optind + 1][0] != '0'))
-                {
-    // CALL DrawSquareWithDiagonals
-                    image->drawSquareWithDiagonals (x1, y1, sideSize,
-                                       lineThickness, lineColor, false,
-                                       (lineColorAlpha >= 0)? lineColorAlpha%256: 255);
-                } else {
-                    mainColor.red = std::stoi(optarg);
-                    mainColor.green = std::stoi(argv[optind]);
-                    mainColor.blue = std::stoi(argv[optind + 1]);
-                    if (std::stoi(argv[optind + 2]) || argv[optind + 2][0] == '0')
-                        mainColorAlpha = std::stoi(argv[optind + 2]);
-    // CALL DrawSquareWithDiagonals
-                    image->drawSquareWithDiagonals (x1, y1, sideSize,
-                                       lineThickness, lineColor, true,
-                                       (lineColorAlpha >= 0)? lineColorAlpha%256: 255,
-                                       mainColor, (mainColorAlpha >= 0)? mainColorAlpha%256: 255);
-                }
-                break;
-            }
-
             case 'i':
             {
                 if (optarg)
@@ -321,7 +359,8 @@ int main(int argc, char *argv[])
             }
             case 'p':
             {
-                function = 5;
+                if (!function) function = 5;
+                else break;
                 break;
             }
             case 'h':
@@ -334,21 +373,28 @@ int main(int argc, char *argv[])
 
     argc -= optind;
     argv += optind;
-
-//    std::cout << "argc = " << argc << std::endl << argv[argc-1] << std::endl;
-
     // open file
     if (inPath)
     {
         if (image->openImage(inPath))
-        { return 0; }
+        {
+            std::cout << "Wrong filename or program could not open this file" << std::endl;
+            errorMessage();
+            return 0;
+        }
     } else {
         if (strstr(argv[argc-1], ".png"))
         {
             if (image->openImage(argv[argc-1]))
+            {
+                std::cout << "Wrong filename or program could not open this file" << std::endl;
+                errorMessage();
                 return 0;
+            }
         } else {
+            std::cout << "Wrong filename" << std::endl;
             errorMessage();
+            return 0;
         }
     }
 
@@ -357,6 +403,8 @@ int main(int argc, char *argv[])
     {
         case 1:
         {
+//            std::cout << "p1: (" << x1 << ", " << y1 << ")" << std::endl;
+//            std::cout << "p2: (" << x2 << ", " << y2 << ")" << std::endl;
             image->drawCircle(x1, y1, x2, y2,
                     lineThickness, lineColor, isFilled,
                     lineColorAlpha, mainColor, mainColorAlpha);
@@ -369,11 +417,12 @@ int main(int argc, char *argv[])
         }
         case 3:
         {
-            image->splitImage(n, n, lineThickness, lineColor, lineColorAlpha);
+            image->splitImage(n, m, lineThickness, lineColor, lineColorAlpha);
             break;
         }
         case 4:
         {
+//            std::cout << "p1: (" << x1 << ", " << y1 << ")" << std::endl;
             image->drawSquareWithDiagonals(x1, y1, sideSize,
                               lineThickness, lineColor, isFilled,
                               lineColorAlpha, mainColor, mainColorAlpha);
@@ -386,6 +435,7 @@ int main(int argc, char *argv[])
         }
         default:
         {
+            std::cout << "No operation selected" << std::endl;
             return 0;
             break;
         }
@@ -395,7 +445,6 @@ int main(int argc, char *argv[])
         strcpy(outPath, image->getFileName());
 
     image->saveImage(outPath);
-
     delete image;
     delete inPath;
     delete [] outPath;
@@ -426,19 +475,19 @@ void help(){
                  "\t\t\t-D [coords1] -D [coords2] -S [lineThickness] -T [lineColor] -S [alpha] -T [fillColor] -S [alpha]\n";
     std::cout << "\t\t-f --filter\n"
                  "\t\t\tOPTIONS:\n"
-                 "\t\t\t-S [chanelToChange] -S [valueToSet]\n";
+                 "\t\t\t-D [chanelToChange] [valueToSet]\n";
     std::cout << "\t\t-s --split\n"
                  "\t\t\tOPTIONS:\n"
-                 "\t\t\t-D [coords1] -S [n] -S [m] -T [lineColor] -T [fillColor]\n";
+                 "\t\t\t-D [n] [m] -S [thickness ] -T [lineColor] -S [alpha]\n";
     std::cout << "\t\t-q --square\n"
                  "\t\t\tOPTIONS:\n"
-                 "\t\t\t-D [coords1] -S [sideSize] -S [lineThickness] -T [lineColor] -T [fillColor]\n";
+                 "\t\t\t-D [coords1] -S [sideSize] -S [lineThickness] -T [lineColor] -S [alpha] -T [fillColor] -S [alpha]\n";
 
     std::cout << "\tOPTIONS" << std::endl;
-    std::cout << "\t\t-i, --thickness\n"
-                 "\t\t\tan integer that corresponds with line thickness" << std::endl;
-    std::cout << "\t\t-o, --size\n"
-                 "\t\t\tan integer that corresponds with square size" << std::endl;
+    std::cout << "\t\t-i, --input\n"
+                 "\t\t\tchoose file to open" << std::endl;
+    std::cout << "\t\t-o, --output\n"
+                 "\t\t\tchoose file to save result" << std::endl;
 
     std::cout << "\t\t-S, --single\n"
                  "\t\t\tone integer value" << std::endl;

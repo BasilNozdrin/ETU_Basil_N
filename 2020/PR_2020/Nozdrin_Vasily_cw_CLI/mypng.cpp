@@ -1,7 +1,7 @@
 #include "mypng.h"
 
 MyPNG::MyPNG () :
-        fileName(nullptr), isOpened(false), bitsInPixel(0), image(new struct Png) {}
+        fileName(nullptr), bitsInPixel(0), isOpened(false), image(new struct Png) {}
 
 MyPNG::MyPNG (const char *filename)
 {
@@ -155,8 +155,8 @@ void MyPNG::drawCircle(int x1, int y1,
         setBigPixel(x1, y1, lineColor, true, lineThikness, lineColorAlpha);
         return;
     }
-    int centerX = x2-x1;
-    int centerY = y2-y1;
+    int centerX = (x2+x1) / 2;
+    int centerY = (y2+y1) / 2;
     int radius = abs((x2-x1) / 2);
 
     // fill circle
@@ -249,10 +249,10 @@ void MyPNG::info() const
 {
     std::cout << "Image info:" << std::endl;
     std::cout << "\tSize:                              " << this->image->width << "x" << this->image->height << std::endl;
-    std::cout << "\tColor type:                        " << this->image->color_type << std::endl;
-    std::cout << "\tBit depth:                         " << this->image->bit_depth << std::endl;
-    std::cout << "\tBytes in a row:                    " << this->image->row_pointers << std::endl;
-    std::cout << "\tExpansion of the interlaced image: " << this->image->number_of_passes << std::endl;
+//    std::cout << "\tColor type:                        " << this->image->color_type << std::endl;
+//    std::cout << "\tBit depth:                         " << this->image->bit_depth << std::endl;
+//    std::cout << "\tBytes in a row:                    " << this->image->row_pointers << std::endl;
+//    std::cout << "\tExpansion of the interlaced image: " << this->image->number_of_passes << std::endl;
 }
 
 bool MyPNG::opened() const
@@ -269,7 +269,11 @@ bool MyPNG::isOutOfBounds(const int x, const int y) const
 {
     if (!isOpened)
         return false;
-    return y >= image->height or x >= image->width;
+    if (x < 0 || x >= image->width)
+        return true;
+    if (y < 0 || y >= image->height)
+        return true;
+    return false;
 }
 
 void MyPNG::setPixel(const int x, const int y, png_color color, int colorAlpha)
