@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    static const std::string    optionString    = "?hpcfsqS:D:T:io";
+    static const std::string    optionString    = "?hpcfsqS:D:T:i:o:";
     static const char           *optString      = optionString.c_str();
 //#define no_argument            0
 //#define required_argument      1
@@ -403,8 +403,11 @@ int main(int argc, char *argv[])
     {
         case 1:
         {
-//            std::cout << "p1: (" << x1 << ", " << y1 << ")" << std::endl;
-//            std::cout << "p2: (" << x2 << ", " << y2 << ")" << std::endl;
+            if (abs(x1-x2) != abs(y1-y2))
+            {
+                std::cout << "Wrong input. You're trying to draw an ellipse, but this program can only draw circles" << std::endl;
+                break;
+            }
             image->drawCircle(x1, y1, x2, y2,
                     lineThickness, lineColor, isFilled,
                     lineColorAlpha, mainColor, mainColorAlpha);
