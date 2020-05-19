@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    static const std::string    optionString    = "?hpcfsqS:D:T:i:o:";
+    static const std::string    optionString    = "?hpcfsqmS:D:T:i:o:";
     static const char           *optString      = optionString.c_str();
 //#define no_argument            0
 //#define required_argument      1
@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
         {"filter",  no_argument,        nullptr,'f' },
         {"split",   no_argument,        nullptr,'s' },
         {"square",  no_argument,        nullptr,'q' },
+        {"compress",  no_argument,        nullptr,'m' },
         // parameters
         {"single",  required_argument,  nullptr,'S' },
         {"double",  required_argument,  nullptr,'D' },
@@ -73,6 +74,7 @@ int main(int argc, char *argv[])
     // splitImage                  3
     // drawSquareWithDiagonals     4
     // info                        5
+    // compress                    6
 
 //     opterr=0;
     while ((option = getopt_long (argc, argv, optString,
@@ -80,6 +82,12 @@ int main(int argc, char *argv[])
     {
         switch (option)
         {
+            case 'm':
+            {
+                function = 6;
+                break;
+            }
+
             case 'c':
             {
             // --circle -D x1 y1 -D x2 y2 -S thickness -T R G B A? -T R G B A?
@@ -401,6 +409,12 @@ int main(int argc, char *argv[])
     // process file
     switch (function)
     {
+        case 6:
+        {
+            image->compress();
+            break;
+        }
+
         case 1:
         {
             if (abs(x1-x2) != abs(y1-y2))

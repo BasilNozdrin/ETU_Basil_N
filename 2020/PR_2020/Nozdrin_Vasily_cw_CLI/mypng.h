@@ -54,7 +54,9 @@ public:
                                   png_color lineColor={0,0,0}, bool isFilled=false,
                                   int lineColorAlpha=255,
                                   png_color mainColor={255,255,255}, int mainColorAlpha=0);
-    
+
+    void compress();
+
     void info () const;
     bool opened() const;
     char *getFileName() const;
@@ -69,6 +71,9 @@ protected:
 
     void setPixel (int x, int y,
                   png_color color, int colorAlpha=255);
+
+    png_color getPixel(int, int);
+    png_byte getAlpha (int x, int y);
 
     void setBigPixel (int x, int y,
                       png_color color, bool isVertical, int thickness, int colorAlpha=255);

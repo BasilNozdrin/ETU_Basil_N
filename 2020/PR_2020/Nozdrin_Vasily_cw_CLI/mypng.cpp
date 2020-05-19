@@ -245,6 +245,46 @@ void MyPNG::drawSquareWithDiagonals(int x1, int y1,
     drawLine(x1         , y1+sideSize   , x1+sideSize   , y1            , lineColor, lineThikness, lineColorAlpha);
 }
 
+void MyPNG::compress(){
+    if (!isOpened)
+        return;
+    int heightMod2 = (image->height%2);
+    int widthMod2 = (image->width%2);
+    std::cout << heightMod2 << widthMod2 << std::endl;
+    for (int x = 1; x+1 < image->width-widthMod2; x+= 2)
+        for (int y = 1; y+1 < image->height-heightMod2; y+= 2)
+        {
+            png_color color1 = getPixel(x,y);
+            png_color color2 = getPixel(x,y+1);
+            png_color color3 = getPixel(x+1,y);
+            png_color color4 = getPixel(x+1,y+1);
+            png_color new_color = {
+                    static_cast<png_byte>(((int) color1.red + (int) color2.red + (int) color3.red + (int) color4.red)/ 4),
+                    static_cast<png_byte>(((color1.green + color2.green + color3.green + color4.green) / 4)),
+                    static_cast<png_byte>(((color1.blue + color2.blue + color3.blue + color4.blue) / 4))};
+            png_byte new_alpha = getAlpha(x,y)/4;
+            new_alpha += getAlpha(x,y+1)/4;
+            new_alpha += getAlpha(x+1,y)/4;
+            new_alpha += getAlpha(x+1,y+1)/4;
+            setPixel(x/2, y/2, new_color, new_alpha);
+        }
+    auto new_row_pointers = new png_bytep[(image->height-heightMod2)/2];
+    for (int y = 0; y < (image->height-heightMod2)/2; y++)
+    {
+        new_row_pointers[y] = new png_byte[((image->width-widthMod2) / 2)*bitsInPixel];
+        for (int x = 0; x < (image->width-widthMod2)/2; x++)
+            for (int i = 0; i < bitsInPixel; i++)
+            new_row_pointers[y][x*bitsInPixel+i] = image->row_pointers[y][x*bitsInPixel+i];
+    }
+    for (int y = 0; y < image->height; y++)
+        delete image->row_pointers[y];
+    delete image->row_pointers;
+
+    image->row_pointers = new_row_pointers;
+    image->height = (image->height-heightMod2) / 2;
+    image->width = (image->width-widthMod2) / 2;
+}
+
 void MyPNG::info() const
 {
     std::cout << "Image info:" << std::endl;
@@ -284,10 +324,25 @@ void MyPNG::setPixel(const int x, const int y, png_color color, int colorAlpha)
     if (isOutOfBounds(x, y)) { return; }
 
     int colorp[4] = {color.red, color.green, color.blue, colorAlpha};
+    // row
     png_byte *ptr = &(image->row_pointers[y][x*(this->bitsInPixel)]);
 
     for (int i = 0; i < this->bitsInPixel; i++)
         ptr[i] = colorp[i];
+}
+
+png_color MyPNG::getPixel(int x, int y)
+{
+    return {image->row_pointers[y][x*(this->bitsInPixel)],
+            image->row_pointers[y][x*(this->bitsInPixel)+1],
+            image->row_pointers[y][x*(this->bitsInPixel)+2]};
+}
+
+png_byte MyPNG::getAlpha (int x, int y)
+{
+    if (this->bitsInPixel != 4)
+        return 255;
+    return (image->row_pointers[y][x*(this->bitsInPixel)+3]);
 }
 
 void MyPNG::setBigPixel(const int x, const int y, png_color color, bool isVertical, int thikness, int colorAlpha)
