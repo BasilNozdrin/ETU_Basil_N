@@ -54,7 +54,7 @@ class FapCeo:
     def action_click_girl(self, n):
         x, y = self.__girls[n % 11]
         if pyautogui.onScreen(x, y):
-            pyautogui.click(x, y, clicks=1, interval=0.1, button='left')
+            pyautogui.click(x, y, clicks=10, interval=0.01, button='left')
 
     def action_level_up(self, levels=20):
         x, y = self.__level_up
@@ -77,6 +77,7 @@ class FapCeo:
         self.action_click_girl(10)
         if pyautogui.onScreen(x, y):
             pyautogui.click(x, y, clicks=1, interval=2, button='left')
+        self.action_click_girl(0)
 
     def state(self):
         """
@@ -96,10 +97,11 @@ class FapCeo:
 
     def looped_level_up(self, number_of_passes=1):
         for i in range(11*number_of_passes):
-            if self.state() == 0:
-                print('loop terminated')
-                return
+            # if self.state() == 0:
+            #     print('loop terminated')
+            #     return
             self.action_click_girl(i % 11)
             pyautogui.sleep(1)
+            self.action_click_girl(i % 11)
             while self.state() == 2:
                 self.action_level_up()
