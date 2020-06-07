@@ -1,0 +1,12 @@
+
+@media screen and (max-width: 380px) {
+  .field {
+    height: 80vw;
+    width: 80vw;
+
+    .row{height: 33%; .cell {
+      max-width: 33%;
+      height: 100%;
+    }}
+  }
+}
