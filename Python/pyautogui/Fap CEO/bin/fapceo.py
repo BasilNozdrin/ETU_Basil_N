@@ -4,7 +4,6 @@ import pyautogui
 class FapCeo:
     __girls = []
     __level_up = __sell_company = __sell_confirm = __hire_all = (0, 0)
-
     __gray = [
         (191, 191, 191),
         (199, 199, 199),
@@ -36,6 +35,7 @@ class FapCeo:
             self.__sell_company = (974, 30)
             self.__sell_confirm = (1181, 885)
             self.__hire_all = (1479, 87)
+            self.__event_chest = (1647, 743)
         else:
             self.__girls = [
                 (572, 380), (744, 287),
@@ -47,6 +47,7 @@ class FapCeo:
             self.__sell_company = (951, 157)
             self.__sell_confirm = (1085, 707)
             self.__hire_all = (1298, 185)
+            self.__event_chest = (1413, 620)
 
         pyautogui.mouseInfo()
         pyautogui.sleep(2)
@@ -74,6 +75,14 @@ class FapCeo:
         self.action_click_girl(0)
         if pyautogui.onScreen(x, y):
             pyautogui.click(x, y, clicks=1, interval=2, button='left')
+        self.action_click_girl(0)
+
+    def action_event(self):
+        x, y = self.__event_chest
+        self.action_click_girl(0)
+        if pyautogui.onScreen(x, y):
+            pyautogui.click(x, y, clicks=10, interval=0.1, button='left')
+        pyautogui.sleep(2)
         self.action_click_girl(0)
 
     def state(self):
@@ -104,3 +113,14 @@ class FapCeo:
             self.action_click_girl(i % 11)
             while self.state() == 2:
                 self.action_level_up()
+
+
+def loop(game, number_of_passes=2, sell=True, event=False):
+    while game.state():
+        if event:
+            game.action_event()
+        if sell:
+            game.action_sell_company()
+            game.action_hire_all()
+        game.looped_level_up(number_of_passes=number_of_passes)
+    print('Process terminated')
