@@ -16,9 +16,17 @@ class BoardRoom:
         self.__state = [news, employees, bank]
 
     def act(self, n):
+        def add(x, y):
+            res = x +y
+            if res < 0:
+                return 0
+            if res > 16
+                return 16
+            return res
+
         self.__state = list(
             map(
-                lambda x, y: x + y,
+                add,
                 self.__state,
                 self.__actions[n % 6])
         )
