@@ -55,7 +55,7 @@ class FapCeo:
     def action_click_girl(self, n):
         x, y = self.__girls[n % 11]
         if pyautogui.onScreen(x, y):
-            pyautogui.click(x, y, clicks=10, interval=0.01, button='left')
+            pyautogui.click(x, y, clicks=10, interval=0.07, button='left')
 
     def action_level_up(self, levels=20):
         x, y = self.__level_up

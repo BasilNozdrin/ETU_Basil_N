@@ -11,8 +11,8 @@ def main():
         print('Enter number of passes,'
               'sell end event options:',
               end='')
-        game = fc.FapCeo()
         number_of_passes, sell, event = list(map(int, input().split()))
+        game = fc.FapCeo()
         fc.loop(game, number_of_passes=number_of_passes, sell=sell, event=event)
     else:
         print('Enter your board initial state:\n',
