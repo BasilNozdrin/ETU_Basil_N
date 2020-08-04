@@ -20,7 +20,7 @@ class BoardRoom:
             res = x +y
             if res < 0:
                 return 0
-            if res > 16
+            if res > 16:
                 return 16
             return res
 

@@ -3,19 +3,40 @@ import pyautogui
 
 class FapCeo:
     __girls = []
-    __level_up = __sell_company = __sell_confirm = __hire_all = (0, 0)
+    __level_up = __sell_company = __sell_confirm = __hire_all = __cancel_sell = (0, 0)
     __gray = [
         (191, 191, 191),
         (199, 199, 199),
+        # fullscreen
+        (102, 107, 125),
+        (197, 197, 197),
+        (188, 188, 188),
+        (189, 189, 189),
     ]
     __green_and_violet = [
+        # green
         (38, 184, 57),
         (40, 190, 59),
         (41, 197, 61),
-
+        # fullscreen green
+        (36, 188, 55),
+        (37, 196, 57),
+        # violet
         (172, 5, 193),
         (175, 5, 197),
         (182, 5, 205),
+        # fullscreen violet
+        (173, 0, 196),
+        (180, 0, 204),
+    ]
+    __sell_colors = [
+        (46, 44, 44),
+        (15, 182, 255),
+        (23, 148, 227),
+        # fullscreen
+        (13, 178, 255),
+        (15, 173, 251),
+        (126, 128, 146),
     ]
 
     def __init__(self, mode=''):
@@ -24,7 +45,7 @@ class FapCeo:
             use 'fullscreen' or 'fs' for fullscreen mode
             anything else is windowed mode
         """
-        if mode == 'fullscreen' or mode == 'fs':
+        if mode in ['fullscreen', 'fs']:
             self.__girls = [
                 (395, 386), (644, 241),
                 (607, 500), (835, 365), (1071, 224),
@@ -32,8 +53,8 @@ class FapCeo:
                 (1007, 738), (1231, 598), (1487, 463),
             ]
             self.__level_up = (1695, 988)
-            self.__sell_company = (974, 30)
-            self.__sell_confirm = (1181, 885)
+            self.__sell_company = (763, 0)
+            self.__sell_confirm = (1036, 940)
             self.__hire_all = (1479, 87)
             self.__event_chest = (1647, 743)
         else:
@@ -44,8 +65,8 @@ class FapCeo:
                 (982, 627), (1137, 525), (1304, 431),
             ]
             self.__level_up = (1442, 783)
-            self.__sell_company = (951, 157)
-            self.__sell_confirm = (1085, 707)
+            self.__sell_company = (956, 127)
+            self.__sell_confirm = (1017, 756)
             self.__hire_all = (1298, 185)
             self.__event_chest = (1413, 620)
 
@@ -65,12 +86,19 @@ class FapCeo:
     def action_sell_company(self):
         x, y = self.__sell_company
         if pyautogui.onScreen(x, y):
-            pyautogui.click(x, y, clicks=1, interval=0.1, button='left')
+            pyautogui.click(x, y, clicks=1, interval=1, button='left')
         x, y = self.__sell_confirm
         if pyautogui.onScreen(x, y):
+            cur = pyautogui.pixel(x, y)
             pyautogui.click(x, y, clicks=1, interval=3, button='left')
+            print('sell', cur, end='\t')
+            if cur not in self.__sell_colors:
+                print('selling...')
+                self.action_hire()
+            else:
+                print('not ready to sell')
 
-    def action_hire_all(self):
+    def action_hire(self):
         x, y = self.__hire_all
         self.action_click_girl(0)
         if pyautogui.onScreen(x, y):
@@ -94,11 +122,14 @@ class FapCeo:
         """
         x, y = self.__level_up
         cur = pyautogui.pixel(x, y)
-        # print(cur)
+        print('state', cur, end='\t')
         if cur in self.__gray:
+            print('gray')
             return 1
         if cur in self.__green_and_violet:
+            print('green or violet')
             return 2
+        print('bad color')
         return 0
 
     def looped_level_up(self, number_of_passes=1):
@@ -107,7 +138,7 @@ class FapCeo:
             if self.state() == 0:
                 self.action_click_girl(i % 11)
                 if self.state() == 0:
-                    print('loop terminated')
+                    print('looped_level_up stopped: wrong color')
                     return
             pyautogui.sleep(2)
             self.action_click_girl(i % 11)
@@ -121,6 +152,5 @@ def loop(game, number_of_passes=2, sell=True, event=False):
             game.action_event()
         if sell:
             game.action_sell_company()
-            game.action_hire_all()
         game.looped_level_up(number_of_passes=number_of_passes)
     print('Process terminated')
