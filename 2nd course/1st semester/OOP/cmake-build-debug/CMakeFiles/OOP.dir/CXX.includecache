@@ -6,7 +6,15 @@
 
 #IncludeRegexTransform: 
 
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Cell.h
+
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Field.h
+Cell.h
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Cell.h
+
 /home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/main.cpp
 iostream
 -
+bin/gamefield/Field.h
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Field.h
 

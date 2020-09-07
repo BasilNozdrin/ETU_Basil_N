@@ -143,6 +143,60 @@ OOP/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/build
 .PHONY : OOP/fast
 
+bin/gamefield/Cell.o: bin/gamefield/Cell.cpp.o
+
+.PHONY : bin/gamefield/Cell.o
+
+# target to build an object file
+bin/gamefield/Cell.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o
+.PHONY : bin/gamefield/Cell.cpp.o
+
+bin/gamefield/Cell.i: bin/gamefield/Cell.cpp.i
+
+.PHONY : bin/gamefield/Cell.i
+
+# target to preprocess a source file
+bin/gamefield/Cell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.i
+.PHONY : bin/gamefield/Cell.cpp.i
+
+bin/gamefield/Cell.s: bin/gamefield/Cell.cpp.s
+
+.PHONY : bin/gamefield/Cell.s
+
+# target to generate assembly for a file
+bin/gamefield/Cell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.s
+.PHONY : bin/gamefield/Cell.cpp.s
+
+bin/gamefield/Field.o: bin/gamefield/Field.cpp.o
+
+.PHONY : bin/gamefield/Field.o
+
+# target to build an object file
+bin/gamefield/Field.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o
+.PHONY : bin/gamefield/Field.cpp.o
+
+bin/gamefield/Field.i: bin/gamefield/Field.cpp.i
+
+.PHONY : bin/gamefield/Field.i
+
+# target to preprocess a source file
+bin/gamefield/Field.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.i
+.PHONY : bin/gamefield/Field.cpp.i
+
+bin/gamefield/Field.s: bin/gamefield/Field.cpp.s
+
+.PHONY : bin/gamefield/Field.s
+
+# target to generate assembly for a file
+bin/gamefield/Field.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.s
+.PHONY : bin/gamefield/Field.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -179,6 +233,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... OOP"
+	@echo "... bin/gamefield/Cell.o"
+	@echo "... bin/gamefield/Cell.i"
+	@echo "... bin/gamefield/Cell.s"
+	@echo "... bin/gamefield/Field.o"
+	@echo "... bin/gamefield/Field.i"
+	@echo "... bin/gamefield/Field.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
