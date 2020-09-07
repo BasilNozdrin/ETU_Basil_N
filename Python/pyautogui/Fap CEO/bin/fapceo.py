@@ -91,12 +91,12 @@ class FapCeo:
         if pyautogui.onScreen(x, y):
             cur = pyautogui.pixel(x, y)
             pyautogui.click(x, y, clicks=1, interval=3, button='left')
-            print('sell', cur, end='\t')
+            # print('sell', cur, end='\t')
             if cur not in self.__sell_colors:
-                print('selling...')
+                # print('selling...')
                 self.action_hire()
-            else:
-                print('not ready to sell')
+            # else:
+                # print('not ready to sell')
 
     def action_hire(self):
         x, y = self.__hire_all
@@ -122,14 +122,14 @@ class FapCeo:
         """
         x, y = self.__level_up
         cur = pyautogui.pixel(x, y)
-        print('state', cur, end='\t')
+        # print('state', cur, end='\t')
         if cur in self.__gray:
-            print('gray')
+            # print('gray')
             return 1
         if cur in self.__green_and_violet:
-            print('green or violet')
+            # print('green or violet')
             return 2
-        print('bad color')
+        # print('bad color')
         return 0
 
     def looped_level_up(self, number_of_passes=1):
@@ -138,7 +138,7 @@ class FapCeo:
             if self.state() == 0:
                 self.action_click_girl(i % 11)
                 if self.state() == 0:
-                    print('looped_level_up stopped: wrong color')
+                    # print('looped_level_up stopped: wrong color')
                     return
             pyautogui.sleep(2)
             self.action_click_girl(i % 11)
