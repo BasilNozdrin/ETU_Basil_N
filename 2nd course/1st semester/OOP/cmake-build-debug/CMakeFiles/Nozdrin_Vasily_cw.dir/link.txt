@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Nozdrin_Vasily_cw.dir/main.cpp.o  -o Nozdrin_Vasily_cw  -lpngedit 
