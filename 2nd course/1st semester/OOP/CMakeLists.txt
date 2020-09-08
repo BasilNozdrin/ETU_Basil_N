@@ -3,7 +3,7 @@ project(OOP)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_EXE  src/main.cpp src/GameField/Field.cpp src/GameField/Field.h src/GameField/Cell.cpp src/GameField/Cell.h)
+set(SOURCE_EXE  src/main.cpp src/GameField/Field.cpp src/GameField/Field.h src/GameField/Cell.cpp src/GameField/Cell.h src/logic/Controls.cpp src/logic/Controls.h)
 #set(SOURCE_LIB pngedit.cpp)
 
 #find_package(PNG REQUIRED)

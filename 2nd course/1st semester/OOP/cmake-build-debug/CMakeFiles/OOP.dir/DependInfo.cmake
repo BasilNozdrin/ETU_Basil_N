@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o"
   "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Field.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/src/GameField/Field.cpp.o"
+  "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/logic/Controls.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/src/logic/Controls.cpp.o"
   "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/main.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

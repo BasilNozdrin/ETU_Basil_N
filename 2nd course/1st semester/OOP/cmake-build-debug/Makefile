@@ -197,6 +197,33 @@ src/GameField/Field.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/Field.cpp.s
 .PHONY : src/GameField/Field.cpp.s
 
+src/logic/Controls.o: src/logic/Controls.cpp.o
+
+.PHONY : src/logic/Controls.o
+
+# target to build an object file
+src/logic/Controls.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/logic/Controls.cpp.o
+.PHONY : src/logic/Controls.cpp.o
+
+src/logic/Controls.i: src/logic/Controls.cpp.i
+
+.PHONY : src/logic/Controls.i
+
+# target to preprocess a source file
+src/logic/Controls.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/logic/Controls.cpp.i
+.PHONY : src/logic/Controls.cpp.i
+
+src/logic/Controls.s: src/logic/Controls.cpp.s
+
+.PHONY : src/logic/Controls.s
+
+# target to generate assembly for a file
+src/logic/Controls.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/logic/Controls.cpp.s
+.PHONY : src/logic/Controls.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -239,6 +266,9 @@ help:
 	@echo "... src/GameField/Field.o"
 	@echo "... src/GameField/Field.i"
 	@echo "... src/GameField/Field.s"
+	@echo "... src/logic/Controls.o"
+	@echo "... src/logic/Controls.i"
+	@echo "... src/logic/Controls.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
