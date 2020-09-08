@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o"
-  "CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o"
-  "CMakeFiles/OOP.dir/main.cpp.o"
+  "CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o"
+  "CMakeFiles/OOP.dir/src/GameField/Field.cpp.o"
+  "CMakeFiles/OOP.dir/src/main.cpp.o"
   "OOP"
   "OOP.pdb"
 )

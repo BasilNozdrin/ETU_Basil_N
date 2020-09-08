@@ -77,57 +77,57 @@ include CMakeFiles/OOP.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/OOP.dir/flags.make
 
-CMakeFiles/OOP.dir/main.cpp.o: CMakeFiles/OOP.dir/flags.make
-CMakeFiles/OOP.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OOP.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OOP.dir/main.cpp.o -c "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/main.cpp"
+CMakeFiles/OOP.dir/src/main.cpp.o: CMakeFiles/OOP.dir/flags.make
+CMakeFiles/OOP.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OOP.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OOP.dir/src/main.cpp.o -c "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/main.cpp"
 
-CMakeFiles/OOP.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OOP.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/main.cpp" > CMakeFiles/OOP.dir/main.cpp.i
+CMakeFiles/OOP.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OOP.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/main.cpp" > CMakeFiles/OOP.dir/src/main.cpp.i
 
-CMakeFiles/OOP.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OOP.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/main.cpp" -o CMakeFiles/OOP.dir/main.cpp.s
+CMakeFiles/OOP.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OOP.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/main.cpp" -o CMakeFiles/OOP.dir/src/main.cpp.s
 
-CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o: CMakeFiles/OOP.dir/flags.make
-CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o: ../bin/gamefield/Field.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o -c "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Field.cpp"
+CMakeFiles/OOP.dir/src/GameField/Field.cpp.o: CMakeFiles/OOP.dir/flags.make
+CMakeFiles/OOP.dir/src/GameField/Field.cpp.o: ../src/GameField/Field.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/OOP.dir/src/GameField/Field.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OOP.dir/src/GameField/Field.cpp.o -c "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Field.cpp"
 
-CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Field.cpp" > CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.i
+CMakeFiles/OOP.dir/src/GameField/Field.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OOP.dir/src/GameField/Field.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Field.cpp" > CMakeFiles/OOP.dir/src/GameField/Field.cpp.i
 
-CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Field.cpp" -o CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.s
+CMakeFiles/OOP.dir/src/GameField/Field.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OOP.dir/src/GameField/Field.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Field.cpp" -o CMakeFiles/OOP.dir/src/GameField/Field.cpp.s
 
-CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o: CMakeFiles/OOP.dir/flags.make
-CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o: ../bin/gamefield/Cell.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o -c "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Cell.cpp"
+CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o: CMakeFiles/OOP.dir/flags.make
+CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o: ../src/GameField/Cell.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o -c "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.cpp"
 
-CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Cell.cpp" > CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.i
+CMakeFiles/OOP.dir/src/GameField/Cell.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OOP.dir/src/GameField/Cell.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.cpp" > CMakeFiles/OOP.dir/src/GameField/Cell.cpp.i
 
-CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Cell.cpp" -o CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.s
+CMakeFiles/OOP.dir/src/GameField/Cell.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OOP.dir/src/GameField/Cell.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.cpp" -o CMakeFiles/OOP.dir/src/GameField/Cell.cpp.s
 
 # Object files for target OOP
 OOP_OBJECTS = \
-"CMakeFiles/OOP.dir/main.cpp.o" \
-"CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o" \
-"CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o"
+"CMakeFiles/OOP.dir/src/main.cpp.o" \
+"CMakeFiles/OOP.dir/src/GameField/Field.cpp.o" \
+"CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o"
 
 # External object files for target OOP
 OOP_EXTERNAL_OBJECTS =
 
-OOP: CMakeFiles/OOP.dir/main.cpp.o
-OOP: CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o
-OOP: CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o
+OOP: CMakeFiles/OOP.dir/src/main.cpp.o
+OOP: CMakeFiles/OOP.dir/src/GameField/Field.cpp.o
+OOP: CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o
 OOP: CMakeFiles/OOP.dir/build.make
 OOP: CMakeFiles/OOP.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable OOP"

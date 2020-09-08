@@ -143,86 +143,86 @@ OOP/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/build
 .PHONY : OOP/fast
 
-bin/gamefield/Cell.o: bin/gamefield/Cell.cpp.o
+src/GameField/Cell.o: src/GameField/Cell.cpp.o
 
-.PHONY : bin/gamefield/Cell.o
-
-# target to build an object file
-bin/gamefield/Cell.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o
-.PHONY : bin/gamefield/Cell.cpp.o
-
-bin/gamefield/Cell.i: bin/gamefield/Cell.cpp.i
-
-.PHONY : bin/gamefield/Cell.i
-
-# target to preprocess a source file
-bin/gamefield/Cell.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.i
-.PHONY : bin/gamefield/Cell.cpp.i
-
-bin/gamefield/Cell.s: bin/gamefield/Cell.cpp.s
-
-.PHONY : bin/gamefield/Cell.s
-
-# target to generate assembly for a file
-bin/gamefield/Cell.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.s
-.PHONY : bin/gamefield/Cell.cpp.s
-
-bin/gamefield/Field.o: bin/gamefield/Field.cpp.o
-
-.PHONY : bin/gamefield/Field.o
+.PHONY : src/GameField/Cell.o
 
 # target to build an object file
-bin/gamefield/Field.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o
-.PHONY : bin/gamefield/Field.cpp.o
+src/GameField/Cell.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o
+.PHONY : src/GameField/Cell.cpp.o
 
-bin/gamefield/Field.i: bin/gamefield/Field.cpp.i
+src/GameField/Cell.i: src/GameField/Cell.cpp.i
 
-.PHONY : bin/gamefield/Field.i
+.PHONY : src/GameField/Cell.i
 
 # target to preprocess a source file
-bin/gamefield/Field.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.i
-.PHONY : bin/gamefield/Field.cpp.i
+src/GameField/Cell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/Cell.cpp.i
+.PHONY : src/GameField/Cell.cpp.i
 
-bin/gamefield/Field.s: bin/gamefield/Field.cpp.s
+src/GameField/Cell.s: src/GameField/Cell.cpp.s
 
-.PHONY : bin/gamefield/Field.s
+.PHONY : src/GameField/Cell.s
 
 # target to generate assembly for a file
-bin/gamefield/Field.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.s
-.PHONY : bin/gamefield/Field.cpp.s
+src/GameField/Cell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/Cell.cpp.s
+.PHONY : src/GameField/Cell.cpp.s
 
-main.o: main.cpp.o
+src/GameField/Field.o: src/GameField/Field.cpp.o
 
-.PHONY : main.o
+.PHONY : src/GameField/Field.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/GameField/Field.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/Field.cpp.o
+.PHONY : src/GameField/Field.cpp.o
 
-main.i: main.cpp.i
+src/GameField/Field.i: src/GameField/Field.cpp.i
 
-.PHONY : main.i
+.PHONY : src/GameField/Field.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/GameField/Field.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/Field.cpp.i
+.PHONY : src/GameField/Field.cpp.i
 
-main.s: main.cpp.s
+src/GameField/Field.s: src/GameField/Field.cpp.s
 
-.PHONY : main.s
+.PHONY : src/GameField/Field.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/GameField/Field.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/Field.cpp.s
+.PHONY : src/GameField/Field.cpp.s
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -233,15 +233,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... OOP"
-	@echo "... bin/gamefield/Cell.o"
-	@echo "... bin/gamefield/Cell.i"
-	@echo "... bin/gamefield/Cell.s"
-	@echo "... bin/gamefield/Field.o"
-	@echo "... bin/gamefield/Field.i"
-	@echo "... bin/gamefield/Field.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... src/GameField/Cell.o"
+	@echo "... src/GameField/Cell.i"
+	@echo "... src/GameField/Cell.s"
+	@echo "... src/GameField/Field.o"
+	@echo "... src/GameField/Field.i"
+	@echo "... src/GameField/Field.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

@@ -8,13 +8,13 @@
 // other libraries' headers,
 
 // your project's headers.
-#include "bin/gamefield/Field.h"
+#include "src/GameField/Field.h"
 
 using std::cout;
 using std::cin;
 
 int main () {
-//  auto game = Field::getInstance();
+  auto& game = Field::getInstance();
   cout << __cplusplus << "\n";
   return 0;
 } 

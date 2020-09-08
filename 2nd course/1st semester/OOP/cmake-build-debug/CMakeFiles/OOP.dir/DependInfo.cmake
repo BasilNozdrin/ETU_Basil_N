@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Cell.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/bin/gamefield/Cell.cpp.o"
-  "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin/gamefield/Field.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/bin/gamefield/Field.cpp.o"
-  "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/main.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/main.cpp.o"
+  "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o"
+  "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Field.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/src/GameField/Field.cpp.o"
+  "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/main.cpp" "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/cmake-build-debug/CMakeFiles/OOP.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
