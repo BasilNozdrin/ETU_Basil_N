@@ -150,6 +150,8 @@ def loop(game, number_of_passes=2, sell=True, event=False):
     while game.state():
         if event:
             game.action_event()
+            game.action_event()
+            game.action_event()
         if sell:
             game.action_sell_company()
         game.looped_level_up(number_of_passes=number_of_passes)
