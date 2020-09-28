@@ -1,17 +1,20 @@
 #ifndef OOP_CELL_H
 #define OOP_CELL_H
 
+#include "../Buffs/Buff.h"
+
 class Cell {
  public:
-  Cell(bool walkThrough = true): walkThrough(walkThrough){};
-  ~Cell()= default;
+  explicit Cell(bool walkThrough, Buff *onCell=nullptr);
+  ~Cell();
 
-  bool isWalkThrough() const {return this->walkThrough;};
-
- protected:
+  [[nodiscard]] bool isWalkThrough() const;
+  Buff *getBuff();
+  void setBuff(Buff *buff);
 
  private:
   bool walkThrough;
+  Buff *onCell;
 };
 
 /*
@@ -21,3 +24,4 @@ class Cell {
 */
 
 #endif //OOP_CELL_H
+

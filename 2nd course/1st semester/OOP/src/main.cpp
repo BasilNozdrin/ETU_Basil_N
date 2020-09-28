@@ -10,11 +10,8 @@
 // your project's headers.
 #include "src/GameField/Field.h"
 
-using std::cout;
-using std::cin;
-
 int main () {
   auto& game = Field::getInstance();
-  cout << __cplusplus << "\n";
+  std::cout << __cplusplus << "\n";
   return 0;
-} 
+}
