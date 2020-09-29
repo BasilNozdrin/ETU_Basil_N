@@ -6,29 +6,13 @@
 
 #IncludeRegexTransform: 
 
-../src/GameField/Cell.h
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/logic/Controls.cpp
+Controls.h
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/logic/Controls.h
 
-../src/GameField/Field.h
-Cell.h
-../src/GameField/Cell.h
-
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.cpp
-Cell.h
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.h
-
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.h
-
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Field.cpp
-Field.h
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Field.h
-
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Field.h
-Cell.h
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/GameField/Cell.h
-
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/main.cpp
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/logic/Controls.h
 iostream
 -
-src/GameField/Field.h
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src/src/GameField/Field.h
+string
+-
 

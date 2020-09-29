@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/test.dir/main.cpp.o CMakeFiles/test.dir/A.cpp.o CMakeFiles/test.dir/AA.cpp.o CMakeFiles/test.dir/AARowIter.cpp.o  -o test 

@@ -18,16 +18,16 @@ class Controls {
     {
       switch (getchar()) {
         case KEY_UP:
-          std::cout << "Up ";
+          std::cout << " Up  ";
           break;
         case KEY_DOWN:
-          std::cout << "Up ";
+          std::cout << " Down";
           break;
         case KEY_LEFT:
-          std::cout << "Up ";
+          std::cout << "Left ";
           break;
         case KEY_RIGHT:
-          std::cout << "Up ";
+          std::cout << "Right";
           break;
         default:
           value = 0;

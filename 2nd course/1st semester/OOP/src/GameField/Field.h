@@ -1,32 +1,39 @@
 #ifndef OOP_FIELD_H
 #define OOP_FIELD_H
 
-#include "Cell.h"
+#include <iostream>
 
+#include "Cell.h"
+#include "FieldIter.h"
+#include "FieldRowIter.h"
+#include "levels.cpp"
 
 class Field {
  public:
-  Field(const Field&) = delete;
+  using Iterator = FieldIter<Cell**, Cell*>;
+ public:
+  static Field* getInstance();
 
-  static Field& getInstance(){
-    static Field fieldInstance;
-    return fieldInstance;
-  }
+  Field(Field &)=delete;
+  Field& operator=(const Field &)=delete;
+  Field(Field&& other) noexcept;
+  Field& operator=(Field&& field) noexcept;
+
+  Iterator begin();
+  Iterator end();
 
  private:
-  Field() {
-    this->gameField = new Cell*[ySize];
-    for (int i = 0; i < ySize; i++) {
-      this->gameField[i] = new Cell[xSize];
-      // TODO initialize cells
-      //  а надо ли? память выделили, клетки есть. Поле можно и потом разметить
-    }
-  }
+  Field();
 
-  Cell **gameField;
-  int xSize = 5;
-  int ySize = 5;
+  static Field* field_;
+  int xSize, ySize;
+  Cell ***gameField = nullptr;
+
+  void show();
+  void wipe();
+  void loadLevel(int);
 };
+
 
 /* Iterates over the contents of a GargantuanTable:
  *

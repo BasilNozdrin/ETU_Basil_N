@@ -1,0 +1,3 @@
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/test/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/test/cmake-build-debug/CMakeFiles/test.dir

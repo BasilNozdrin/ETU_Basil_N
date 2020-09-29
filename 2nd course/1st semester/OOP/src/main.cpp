@@ -2,16 +2,16 @@
 // Related header,
 
 // C system headers,
-#include <iostream>
-// C++ standard library headers,
 
+// C++ standard library headers,
+#include <iostream>
 // other libraries' headers,
 
 // your project's headers.
-#include "src/GameField/Field.h"
+#include "logic/Game.h"
 
 int main () {
-  auto& game = Field::getInstance();
+  Game game;
   std::cout << __cplusplus << "\n";
   return 0;
 }

@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/." -I"/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/bin" 
+CXX_INCLUDES = -I"/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/OOP/src" 
 

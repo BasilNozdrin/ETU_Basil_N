@@ -1,7 +1,12 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/OOP.dir/src/Buffs/Buff.cpp.o"
   "CMakeFiles/OOP.dir/src/GameField/Cell.cpp.o"
   "CMakeFiles/OOP.dir/src/GameField/Field.cpp.o"
+  "CMakeFiles/OOP.dir/src/GameField/FieldIter.cpp.o"
+  "CMakeFiles/OOP.dir/src/GameField/FieldRowIter.cpp.o"
+  "CMakeFiles/OOP.dir/src/GameField/levels.cpp.o"
   "CMakeFiles/OOP.dir/src/logic/Controls.cpp.o"
+  "CMakeFiles/OOP.dir/src/logic/Game.cpp.o"
   "CMakeFiles/OOP.dir/src/main.cpp.o"
   "OOP"
   "OOP.pdb"

@@ -59,10 +59,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/ice-jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/ice-jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.7319.72/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/ice-jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/bin/cmake/linux/bin/cmake -E rm -f
+RM = /home/ice-jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.7319.72/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/ice-jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/ice-jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.7319.72/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -90,7 +90,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/ice-jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/ice-jack/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.7319.72/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -142,6 +142,33 @@ OOP: cmake_check_build_system
 OOP/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/build
 .PHONY : OOP/fast
+
+src/Buffs/Buff.o: src/Buffs/Buff.cpp.o
+
+.PHONY : src/Buffs/Buff.o
+
+# target to build an object file
+src/Buffs/Buff.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/Buffs/Buff.cpp.o
+.PHONY : src/Buffs/Buff.cpp.o
+
+src/Buffs/Buff.i: src/Buffs/Buff.cpp.i
+
+.PHONY : src/Buffs/Buff.i
+
+# target to preprocess a source file
+src/Buffs/Buff.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/Buffs/Buff.cpp.i
+.PHONY : src/Buffs/Buff.cpp.i
+
+src/Buffs/Buff.s: src/Buffs/Buff.cpp.s
+
+.PHONY : src/Buffs/Buff.s
+
+# target to generate assembly for a file
+src/Buffs/Buff.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/Buffs/Buff.cpp.s
+.PHONY : src/Buffs/Buff.cpp.s
 
 src/GameField/Cell.o: src/GameField/Cell.cpp.o
 
@@ -197,6 +224,87 @@ src/GameField/Field.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/Field.cpp.s
 .PHONY : src/GameField/Field.cpp.s
 
+src/GameField/FieldIter.o: src/GameField/FieldIter.cpp.o
+
+.PHONY : src/GameField/FieldIter.o
+
+# target to build an object file
+src/GameField/FieldIter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/FieldIter.cpp.o
+.PHONY : src/GameField/FieldIter.cpp.o
+
+src/GameField/FieldIter.i: src/GameField/FieldIter.cpp.i
+
+.PHONY : src/GameField/FieldIter.i
+
+# target to preprocess a source file
+src/GameField/FieldIter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/FieldIter.cpp.i
+.PHONY : src/GameField/FieldIter.cpp.i
+
+src/GameField/FieldIter.s: src/GameField/FieldIter.cpp.s
+
+.PHONY : src/GameField/FieldIter.s
+
+# target to generate assembly for a file
+src/GameField/FieldIter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/FieldIter.cpp.s
+.PHONY : src/GameField/FieldIter.cpp.s
+
+src/GameField/FieldRowIter.o: src/GameField/FieldRowIter.cpp.o
+
+.PHONY : src/GameField/FieldRowIter.o
+
+# target to build an object file
+src/GameField/FieldRowIter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/FieldRowIter.cpp.o
+.PHONY : src/GameField/FieldRowIter.cpp.o
+
+src/GameField/FieldRowIter.i: src/GameField/FieldRowIter.cpp.i
+
+.PHONY : src/GameField/FieldRowIter.i
+
+# target to preprocess a source file
+src/GameField/FieldRowIter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/FieldRowIter.cpp.i
+.PHONY : src/GameField/FieldRowIter.cpp.i
+
+src/GameField/FieldRowIter.s: src/GameField/FieldRowIter.cpp.s
+
+.PHONY : src/GameField/FieldRowIter.s
+
+# target to generate assembly for a file
+src/GameField/FieldRowIter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/FieldRowIter.cpp.s
+.PHONY : src/GameField/FieldRowIter.cpp.s
+
+src/GameField/levels.o: src/GameField/levels.cpp.o
+
+.PHONY : src/GameField/levels.o
+
+# target to build an object file
+src/GameField/levels.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/levels.cpp.o
+.PHONY : src/GameField/levels.cpp.o
+
+src/GameField/levels.i: src/GameField/levels.cpp.i
+
+.PHONY : src/GameField/levels.i
+
+# target to preprocess a source file
+src/GameField/levels.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/levels.cpp.i
+.PHONY : src/GameField/levels.cpp.i
+
+src/GameField/levels.s: src/GameField/levels.cpp.s
+
+.PHONY : src/GameField/levels.s
+
+# target to generate assembly for a file
+src/GameField/levels.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/GameField/levels.cpp.s
+.PHONY : src/GameField/levels.cpp.s
+
 src/logic/Controls.o: src/logic/Controls.cpp.o
 
 .PHONY : src/logic/Controls.o
@@ -223,6 +331,33 @@ src/logic/Controls.s: src/logic/Controls.cpp.s
 src/logic/Controls.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/logic/Controls.cpp.s
 .PHONY : src/logic/Controls.cpp.s
+
+src/logic/Game.o: src/logic/Game.cpp.o
+
+.PHONY : src/logic/Game.o
+
+# target to build an object file
+src/logic/Game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/logic/Game.cpp.o
+.PHONY : src/logic/Game.cpp.o
+
+src/logic/Game.i: src/logic/Game.cpp.i
+
+.PHONY : src/logic/Game.i
+
+# target to preprocess a source file
+src/logic/Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/logic/Game.cpp.i
+.PHONY : src/logic/Game.cpp.i
+
+src/logic/Game.s: src/logic/Game.cpp.s
+
+.PHONY : src/logic/Game.s
+
+# target to generate assembly for a file
+src/logic/Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/src/logic/Game.cpp.s
+.PHONY : src/logic/Game.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -260,15 +395,30 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... OOP"
+	@echo "... src/Buffs/Buff.o"
+	@echo "... src/Buffs/Buff.i"
+	@echo "... src/Buffs/Buff.s"
 	@echo "... src/GameField/Cell.o"
 	@echo "... src/GameField/Cell.i"
 	@echo "... src/GameField/Cell.s"
 	@echo "... src/GameField/Field.o"
 	@echo "... src/GameField/Field.i"
 	@echo "... src/GameField/Field.s"
+	@echo "... src/GameField/FieldIter.o"
+	@echo "... src/GameField/FieldIter.i"
+	@echo "... src/GameField/FieldIter.s"
+	@echo "... src/GameField/FieldRowIter.o"
+	@echo "... src/GameField/FieldRowIter.i"
+	@echo "... src/GameField/FieldRowIter.s"
+	@echo "... src/GameField/levels.o"
+	@echo "... src/GameField/levels.i"
+	@echo "... src/GameField/levels.s"
 	@echo "... src/logic/Controls.o"
 	@echo "... src/logic/Controls.i"
 	@echo "... src/logic/Controls.s"
+	@echo "... src/logic/Game.o"
+	@echo "... src/logic/Game.i"
+	@echo "... src/logic/Game.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

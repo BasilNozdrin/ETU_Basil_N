@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/test/A.h
+iostream
+-
+
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/test/main.cpp
+iostream
+-
+A.h
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/test/A.h
+
