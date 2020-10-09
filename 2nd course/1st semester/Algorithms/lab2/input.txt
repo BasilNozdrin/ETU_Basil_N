@@ -1,0 +1,3 @@
+(a(b()c)d)
+(a(b()(s(nine))(ds)c)d)
+(a(b()c)d)
