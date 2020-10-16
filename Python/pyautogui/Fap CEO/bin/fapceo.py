@@ -3,7 +3,8 @@ import pyautogui
 
 class FapCeo:
     __girls = []
-    __level_up = __sell_company = __sell_confirm = __hire_all = __cancel_sell = (0, 0)
+    __level_up = __sell_company = __sell_confirm = (0, 0)
+    __hire_all = __cancel_sell = __close_offer = (0, 0)
     __gray = [
         (191, 191, 191),
         (199, 199, 199),
@@ -57,6 +58,7 @@ class FapCeo:
             self.__sell_confirm = (1036, 940)
             self.__hire_all = (1479, 87)
             self.__event_chest = (1647, 743)
+            self.__close_offer = (1400, 148)
         else:
             self.__girls = [
                 (572, 380), (744, 287),
@@ -145,14 +147,19 @@ class FapCeo:
             while self.state() == 2:
                 self.action_level_up()
 
+    def close_offer(self):
+        x, y = self.__close_offer
+        if pyautogui.onScreen(x, y):
+            pyautogui.click(x, y, clicks=1, interval=1, button='left')
+
 
 def loop(game, number_of_passes=2, sell=True, event=False):
     while game.state():
         if event:
             game.action_event()
-            game.action_event()
-            game.action_event()
         if sell:
             game.action_sell_company()
         game.looped_level_up(number_of_passes=number_of_passes)
+        # if not game.state():
+        #     game.close_offer()
     print('Process terminated')
