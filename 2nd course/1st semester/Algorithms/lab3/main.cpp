@@ -3,48 +3,45 @@
 #include <string>
 
 template <class T>
-class Node {
+class Node {                                                // +Node(data) +m_data +*m_left +*m_right
  public:
-  Node(T& data)
+  Node(T data)
     : m_data(data), m_left(nullptr), m_right(nullptr){};
   ~Node()=default;
-//   void setLeft(Node* pointer){ m_left = pointer; };
-//   void setRight(Node* pointer){ m_left = pointer; };
-//   Node<T>* getLeft(){ return m_left; };
-//   Node<T>* getRight(){ return m_right; };
-//  private:
-  T& m_data;
+  T m_data;
   Node<T>* m_left;
   Node<T>* m_right;
 };
-
-template <class T>
-class Element {
- public:
-  Element(T& data)
-    : data(m_data),  m_prev(nullptr), m_next(nullptr) {};
-
-  T& m_data;
-  Element *m_prev;
-  Element *m_next;
-}
-
 template <class T>
 class Queue {
  public:
+   /*--------Queue Element--------*/
+  class Element {
+   public:
+    Element(T data)
+    : m_data(data),  m_prev(nullptr), m_next(nullptr) {};
+    T m_data;
+    Element *m_prev;
+    Element *m_next;
+  };
+  /*-----------------------------*/
+ public:
   Queue()
     : m_first(nullptr), m_last(nullptr) {};
-  Element<T>* top() {
+  Element *top() {                                          // top
     return m_last;
   }
-  void pop() {
+  void pop() {                                              // pop
     if (m_last) {
       m_last = m_last->m_prev;
-      if (m_last)
+      if (m_last) {
+        delete m_last->m_next;
         m_last->m_next = nullptr;
+      }
     }
   };
-  void push(Element<T>* elem) {
+  void push(T data) {                             // push
+    auto *elem = new Element(data);
     if (m_first) {
       elem->m_next = m_first;
       m_first->m_prev = elem;
@@ -55,46 +52,79 @@ class Queue {
     }
   };
  private:
-  Element<T>* m_first;
-  Element<T>* m_last;
-}
-
-//  let this shit be a stack ||
-//  let this shit be a stack ||
-//  let this shit be a stack \/
+  Element *m_first;
+  Element *m_last;
+};
 
 template <class T>
-void RLT_traversal(Node<T> **roots, Queue<T> *queue) {
-  if (!queue) {                                             // first step
-    queue = new Queue<T>();                                 // init queue
-    queue->push(
-      new Element<T>(*roots->m_data)
-     );
-  }
-  // add data from L and R to queue
-  for (auto root :: roots) {
-    if (root->m_left)
-      queue->push(new Element<T>(root->m_left->m_data));
-    if (root->m_right)
-      queue->push(new Element<T>(root->m_right->m_data));
-  }
-  // go recurcively to L and R
-  RLT_traversal (new_roots,  queue);
+void rLR_traversal(Queue<Node<T>*> *currentLevel, Queue<T> *printQueue) {
+  auto nextLevel = new Queue<Node<T>*>();
+  while (currentLevel->top()) {
+    // add data to printQueue
+    printQueue->push(currentLevel->top()->m_data->m_data);
+    // add left node to nextLevel
+    if (currentLevel->top()->m_data->m_left)
+      nextLevel->push(
+        currentLevel->top()->m_data->m_left
+      );
+    // add right node to nextLevel
+    if (currentLevel->top()->m_data->m_right)
+      nextLevel->push(
+        currentLevel->top()->m_data->m_right
+      );
+    
+    currentLevel->pop();
+  };
+  
+  if (nextLevel->top())
+    rLR_traversal(nextLevel, printQueue);
+  delete nextLevel;
+};
+
+Node<int>* readIntTree (std::fstream *input) {
+  std::string line;
+  getline(*input, line);
+  int size = line.size();
+  auto node = new Node<int>(std::stoi(line));
+  if (line[size-3] - '0' ==  1)
+    node->m_left = readIntTree(input);
+  if (line[size-1] - '0' ==  1)
+    node->m_right = readIntTree(input);
+  return node;
+}
+Node<std::string>* readStringTree (std::fstream *input) {
+  std::string line;
+  getline(*input, line);
+  int size = line.size();
+  auto node = new Node<std::string>(line.substr(0, size-4));
+  if (line[size-3] - '0' ==  1)
+    node->m_left = readStringTree(input);
+  if (line[size-1] - '0' ==  1)
+    node->m_right = readStringTree(input);
+  return node;
 }
 
-
 int main() {
-  std::ifstream input("input.txt");
-  for (std::string line; getline(input, line); ) {
-    Node<std::string> *root = nullptr;
-    Queue<std::string> *queue = nullptr; 
-    RLT_traversal (root, queue);
-    std::cout << "depth of \"" << line << "\" is " << depth(line) << "\n";
-  }
+  auto input = new std::fstream("binTree.txt");
+  
+  auto printQueue   = new Queue<std::string>();
+  auto currentLevel = new Queue<Node<std::string>*>();
+  auto root         = readStringTree(input);
+  
+  currentLevel->push(root);
+  
+  rLR_traversal<std::string>(currentLevel, printQueue);
+  
+  // print result
+  while (printQueue->top()) {
+    std::cout << printQueue->top()->m_data <<  " ";
+    printQueue->pop();
+  };
+  
   return 0;
 }
 
-/* Root Left Right
+/* root-Left-Right tree traversal
  * 6. Задано бинарное дерево b типа ВТ с произвольным типом элементов.
  * Используя очередь, напечатать все элементы дерева b по уровням:
  * сначала из корня дерева,
