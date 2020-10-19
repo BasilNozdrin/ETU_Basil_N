@@ -72,10 +72,10 @@ void rLR_traversal(Queue<Node<T>*> *currentLevel, Queue<T> *printQueue) {
       nextLevel->push(
         currentLevel->top()->m_data->m_right
       );
-    
+
     currentLevel->pop();
   };
-  
+
   if (nextLevel->top())
     rLR_traversal(nextLevel, printQueue);
   delete nextLevel;
@@ -105,22 +105,22 @@ Node<std::string>* readStringTree (std::fstream *input) {
 }
 
 int main() {
-  auto input = new std::fstream("binTree.txt");
-  
+  auto input = new std::fstream("binTree3.txt");
+
   auto printQueue   = new Queue<std::string>();
   auto currentLevel = new Queue<Node<std::string>*>();
   auto root         = readStringTree(input);
-  
+
   currentLevel->push(root);
-  
+
   rLR_traversal<std::string>(currentLevel, printQueue);
-  
+
   // print result
   while (printQueue->top()) {
     std::cout << printQueue->top()->m_data <<  " ";
     printQueue->pop();
   };
-  
+
   return 0;
 }
 

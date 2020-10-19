@@ -1,0 +1,9 @@
+root 1 1
+L 1 1
+LL 0 0
+LR 0 1
+LRR 1 0
+LRRL 0 0
+R 1 1
+RL 0 0
+RR 0 0
