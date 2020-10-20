@@ -30,8 +30,9 @@ void MergeSort(T arr[], size_t length) {
       MidBorder = BlockIterator + BlockSizeIterator;
       RightBorder = BlockIterator + 2 * BlockSizeIterator;
       RightBorder = (RightBorder < length) ? RightBorder : length;
+      
       int* SortedBlock = new int[RightBorder - LeftBorder];
-
+/**/
       //Пока в обоих массивах есть элементы выбираем меньший из них и заносим в отсортированный блок
       while (LeftBorder + LeftBlockIterator < MidBorder && MidBorder + RightBlockIterator < RightBorder) {
         if (arr[LeftBorder + LeftBlockIterator] < arr[MidBorder + RightBlockIterator]) {
@@ -56,6 +57,7 @@ void MergeSort(T arr[], size_t length) {
       for (MergeIterator = 0; MergeIterator < LeftBlockIterator + RightBlockIterator; MergeIterator++) {
         arr[LeftBorder + MergeIterator] = SortedBlock[MergeIterator];
       }
+/**/
       delete SortedBlock;
     }
   }
@@ -75,6 +77,13 @@ int main() {
         i = j+1;
       }
     }
+    std::cout << "]\n";
+    
+    MergeSort<int>(arr, n);
+    
+    std::cout << "sorted = [";
+    for(auto x: arr)
+      std::cout << x << " ";
     std::cout << "]\n";
   }
   return 0;
