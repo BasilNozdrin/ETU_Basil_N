@@ -2,6 +2,12 @@
 #include <fstream>
 #include <string>
 
+#include <algorithm>
+#include <functional>
+#include <array>
+
+#include <cstdlib>
+
 /* 13. Сортировка массивов слиянием – простое слияние, итеративная реализация. */
 
 /* обязательное описание авлгоритма в отчете
@@ -9,8 +15,17 @@
  * сравнить результат с std::sort (опционально)
  * делать template функции */
 
+#define DEBUG 0
+
 template<typename T>
 void MergeSort(T arr[], size_t length) {
+#if DEBUG
+  std::cerr << "   0:   ";
+  for(int k = 0; k < length; k++)
+    std::cerr << " | " << arr[k];
+  std::cerr << "\n";
+#endif // DEBUG
+  
   size_t BlockSizeIterator;
   size_t BlockIterator;
   size_t LeftBlockIterator;
@@ -35,7 +50,7 @@ void MergeSort(T arr[], size_t length) {
 /**/
       //Пока в обоих массивах есть элементы выбираем меньший из них и заносим в отсортированный блок
       while (LeftBorder + LeftBlockIterator < MidBorder && MidBorder + RightBlockIterator < RightBorder) {
-        if (arr[LeftBorder + LeftBlockIterator] < arr[MidBorder + RightBlockIterator]) {
+        if (arr[LeftBorder + LeftBlockIterator] < arr[MidBorder + RightBlockIterator]) { // cmp
           SortedBlock[LeftBlockIterator + RightBlockIterator] = arr[LeftBorder + LeftBlockIterator];
           LeftBlockIterator += 1;
         } else {
@@ -60,6 +75,18 @@ void MergeSort(T arr[], size_t length) {
 /**/
       delete SortedBlock;
     }
+#if DEBUG
+    char buf[1024]; sprintf(buf, "%4d:   ", BlockSizeIterator);
+    std::cerr << std::string(buf);
+//     std::cerr << BlockSizeIterator << ":  ";
+    for(int k = 0; k < length; k++) {
+      if (!(k % (BlockSizeIterator*2)))
+        std::cerr << " | " << arr[k];
+      else
+        std::cerr << "   " << arr[k];
+    }
+    std::cerr << "\n";
+#endif // DEBUG
   }
 }
 
@@ -69,7 +96,7 @@ int main() {
     int arr[25] = {};
     int n = 0;
     int i = 0;
-    std::cout << "array = [ ";
+    std::cout << "array  = [";
     for (int j = i; j < line.length(); j++) {
       if (line[j] == ' ' || j+1 == line.length()) {
         arr[n++] = stoi(line.substr(i,j));
@@ -79,9 +106,16 @@ int main() {
     }
     std::cout << "]\n";
     
+    // MergeSort and print
     MergeSort<int>(arr, n);
-    
     std::cout << "sorted = [";
+    for(auto x: arr)
+      std::cout << x << " ";
+    std::cout << "]\n";
+    
+    // std::sort and print
+    std::sort(arr, arr+n);
+    std::cout << "std    = [";
     for(auto x: arr)
       std::cout << x << " ";
     std::cout << "]\n";
