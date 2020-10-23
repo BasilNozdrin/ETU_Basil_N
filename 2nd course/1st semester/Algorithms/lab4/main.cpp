@@ -4,7 +4,6 @@
 
 #include <algorithm>
 #include <functional>
-#include <array>
 
 #include <cstdlib>
 
@@ -15,7 +14,7 @@
  * сравнить результат с std::sort (опционально)
  * делать template функции */
 
-#define DEBUG 0
+#define DEBUG 1
 
 template<typename T>
 void MergeSort(T arr[], size_t length) {
@@ -25,7 +24,7 @@ void MergeSort(T arr[], size_t length) {
     std::cerr << " | " << arr[k];
   std::cerr << "\n";
 #endif // DEBUG
-  
+
   size_t BlockSizeIterator;
   size_t BlockIterator;
   size_t LeftBlockIterator;
@@ -45,7 +44,7 @@ void MergeSort(T arr[], size_t length) {
       MidBorder = BlockIterator + BlockSizeIterator;
       RightBorder = BlockIterator + 2 * BlockSizeIterator;
       RightBorder = (RightBorder < length) ? RightBorder : length;
-      
+
       int* SortedBlock = new int[RightBorder - LeftBorder];
 /**/
       //Пока в обоих массивах есть элементы выбираем меньший из них и заносим в отсортированный блок
@@ -58,7 +57,7 @@ void MergeSort(T arr[], size_t length) {
           RightBlockIterator += 1;
         }
       }
-      
+
       //После этого заносим оставшиеся элементы из левого или правого блока
       while (LeftBorder + LeftBlockIterator < MidBorder) {
         SortedBlock[LeftBlockIterator + RightBlockIterator] = arr[LeftBorder + LeftBlockIterator];
@@ -105,14 +104,14 @@ int main() {
       }
     }
     std::cout << "]\n";
-    
+
     // MergeSort and print
     MergeSort<int>(arr, n);
     std::cout << "sorted = [";
     for(auto x: arr)
       std::cout << x << " ";
     std::cout << "]\n";
-    
+
     // std::sort and print
     std::sort(arr, arr+n);
     std::cout << "std    = [";
