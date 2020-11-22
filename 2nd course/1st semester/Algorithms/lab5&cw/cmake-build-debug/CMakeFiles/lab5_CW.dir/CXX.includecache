@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/main.cpp
+iostream
+-
+utility
+-
+cmath
+-
+modules/WeakHeap.hpp
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/modules/WeakHeap.hpp
+modules/BinTree.hpp
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/modules/BinTree.hpp
+
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/modules/BinTree.hpp
+iostream
+-
+cmath
+-
+Queue.hpp
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/modules/Queue.hpp
+WeakHeap.hpp
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/modules/WeakHeap.hpp
+
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/modules/Queue.hpp
+
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/modules/WeakHeap.hpp
+utility
+-
+

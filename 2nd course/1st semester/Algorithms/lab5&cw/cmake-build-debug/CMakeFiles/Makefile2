@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/OOP.dir/all
+all: CMakeFiles/lab5_CW.dir/all
 
 .PHONY : all
 
@@ -83,36 +83,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/OOP.dir/clean
+clean: CMakeFiles/lab5_CW.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/OOP.dir
+# Target rules for target CMakeFiles/lab5_CW.dir
 
 # All Build rule for target.
-CMakeFiles/OOP.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/cmake-build-debug/CMakeFiles" --progress-num=1,2 "Built target OOP"
-.PHONY : CMakeFiles/OOP.dir/all
+CMakeFiles/lab5_CW.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab5_CW.dir/build.make CMakeFiles/lab5_CW.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab5_CW.dir/build.make CMakeFiles/lab5_CW.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/cmake-build-debug/CMakeFiles" --progress-num=1,2 "Built target lab5_CW"
+.PHONY : CMakeFiles/lab5_CW.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/OOP.dir/rule: cmake_check_build_system
+CMakeFiles/lab5_CW.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/cmake-build-debug/CMakeFiles" 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/OOP.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/lab5_CW.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/cmake-build-debug/CMakeFiles" 0
-.PHONY : CMakeFiles/OOP.dir/rule
+.PHONY : CMakeFiles/lab5_CW.dir/rule
 
 # Convenience name for target.
-OOP: CMakeFiles/OOP.dir/rule
+lab5_CW: CMakeFiles/lab5_CW.dir/rule
 
-.PHONY : OOP
+.PHONY : lab5_CW
 
 # clean rule for target.
-CMakeFiles/OOP.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/clean
-.PHONY : CMakeFiles/OOP.dir/clean
+CMakeFiles/lab5_CW.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab5_CW.dir/build.make CMakeFiles/lab5_CW.dir/clean
+.PHONY : CMakeFiles/lab5_CW.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

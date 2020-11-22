@@ -131,44 +131,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named OOP
+# Target rules for targets named lab5_CW
 
 # Build rule for target.
-OOP: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 OOP
-.PHONY : OOP
+lab5_CW: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lab5_CW
+.PHONY : lab5_CW
 
 # fast build rule for target.
-OOP/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/build
-.PHONY : OOP/fast
+lab5_CW/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab5_CW.dir/build.make CMakeFiles/lab5_CW.dir/build
+.PHONY : lab5_CW/fast
 
-main.o: main.cpp.o
+src/main.o: src/main.cpp.o
 
-.PHONY : main.o
+.PHONY : src/main.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab5_CW.dir/build.make CMakeFiles/lab5_CW.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-main.i: main.cpp.i
+src/main.i: src/main.cpp.i
 
-.PHONY : main.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab5_CW.dir/build.make CMakeFiles/lab5_CW.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-main.s: main.cpp.s
+src/main.s: src/main.cpp.s
 
-.PHONY : main.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OOP.dir/build.make CMakeFiles/OOP.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab5_CW.dir/build.make CMakeFiles/lab5_CW.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -178,10 +178,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... OOP"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... lab5_CW"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

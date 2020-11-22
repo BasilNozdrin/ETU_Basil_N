@@ -156,7 +156,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=lab5&CW
+CMAKE_PROJECT_NAME:STATIC=lab5_CW
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -245,10 +245,22 @@ SFML_DIR:PATH=/usr/lib64/cmake/SFML
 SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND
 
 //Value Computed by CMake
+lab5%CW_BINARY_DIR:STATIC=/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/cmake-build-debug
+
+//Value Computed by CMake
+lab5%CW_SOURCE_DIR:STATIC=/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw
+
+//Value Computed by CMake
 lab5&CW_BINARY_DIR:STATIC=/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/cmake-build-debug
 
 //Value Computed by CMake
 lab5&CW_SOURCE_DIR:STATIC=/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw
+
+//Value Computed by CMake
+lab5_CW_BINARY_DIR:STATIC=/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw/cmake-build-debug
+
+//Value Computed by CMake
+lab5_CW_SOURCE_DIR:STATIC=/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lab5&cw
 
 
 ########################

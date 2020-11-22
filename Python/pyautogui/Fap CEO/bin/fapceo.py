@@ -2,42 +2,30 @@ import pyautogui
 
 
 class FapCeo:
+    __fullsceen = False
     __girls = []
     __level_up = __sell_company = __sell_confirm = (0, 0)
     __hire_all = __cancel_sell = __close_offer = (0, 0)
     __gray = [
-        (191, 191, 191),
-        (199, 199, 199),
+        (191, 191, 191), (199, 199, 199),
         # fullscreen
         (102, 107, 125),
-        (197, 197, 197),
-        (188, 188, 188),
-        (189, 189, 189),
+        (197, 197, 197), (188, 188, 188), (189, 189, 189),
     ]
     __green_and_violet = [
         # green
-        (38, 184, 57),
-        (40, 190, 59),
-        (41, 197, 61),
+        (38, 184, 57), (40, 190, 59), (41, 197, 61),
         # fullscreen green
-        (36, 188, 55),
-        (37, 196, 57),
+        (36, 188, 55), (37, 196, 57),
         # violet
-        (172, 5, 193),
-        (175, 5, 197),
-        (182, 5, 205),
+        (172, 5, 193), (175, 5, 197), (182, 5, 205),
         # fullscreen violet
-        (173, 0, 196),
-        (180, 0, 204),
+        (173, 0, 196), (180, 0, 204),
     ]
     __sell_colors = [
-        (46, 44, 44),
-        (15, 182, 255),
-        (23, 148, 227),
+        (46, 44, 44), (15, 182, 255), (23, 148, 227),
         # fullscreen
-        (13, 178, 255),
-        (15, 173, 251),
-        (126, 128, 146),
+        (13, 178, 255), (15, 173, 251), (11, 178, 255), (126, 128, 146),
     ]
 
     def __init__(self, mode=''):
@@ -93,7 +81,7 @@ class FapCeo:
         if pyautogui.onScreen(x, y):
             cur = pyautogui.pixel(x, y)
             pyautogui.click(x, y, clicks=1, interval=3, button='left')
-            # print('sell', cur, end='\t')
+            print('sell', cur, end='\t')
             if cur not in self.__sell_colors:
                 # print('selling...')
                 self.action_hire()
