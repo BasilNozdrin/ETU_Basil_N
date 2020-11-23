@@ -1,3 +1,0 @@
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/cmake-build-debug/CMakeFiles/lb5_and_cw.dir
