@@ -44,8 +44,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src"/>
 					<Add directory="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/modules"/>
+					<Add directory="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-pc-linux-gnu"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward"/>
@@ -68,8 +68,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src"/>
 					<Add directory="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/modules"/>
+					<Add directory="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-pc-linux-gnu"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward"/>
@@ -86,6 +86,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/CMakeLists.txt">
+			<Option target="lb5_and_cw"/>
+		</Unit>
+		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/lb5_and_cw">
+			<Option target="lb5_and_cw"/>
+		</Unit>
 		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/modules/BinTree.hpp">
 			<Option target="lb5_and_cw"/>
 		</Unit>

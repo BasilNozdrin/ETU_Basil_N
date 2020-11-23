@@ -18,5 +18,7 @@ int main () {
   BinTree bt(&wh);
   bt.print();
 
+
+
   return 0;
 }
