@@ -81,7 +81,7 @@ class FapCeo:
         if pyautogui.onScreen(x, y):
             cur = pyautogui.pixel(x, y)
             pyautogui.click(x, y, clicks=1, interval=3, button='left')
-            print('sell', cur, end='\t')
+            # print('sell', cur, end='\t')
             if cur not in self.__sell_colors:
                 # print('selling...')
                 self.action_hire()
