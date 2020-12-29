@@ -20,8 +20,7 @@ Wait, don't you have your own repository to store your own stuff? <br>
 1. Hehey we've got university repos
     1. 2019 informatics
     2. 2019 programming
-    3. 2019 course work
-    4. 2020 programming
+    3. 2020 programming
 2. Python stuff
     1. PyAutoGui
         1. Counting system converter
@@ -34,6 +33,6 @@ Wait, don't you have your own repository to store your own stuff? <br>
     2. Website with sorting visualisation
         qsort algorithm (in progress)
 5. C++ experiments
-    1. Class example (two of them)
+    1. Class example names&birthdays
     2. Qt simple application
 
