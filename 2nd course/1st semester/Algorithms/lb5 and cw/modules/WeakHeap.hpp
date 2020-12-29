@@ -35,12 +35,12 @@ class WeakHeap{
     delete [] m_bit;
   };
 
-  int getSize() { return m_size; };
+  int getSize() const { return m_size; };
   void setSize(int size) { m_size = size; };
   int* getData() { return m_data; };
   bool* getBit() { return m_bit; };
 
-  int Join(unsigned int v, unsigned int w) {
+  [[maybe_unused]] int Join(unsigned int v, unsigned int w) {
     if (m_data[v] < m_data[w]) { // defines min-heap
       std::swap(m_data[v], m_data[w]);
       m_bit[v] ^= true;
@@ -48,43 +48,42 @@ class WeakHeap{
     }
     return 0;
   };       /// проталкивает минимум из v наверх в w
-  unsigned int Up(unsigned int v) {
+  [[maybe_unused]] unsigned int Up(unsigned int v) {
     if ((v % 2)^(m_bit[v/2]))
       return v/2;
     return Up(v/2);
   };                /// returns Right parent
-  void SiftUp(unsigned int v) {
+  [[maybe_unused]] void SiftUp(unsigned int v) {
     unsigned int w;
     while (this->Join(v,w = Up(v)))
       v = w;
   };                    /// sifts WeakHeap
-  int SiftDown() {
+  [[maybe_unused]] int SiftDown() {
     // save min
     int result = m_data[0];
     // delete min
-    m_data[0] = m_data[m_size-1];
     m_size--;
+    std::swap(m_data[0], m_data[m_size]);
     // go left
     unsigned int v = 1;
-    while (2 * v + m_bit[v] < m_size - 1)
-      v = 2 * v + m_bit[v];
-    while (v >= 0) {
+    while (2*v + m_bit[v] < m_size - 1)
+      v = 2*v + m_bit[v];
+    while (v > 0) {
       Join(v, 0);
       v /= 2;
     }
     return result;
   };                                 /// Deletes minimum
-  void Build(){
+  [[maybe_unused]] void Build(){
     for (unsigned int i = m_size-1; i > 0; i--)
       this->Join(i, this->Up(i));
   };                                    /// makes WeakHeap a correct one
-  void heapsort(){
+  [[maybe_unused]] void heapsort(){
     int size = m_size;
     for (int i = 0; i < size; i++){
       this->Build();
       std::swap(m_data[0], m_data[m_size-1]);
       m_size--;
-      WeakHeap *wh = this;
     }
     m_size = size;
   };

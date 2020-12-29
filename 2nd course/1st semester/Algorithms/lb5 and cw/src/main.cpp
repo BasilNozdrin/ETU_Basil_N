@@ -6,19 +6,7 @@
 #include "WeakHeap.hpp"
 #include "BinTree.hpp"
 
-void heapsort(WeakHeap &wh){
-  int size = wh.getSize();
-  for (int i = 0; i < size; i++){
-    wh.Build();
-    std::swap(wh.getData()[0], wh.getData()[wh.getSize()-1]);
-    wh.setSize(wh.getSize()-1);
-    BinTree bt(&wh);
-    bt.print();
-    std::cout << "=======================================\n";
-  }
-  wh.setSize(size);
-};
-
+void heapsort(WeakHeap &wh);
 
 int main () {
   std::ifstream input("../input.txt");
@@ -39,6 +27,15 @@ int main () {
     WeakHeap wh(array, size);
     wh.Build();
 
+//    std::cout << "Building Weak Heap\narray = [";
+//    for (int j = 0; j < size; j++)
+//      std::cout << wh.getData()[j] << " ";
+//    std::cout << "]\n";
+
+//    auto bt = new BinTree(&wh);
+//    bt->print();
+//    delete bt;
+
     heapsort(wh);
     auto result = wh.getData();
 
@@ -50,3 +47,25 @@ int main () {
   }
   return 0;
 }
+
+void heapsort(WeakHeap &wh){
+  int size = wh.getSize();
+  for (int k = 0; k < size; k++){
+    wh.Build();
+    std::cout << "array = [";
+    for (int j = 0; j < wh.getSize(); j++)
+      std::cout << wh.getData()[j] << " ";
+    std::cout << "| ";
+    for (int j = wh.getSize(); j < size; j++)
+      std::cout << wh.getData()[j] << " ";
+    std::cout << "]\n";
+
+    BinTree bt(&wh);
+    bt.print();
+    std::cout << "\n\n";
+
+    std::swap(wh.getData()[0], wh.getData()[wh.getSize()-1]);
+    wh.setSize(wh.getSize()-1);
+  }
+  wh.setSize(size);
+};
