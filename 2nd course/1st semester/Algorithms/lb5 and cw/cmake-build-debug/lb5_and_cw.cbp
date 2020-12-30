@@ -95,10 +95,16 @@
 		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/modules/BinTree.hpp">
 			<Option target="lb5_and_cw"/>
 		</Unit>
+		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/modules/PrintWh.hpp">
+			<Option target="lb5_and_cw"/>
+		</Unit>
 		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/modules/Queue.hpp">
 			<Option target="lb5_and_cw"/>
 		</Unit>
 		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/modules/WeakHeap.hpp">
+			<Option target="lb5_and_cw"/>
+		</Unit>
+		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/modules/WeakHeapLog.hpp">
 			<Option target="lb5_and_cw"/>
 		</Unit>
 		<Unit filename="/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src/main.cpp">

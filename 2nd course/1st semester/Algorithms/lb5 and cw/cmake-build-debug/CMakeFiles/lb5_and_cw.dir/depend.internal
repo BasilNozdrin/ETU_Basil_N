@@ -3,6 +3,8 @@
 
 CMakeFiles/lb5_and_cw.dir/src/main.cpp.o
  ../modules/BinTree.hpp
+ ../modules/PrintWh.hpp
  ../modules/Queue.hpp
  ../modules/WeakHeap.hpp
+ ../modules/WeakHeapLog.hpp
  /home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src/main.cpp

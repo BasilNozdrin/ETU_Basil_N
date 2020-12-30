@@ -4,9 +4,10 @@
 #include <fstream>
 
 #include "WeakHeap.hpp"
-#include "BinTree.hpp"
+#include "PrintWh.hpp"
+#include "WeakHeapLog.hpp"
 
-void heapsort(WeakHeap &wh);
+void heapsort(WeakHeapLog &wh, bool log=false);
 
 int main () {
   std::ifstream input("../input.txt");
@@ -15,57 +16,57 @@ int main () {
     auto array = new std::pair<int, bool>[size];
     int i = 0;
     size = 0;
-    std::cout << "array  = [";
+//    std::cout << "array = [";
     for (int j = i; j < line.length(); j++) {
       if (line[j] == ' ' || j + 1 == line.length()) {
         array[size++] = std::pair<int, bool>(stoi(line.substr(i, j)), false);
-        std::cout << array[size - 1].first << " ";
         i = j + 1;
+//        std::cout << array[size - 1].first << " ";
       }
     }
-    std::cout << "]\n";
-    WeakHeap wh(array, size);
-    wh.Build();
-
-//    std::cout << "Building Weak Heap\narray = [";
-//    for (int j = 0; j < size; j++)
-//      std::cout << wh.getData()[j] << " ";
 //    std::cout << "]\n";
 
-//    auto bt = new BinTree(&wh);
-//    bt->print();
-//    delete bt;
+    WeakHeapLog wh(array, size);
+    auto bt = new PrintWh(&wh);
+    bt->print();
+    delete bt;
 
-    heapsort(wh);
+    wh.heapsortLog(true);
+//    heapsort(wh, true);
+
+    /*
     auto result = wh.getData();
-
     std::cout << "sorted = [";
     for (int j = 0; j < size; j++)
       std::cout << result[j] << " ";
     std::cout << "]\n";
+     */
     delete [] array;
   }
   return 0;
 }
 
-void heapsort(WeakHeap &wh){
+void heapsort(WeakHeapLog &wh, bool log){
   int size = wh.getSize();
-  for (int k = 0; k < size; k++){
-    wh.Build();
-    std::cout << "array = [";
-    for (int j = 0; j < wh.getSize(); j++)
-      std::cout << wh.getData()[j] << " ";
-    std::cout << "| ";
-    for (int j = wh.getSize(); j < size; j++)
-      std::cout << wh.getData()[j] << " ";
+  auto bt = new PrintWh(&wh);
+  if (log) {
+    std::cout << "sorting array\narray = [";
+    for (int i = 0; i < size; i++) std::cout << wh.getData()[i] << " ";
     std::cout << "]\n";
+    bt->print();
+  }
+  delete bt;
 
-    BinTree bt(&wh);
-    bt.print();
-    std::cout << "\n\n";
+  for (int k = 0; k < size; k++) {
+    wh.SiftDownLog(log);
 
-    std::swap(wh.getData()[0], wh.getData()[wh.getSize()-1]);
-    wh.setSize(wh.getSize()-1);
+    if (log) {
+      bt = new PrintWh(&wh); bt->print(); delete bt;
+      std::cout << "array = [";
+      for (int j = 0; j < wh.getSize(); j++)    std::cout << wh.getData()[j] << " "; std::cout << "| ";
+      for (int j = wh.getSize(); j < size; j++) std::cout << wh.getData()[j] << " "; std::cout << "]\n";
+      std::cout << "\n\n";
+    }
   }
   wh.setSize(size);
 };

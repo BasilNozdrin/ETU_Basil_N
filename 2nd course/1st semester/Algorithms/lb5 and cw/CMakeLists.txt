@@ -12,4 +12,4 @@ add_executable(lb5_and_cw
         modules/WeakHeap.hpp
         src/main.cpp
         CMakeLists.txt
-        lb5_and_cw)
+        lb5_and_cw modules/PrintWh.hpp modules/WeakHeapLog.hpp)

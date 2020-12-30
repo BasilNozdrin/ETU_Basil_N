@@ -16,11 +16,23 @@ Queue.hpp
 WeakHeap.hpp
 ../modules/WeakHeap.hpp
 
+../modules/PrintWh.hpp
+WeakHeap.hpp
+../modules/WeakHeap.hpp
+BinTree.hpp
+../modules/BinTree.hpp
+
 ../modules/Queue.hpp
 
 ../modules/WeakHeap.hpp
 utility
 -
+
+../modules/WeakHeapLog.hpp
+WeakHeap.hpp
+../modules/WeakHeap.hpp
+PrintWh.hpp
+../modules/PrintWh.hpp
 
 /home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src/main.cpp
 iostream
@@ -33,6 +45,8 @@ fstream
 -
 WeakHeap.hpp
 /home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src/WeakHeap.hpp
-BinTree.hpp
-/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src/BinTree.hpp
+PrintWh.hpp
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src/PrintWh.hpp
+WeakHeapLog.hpp
+/home/ice-jack/Projects/ETU_Basil_N/2nd course/1st semester/Algorithms/lb5 and cw/src/WeakHeapLog.hpp
 

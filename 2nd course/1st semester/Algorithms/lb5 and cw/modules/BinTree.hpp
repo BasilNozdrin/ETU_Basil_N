@@ -15,21 +15,21 @@ class BinTree {
  public:
   BinTree(): m_data(0), m_empty(false), m_left(nullptr), m_right(nullptr) {};
   explicit BinTree(int data): m_data(data), m_empty(false), m_left(nullptr), m_right(nullptr) {};
-  explicit BinTree(WeakHeap *wh) : m_data(wh->getData()[0]), m_empty(false), m_left(nullptr), m_right(nullptr) {
-    int size = wh->getSize();
-    auto tmp = new BinTree*[size];
-    for (int i = 1; i < size; i++)
-      tmp[i] = new BinTree(wh->getData()[i]);
-    tmp[0] = this;
-    for (int i = 0; i < size; i++) {
-      int bit = wh->getBit()[i];
-      if (2*i+bit < size && i != 0)
-        tmp[i]->m_left = tmp[2*i+bit];
-      if (2*i+1-bit < size)
-        tmp[i]->m_right = tmp[2*i+1-bit];
-    }
-    delete [] tmp;
-  };
+//  explicit BinTree(WeakHeap *wh) : m_data(wh->getData()[0]), m_empty(false), m_left(nullptr), m_right(nullptr) {
+//    int size = wh->getSize();
+//    auto tmp = new BinTree*[size];
+//    for (int i = 1; i < size; i++)
+//      tmp[i] = new BinTree(wh->getData()[i]);
+//    tmp[0] = this;
+//    for (int i = 0; i < size; i++) {
+//      int bit = wh->getBit()[i];
+//      if (2*i+bit < size && i != 0)
+//        tmp[i]->m_left = tmp[2*i+bit];
+//      if (2*i+1-bit < size)
+//        tmp[i]->m_right = tmp[2*i+1-bit];
+//    }
+//    delete [] tmp;
+//  };
   ~BinTree(){
     delete m_left;
     delete m_right;
@@ -100,11 +100,11 @@ class BinTree {
   [[maybe_unused]] [[nodiscard]] int getData() const  { return m_data;  };
   [[maybe_unused]] BinTree*  getLeft()  { return m_left;  };
   [[maybe_unused]] BinTree*  getRight() { return m_right; };
- protected:
+ public:
   int m_data;
   bool m_empty;
-  BinTree* m_left;
   BinTree* m_right;
+  BinTree* m_left;
 };
 
 #endif //LAB5_CW_BINTREE_HPP
