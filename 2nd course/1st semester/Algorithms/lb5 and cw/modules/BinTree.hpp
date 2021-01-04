@@ -92,7 +92,7 @@ class BinTree {
       queue = new_queue;
       level++;
     }
-
+    std::cout << "============================================================================\n";
   };
   [[maybe_unused]] void setData(int data)        { m_data = data;  };
   [[maybe_unused]] void setLeft(BinTree* node)   { m_left = node;  };

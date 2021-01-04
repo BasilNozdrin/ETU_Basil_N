@@ -14,17 +14,19 @@ class WeakHeapLog : public WeakHeap {
       m_data[i] = array[i].first;
       m_bit[i] = array[i].second;
     }
-    this->BuildLog(false);
+    PrintWh bt(this);
+    bt.print();
+    this->BuildLog(true);
   };
   [[maybe_unused]] int JoinLog(unsigned int v, unsigned int w, bool log = false) {
     PrintWh *bt = nullptr;
     if (log)
-      std::cout << "JoinLog(" << m_data[v] << "=m_data[" << v << "], " << m_data[w] << "=m_data[" << w << "])";
+      std::cout << "Проталкиваем минимум из " << m_data[v] << "=m_data[" << v << "] в " << m_data[w] << "=m_data[" << w << "]";
     if (m_data[v] < m_data[w]) { // defines min-heap
       std::swap(m_data[v], m_data[w]);
       m_bit[v] ^= true;
       if (log) {
-        std::cout << " -> 1\n";
+        std::cout << " -> меняем местами\n";
         bt = new PrintWh(this);
         bt->print();
         std::cout << "\n";
@@ -33,13 +35,13 @@ class WeakHeapLog : public WeakHeap {
       return 1;
     }
     if (log) {
-      std::cout << " -> 0\n";
+      std::cout << " -> не меняем местами\n";
     }
     return 0;
   };       /// проталкивает минимум из v наверх в w
   [[maybe_unused]] unsigned int UpLog(unsigned int v, bool log = false) {
     if (log)
-      std::cout << "Up(" << m_data[v] << "=m_data["<< v <<"])\n";
+      std::cout << "Поиск \"правого родителя\" для " << m_data[v] << "=m_data["<< v <<"]\n";
     if ((v % 2)^(m_bit[v/2]))
       return v/2;
     return UpLog(v/2);
@@ -54,7 +56,7 @@ class WeakHeapLog : public WeakHeap {
   [[maybe_unused]] int SiftDownLog(bool log = false) {
     PrintWh *bt = nullptr;
     if (log) {
-      std::cout << "SiftDown\n";
+      std::cout << "Выполняем просеивание\n";
       bt = new PrintWh(this);
       bt->print();
       delete bt;
@@ -62,10 +64,13 @@ class WeakHeapLog : public WeakHeap {
     int result = m_data[0]; // save min
     std::swap(m_data[0], m_data[m_size-1]);
     if (log) {
-      std::cout << "Move min\n";
-      bt = new PrintWh(this);
-      bt->print();
-      delete bt;
+      std::cout << "Перемещаем минимум из корня\narray = [";
+      for (int j = 0; j < m_size; j++)
+        std::cout << m_data[j] << " ";
+      std::cout << "]\n";
+//      bt = new PrintWh(this);
+//      bt->print();
+//      delete bt;
     }
     m_size--;               // delete min
     if (log) {
@@ -79,20 +84,20 @@ class WeakHeapLog : public WeakHeap {
     unsigned int v = 1;
     while (2*v + m_bit[v] < m_size)
       v = 2*v + m_bit[v];
-    if (log)
-      std::cout << "lower_left=" << m_data[v] << "=m_data["<< v <<"]\n";
+//    if (log)
+//      std::cout << "lower_left=" << m_data[v] << "=m_data["<< v <<"]\n";
 //    std::cout << "bro=" << m_data[2*(v/2)+1-m_bit[v/2]] << "=m_data["<< 2*(v/2)+1-m_bit[v/2] <<"]\n";
     while (v > 0) {
       JoinLog(v, 0, log);
       v /= 2;
-      if (log && v > 0)
-        std::cout << "next=" << m_data[v] << "=m_data["<< v <<"]\n";
+//      if (log && v > 0)
+//        std::cout << "next=" << m_data[v] << "=m_data["<< v <<"]\n";
     }
     return result;
   };                                 /// Deletes minimum
   [[maybe_unused]] void BuildLog(bool log = false){
     if (log) {
-      std::cout << "Building Weak Heap\narray = [";
+      std::cout << "Строим слабую кучу\narray = [";
       for (int j = 0; j < m_size; j++)
         std::cout << m_data[j] << " ";
       std::cout << "]\n";
@@ -100,8 +105,26 @@ class WeakHeapLog : public WeakHeap {
 
     for (unsigned int i = m_size-1; i > 0; i--)
       this->JoinLog(i, this->Up(i), log);
+
+    if(log) {
+      PrintWh bt(this);
+      bt.print();
+      std::cout << "Куча построена\n"
+                   "=======================================\n"
+                   "=======================================\n\n";
+    }
   };                                    /// makes WeakHeap a correct one
-  [[maybe_unused]] void heapsortLog(bool log = false){
+  [[maybe_unused]] void heapsortLog(bool log = false) {
+    if (log) {
+      std::cout << "Выполняем сортировку\narray = [";
+      for (int j = 0; j < m_size; j++) std::cout << m_data[j] << " ";
+      std::cout << "]\n";
+      std::cout << "bit   = [";
+      for (int j = 0; j < m_size; j++) std::cout << m_bit[j] << " ";
+      std::cout << "]\n";
+      PrintWh bt(this);
+      bt.print();
+    }
     int size = m_size;
     for (int k = 0; k < size; k++){
       this->SiftDownLog(log);
@@ -111,11 +134,14 @@ class WeakHeapLog : public WeakHeap {
         std::cout << "| ";
         for (int j = m_size; j < size; j++) std::cout << m_data[j] << " ";
         std::cout << "]\n";
+        std::cout << "bit   = [";
+        for (int j = 0; j < size; j++) std::cout << m_bit[j] << " ";
+        std::cout << "]\n";
+
       }
     }
     m_size = size;
   };
 };
-
 
 #endif //LB5_AND_CW_WEAKHEAPLOG_HPP
