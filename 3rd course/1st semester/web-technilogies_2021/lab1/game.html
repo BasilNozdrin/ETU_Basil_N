@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>etris</title>
+        <link href="./css/style.css" rel="stylesheet"/>
+        <link rel="icon" type="image/png" href="src/favicon.ico">
+        <script defer src="./js/gamepage.js"></script>
+    </head>
+    <body>
+        <div id="main_block">
+            <canvas id="game_canvas" height="500px" width="250px"></canvas>
+            <div id="info_block">
+                <span id="points"> Score: 0</span> <br>
+                <span id="username"> </span> <br>
+                <span id="level"> </span> <br>
+                <canvas id="next_item_canvas" height="150px" width="150px"></canvas> <br>
+                <span id="controls">
+                    Use arrows and space to play<br>
+                </span> <br>
+            </div>
+            <div id="records_block">
+                <h1> Top Scores </h1>
+                <br>
+                <span id="records"></span>
+                <input class="submitButton" type="submit" id="go_to_login" value="Login Page" onclick="goToLogin()">
+                <input class="submitButton" type="submit" value="Restart" onclick="goToLogin()">
+            </div>
+        </div>
+    </body>
+</html>

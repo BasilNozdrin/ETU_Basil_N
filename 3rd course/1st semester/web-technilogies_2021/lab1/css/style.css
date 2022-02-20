@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background: #007380;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginForm {
+    font-family: "Nunito ExtraBold", sans-serif;
+    font-size: 16pt;
+
+    width: 500px;
+    padding: 30px;
+
+    background: #004b94;
+    border-radius: 10px;
+}
+
+#login {
+    font-family: inherit;
+    font-size: 18px;
+
+    height: 50px;
+    width: 100%;
+
+    background: #00ffccaa;
+
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #000000;
+}
+
+.submitButton {
+    font-family: inherit;
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+
+    height: 50px;
+    width: 100%;
+
+    background: #06266F;
+
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #000000;
+
+    color: white;
+}
+
+#main_block {
+    display: grid;
+    height: 700px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    background: #FFAA00;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 8px 200px #BF8F30;
+    margin-top: 100px;
+    font-family: "Roboto Light", sans-serif;
+}
+
+#records_header {
+    font-weight: normal;
+}
+
+
+#game_canvas {
+    background: #06266F;
+    margin-left: 10px;
+    margin-top: 10px;
+    border:  10px solid black;
+}
+
+#next_item_canvas {
+    display:inline-block;
+    margin-top: 15px;
+    background: #06266F;
+    border-radius: 10px;
+    border: 10px solid black;
+}
+
+#level {
+    display:inline-block;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+#username {
+    display:inline-block;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+#points {
+    font-size: 30px;
+    color: #621077;
+}
+
+#controls {
+    display:inline-block;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+#records_block {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 10px;
+    background: #06266F;
+    color: white;
+    padding: 15px;
+    display: none;
+}
+
+#records {
+    font-size: 20px;
+    margin-top: 10px;
+}
