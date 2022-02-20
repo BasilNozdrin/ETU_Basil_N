@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab5/main.cpp
+iostream
+-
+algorithm
+-
+map
+-
+queue
+-
+stack
+-
+

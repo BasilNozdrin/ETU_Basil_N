@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab2/Achar.cpp
+algorithm
+-
+iostream
+-
+queue
+-
+tuple
+-
+vector
+-
+
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab2/main.cpp
+iostream
+-
+vector
+-
+tuple
+-
+Achar.cpp
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab2/Achar.cpp
+

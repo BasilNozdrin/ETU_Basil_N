@@ -1,0 +1,3 @@
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab3/cmake-build-debug/CMakeFiles/lab3.dir

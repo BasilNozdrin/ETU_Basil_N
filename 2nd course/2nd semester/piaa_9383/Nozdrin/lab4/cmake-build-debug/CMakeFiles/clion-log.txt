@@ -1,0 +1,1 @@
+CMakeLists.txt not found in /home/ice-jack/Projects/piaa_9383/Nozdrin/lab4 Select CMakeLists.txt

@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab4/Solution_1.cpp
+Solution_1.h
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab4/Solution_1.h
+
+/home/ice-jack/Projects/piaa_9383/Nozdrin/lab4/Solution_1.h
+iostream
+-
+vector
+-
+
