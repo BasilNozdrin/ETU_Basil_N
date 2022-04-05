@@ -10,3 +10,4 @@
 # Executables and object files
 *.out
 *.o
+*/node_modules
