@@ -21,15 +21,7 @@ function App() {
     return (
         <div className="App">
             <PostForm create={createPost}/>
-            {posts.length !== 0
-                ?
-                <PostList remove={removePost} posts={posts} title="JS post list 1"/>
-                :
-                <h1 style={{textAlign:'center'}}>
-                    Posts not found!
-                </h1>
-            }
-
+            <PostList remove={removePost} posts={posts} title="JS post list 1"/>
         </div>
     );
 }
