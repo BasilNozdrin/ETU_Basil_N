@@ -1,4 +1,4 @@
-package Gaem2D
+package greetings
 
 import "fmt"
 
