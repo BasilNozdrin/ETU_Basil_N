@@ -65,4 +65,5 @@ def gen(news, employees, bank):
 
 
 if __name__ == "__main__":
-    gen(6, 11, 9)
+    data = map(int, input().split())
+    gen(*data)
